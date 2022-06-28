@@ -1,0 +1,28 @@
+.card {
+    width: 375px;
+    height: 525px;
+    border-radius: 3px;
+    box-shadow: 0 0 6px rgb(173, 173, 173);
+    display: grid;
+    grid-template-rows: 80% 20%;
+    gap: 20px;
+    padding: 20px 0;
+    background-color: #FEFEFE;
+}
+
+.card:hover {
+    box-shadow: 0 0 10px rgb(232, 170, 49);
+}
+
+.img {
+    margin: 0 auto;
+    display: block;
+    height: 100%;
+    max-width: 100%;
+}
+
+.name {
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: 600;
+}

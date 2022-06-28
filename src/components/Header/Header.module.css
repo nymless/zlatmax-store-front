@@ -1,0 +1,23 @@
+.Header {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.top {
+    flex: 0 0 70px;
+    background: #141414;
+    box-shadow: 0 4px 20px rgba(169, 169, 169, 0.18);
+    color: #FFFFFF;
+}
+
+.middle {
+    flex: 1 1 90px;
+}
+
+.bottom {
+    flex: 0 0 auto;
+    background: #141414;
+    box-shadow: 0 4px 20px rgba(53, 53, 53, 0.18);
+    color: #FFFFFF;
+}

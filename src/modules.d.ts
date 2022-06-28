@@ -1,0 +1,10 @@
+declare module '*.module.css';
+declare module '*.svg';
+declare module '*.png';
+declare module '*.jpg';
+declare module '@mui/material/styles';
+declare module '@mui/material/Accordion';
+declare module '@mui/material/AccordionSummary';
+declare module '@mui/material/AccordionDetails';
+declare module '@mui/material/Typography';
+declare module '@mui/icons-material/ExpandMore';

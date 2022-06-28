@@ -1,0 +1,12 @@
+.nav {
+    display: flex;
+    column-gap: 60px;
+}
+
+.link {
+    color: white;
+}
+
+.link:hover {
+    color: #E8AA31;
+}
