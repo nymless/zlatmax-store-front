@@ -44,7 +44,7 @@ const ProductsPage: FC<ProductsPageProps> = (props) => {
         <div className={styles.breadcrumbs}>Breadcrumbs...</div>
         <div className={styles.body}>
           <div className={styles.filter}>
-            <ProductFilter />
+            <ProductFilter selectors={props.selectors} />
           </div>
           <div className={styles.products}>
             {isLoading && 'Данные загружаются'}

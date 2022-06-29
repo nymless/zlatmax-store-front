@@ -1,12 +1,6 @@
 import React, { FC } from 'react';
-import { styled } from '@mui/material/styles/';
-import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import styles from './ProductFilter.module.css';
 import Typography from '@mui/material/Typography';
-import { AccordionProps } from '@mui/material/Accordion/Accordion';
-import MuiAccordion from '@mui/material/Accordion';
-import { AccordionSummaryProps } from '@mui/material/AccordionSummary/AccordionSummary';
-import MuiAccordionSummary from '@mui/material/AccordionSummary';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CheckBoxForm from '../CheckBoxForm/CheckBoxForm';
 import {
   useGetBladeMaterialsQuery,
@@ -17,48 +11,16 @@ import {
   useGetHandleMaterialsQuery,
 } from '../../redux/services/productsApi';
 import SliderForm from '../SliderForm/SliderForm';
+import { Accordion } from './Styled/Accordion';
+import { AccordionSummary } from './Styled/AccordionSummary';
+import { AccordionDetails } from './Styled/AccordionDetails';
+import { ProductSelectors } from '../../hooks/useProductSelectors';
 
-const Accordion = styled((props: AccordionProps) => (
-  <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
-  borderTop: `1px solid ${theme.palette.divider}`,
-  borderBottom: `1px solid ${theme.palette.divider}`,
-  '&:not(:last-child)': {
-    borderBottom: 0,
-  },
-  '&:before': {
-    display: 'none',
-  },
-}));
+interface ProductFilterProps {
+  selectors: ProductSelectors;
+}
 
-const AccordionSummary = styled((props: AccordionSummaryProps) => (
-  <MuiAccordionSummary expandIcon={<ExpandMoreIcon />} {...props} />
-))(({ theme }) => ({
-  color: 'white',
-  backgroundColor: 'rgb(14, 14, 14)',
-  '& .MuiAccordionSummary-expandIconWrapper': {
-    color: '#E8AA31',
-  },
-  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-    transform: 'rotate(90deg)',
-  },
-  '& .MuiAccordionSummary-content': {
-    marginLeft: theme.spacing(1),
-  },
-  '& .MuiTypography-root': {
-    fontFamily: 'Montserrat',
-    fontWeight: '600',
-  },
-}));
-
-const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  padding: theme.spacing(2),
-  borderTop: '1px solid rgb(0, 0, 0)',
-}));
-
-interface ProductFilterProps {}
-
-const ProductFilter: FC<ProductFilterProps> = () => {
+const ProductFilter: FC<ProductFilterProps> = (props) => {
   const categories = useGetCategoriesQuery().data;
   const brand = useGetBrandsQuery().data;
   const bladeMaterials = useGetBladeMaterialsQuery().data;
@@ -71,13 +33,19 @@ const ProductFilter: FC<ProductFilterProps> = () => {
   const isMaterial = true;
 
   return (
-    <div>
+    <div className={styles.ProductFilter}>
       <Accordion defaultExpanded={true}>
         <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
           <Typography>Цена</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <SliderForm range={[20, 50]} />
+          <SliderForm
+            min={2000}
+            step={1000}
+            max={200000}
+            from={2000}
+            to={200000}
+          />
         </AccordionDetails>
       </Accordion>
       {isCategory && (
@@ -139,7 +107,13 @@ const ProductFilter: FC<ProductFilterProps> = () => {
           <Typography>Общая длина, мм</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <SliderForm range={[20, 50]} />
+          <SliderForm
+            min={2000}
+            step={1000}
+            max={200000}
+            from={2000}
+            to={200000}
+          />
         </AccordionDetails>
       </Accordion>
       <Accordion defaultExpanded={true}>
@@ -147,7 +121,13 @@ const ProductFilter: FC<ProductFilterProps> = () => {
           <Typography>Длина клинка, мм</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <SliderForm range={[20, 50]} />
+          <SliderForm
+            min={2000}
+            step={1000}
+            max={200000}
+            from={2000}
+            to={200000}
+          />
         </AccordionDetails>
       </Accordion>
       <Accordion defaultExpanded={true}>
@@ -155,7 +135,13 @@ const ProductFilter: FC<ProductFilterProps> = () => {
           <Typography>Ширина клинка, мм</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <SliderForm range={[20, 50]} />
+          <SliderForm
+            min={2000}
+            step={1000}
+            max={200000}
+            from={2000}
+            to={200000}
+          />
         </AccordionDetails>
       </Accordion>
       <Accordion defaultExpanded={true}>
