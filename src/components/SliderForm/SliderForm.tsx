@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
 import Stack from '@mui/material/Stack';
-import Input from '@mui/material/Input';
 import Grid from '@mui/material/Grid';
+import { Slider } from './Styled/Slider';
+import { Input } from './Styled/Input';
 
 function valuetext(value: number) {
   return `${value} рублей`;
@@ -18,46 +18,42 @@ interface SliderFormProps {
 }
 
 const SliderForm: FC<SliderFormProps> = ({ min, step, max, from, to }) => {
-  const [value, setValue] = React.useState<number[]>([from, to]);
+  const [value, setValue] = React.useState<Array<number | string>>([from, to]);
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
   };
 
-  const handleLeftInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const newValue = value;
-    newValue[0] = Number(event.target.value);
-    setValue(newValue);
+  const handleInputChange = (flag: 'left' | 'right') => {
+    return (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = [...value];
+      const index = flag === 'left' ? 0 : 1;
+      newValue[index] =
+        event.target.value === '' ? '' : Number(event.target.value);
+      setValue(newValue);
+    };
   };
 
-  const handleRightInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const newValue = value;
-    newValue[1] = Number(event.target.value);
+  const handleBlur = () => {
+    const newValue = value.map((n) => {
+      if (n < from) return from;
+      if (n > to) return to;
+      return n;
+    });
     setValue(newValue);
-  };
-
-  const handleBlur = (value: number) => {
-    if (value < from) {
-      setValue([from, to]);
-    } else if (value > to) {
-      setValue([from, to]);
-    }
   };
 
   return (
     <Box sx={{ width: '100%' }}>
       <Stack spacing={2}>
-        <Grid container spacing={2} alignItems="center">
-          <Grid item>
+        <Grid container>
+          <Grid item sx={{ flex: '1 1 auto' }}>
             <Input
+              sx={{ width: '100%' }}
               value={value[0]}
               size="small"
-              onChange={handleLeftInputChange}
-              onBlur={() => handleBlur(value[0])}
+              onChange={handleInputChange('left')}
+              onBlur={handleBlur}
               inputProps={{
                 step,
                 min,
@@ -67,12 +63,13 @@ const SliderForm: FC<SliderFormProps> = ({ min, step, max, from, to }) => {
               }}
             />
           </Grid>
-          <Grid item>
+          <Grid item sx={{ flex: '1 1 auto' }}>
             <Input
+              sx={{ width: '100%' }}
               value={value[1]}
               size="small"
-              onChange={handleRightInputChange}
-              onBlur={() => handleBlur(value[1])}
+              onChange={handleInputChange('right')}
+              onBlur={handleBlur}
               inputProps={{
                 step,
                 min,
@@ -85,13 +82,13 @@ const SliderForm: FC<SliderFormProps> = ({ min, step, max, from, to }) => {
         </Grid>
 
         <Slider
-          value={value}
           min={min}
           step={step}
           max={max}
-          getAriaLabel={() => 'Диапазон цен'}
+          value={value as number[]}
           onChange={handleSliderChange}
           valueLabelDisplay="auto"
+          getAriaLabel={() => 'Диапазон цен'}
           getAriaValueText={valuetext}
         />
       </Stack>
