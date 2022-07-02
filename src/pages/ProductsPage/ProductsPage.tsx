@@ -6,7 +6,7 @@ import styles from './ProductsPage.module.css';
 import { withContainer } from '../../hoc/withContainer';
 import { useSearchParams } from 'react-router-dom';
 import { filterTruthy } from '../../utils/filterTruthy';
-import ProductFilter from '../../components/ProductFilter/ProductFilter';
+import ProductFilterForm from '../../components/ProductFilter/ProductFilterForm';
 
 interface ProductsPageProps {
   selectors: ProductSelectors;
@@ -38,33 +38,31 @@ const ProductsPage: FC<ProductsPageProps> = (props) => {
 
   // TODO: add spinner
   return (
-    <div className="_container">
-      <section className={styles.ProductsPage}>
-        <div className={styles.heading}>Название</div>
-        <div className={styles.breadcrumbs}>Breadcrumbs...</div>
-        <div className={styles.body}>
-          <div className={styles.filter}>
-            <ProductFilter selectors={props.selectors} />
-          </div>
-          <div className={styles.products}>
-            {isLoading && 'Данные загружаются'}
-            {error && 'Ошибка загрузки данных с сервера'}
-            {!isLoading && !error && !data?.rows.length
-              ? 'Нет товаров соответсвующих выбранным параметрам'
-              : data?.rows.map((product) => {
-                  return (
-                    <ProductCard
-                      key={product.id}
-                      name={product.name}
-                      img={product.img}
-                      productId={product.id}
-                    />
-                  );
-                })}
-          </div>
+    <section className={styles.ProductsPage}>
+      <div className={styles.heading}>Название</div>
+      <div className={styles.breadcrumbs}>Breadcrumbs...</div>
+      <div className={styles.body}>
+        <div className={styles.filter}>
+          <ProductFilterForm selectors={props.selectors} />
         </div>
-      </section>
-    </div>
+        <div className={styles.products}>
+          {isLoading && 'Данные загружаются'}
+          {error && 'Ошибка загрузки данных с сервера'}
+          {!isLoading && !error && !data?.rows.length
+            ? 'Нет товаров соответсвующих выбранным параметрам'
+            : data?.rows.map((product) => {
+                return (
+                  <ProductCard
+                    key={product.id}
+                    name={product.name}
+                    img={product.img}
+                    productId={product.id}
+                  />
+                );
+              })}
+        </div>
+      </div>
+    </section>
   );
 };
 

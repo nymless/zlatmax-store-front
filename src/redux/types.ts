@@ -80,8 +80,8 @@ export type GetGildingResponse = Type[];
 
 export type GetProductModelsParams = {
   typeId?: number;
-  brandId?: number;
   categoryId?: number;
+  brandId?: number;
   bladeMaterialId?: number;
   rating?: number;
   totalLength?: number;

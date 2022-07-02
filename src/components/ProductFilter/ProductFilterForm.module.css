@@ -1,0 +1,13 @@
+.ProductFilterForm {
+    box-shadow: 0 0 20px rgba(173, 173, 173, 0.5);
+}
+
+.heading {
+    margin: 0;
+}
+
+.rating {
+    display: flex;
+    gap: 20px;
+    padding-top: 2px;
+}

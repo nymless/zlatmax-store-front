@@ -1,1 +1,8 @@
-.RatingStars {}
+.RatingStars {
+    display: flex;
+    gap: 10px;
+}
+
+.starImg {
+    display: block;
+}

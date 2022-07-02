@@ -15,8 +15,8 @@ const RatingStars: FC<RatingStarsProps> = (props) => {
 
   return (
     <div className={styles.RatingStars}>
-      {starsList.map(() => {
-        return <img src={star} alt="rating" />;
+      {starsList.map((i) => {
+        return <img key={i} className={styles.starImg} src={star} alt="rating" />;
       })}
     </div>
   );

@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import { Slider } from './Styled/Slider';
 import { Input } from './Styled/Input';
+import { FormikHelpers, FormikValues } from 'formik';
 
 function valuetext(value: number) {
   return `${value} рублей`;
@@ -15,10 +16,28 @@ interface SliderFormProps {
   max: number;
   from: number;
   to: number;
+  values: FormikValues;
+  setFieldValue: FormikHelpers<FormikValues>['setFieldValue'];
+  field: string;
 }
 
-const SliderForm: FC<SliderFormProps> = ({ min, step, max, from, to }) => {
-  const [value, setValue] = React.useState<Array<number | string>>([from, to]);
+const SliderForm: FC<SliderFormProps> = ({
+  min,
+  step,
+  max,
+  from,
+  to,
+  setFieldValue,
+  field,
+}) => {
+  const [value, setValue] = React.useState<Array<number | string>>([
+    from,
+    to,
+  ]);
+
+  useEffect(() => {
+    setFieldValue(field, value.join('-'));
+  }, [setFieldValue, value, field]);
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
