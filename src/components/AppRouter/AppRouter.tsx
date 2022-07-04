@@ -1,15 +1,15 @@
-import React, { FC } from "react";
-import { Route, Routes } from "react-router-dom";
-import { ProductSelectors } from "../../hooks/useProductSelectors";
-import AdminPage from "../../pages/AdminPage/AdminPage";
-import AuthPage from "../../pages/AuthPage/AuthPage";
-import CategoryPage from "../../pages/CategoryPage/CategoryPage";
-import ManufacturerPage from "../../pages/BrandPage/BrandPage";
-import MaterialPage from "../../pages/MaterialPage/MaterialPage";
-import ProductPage from "../../pages/ProductPage/ProductPage";
-import ProductsPage from "../../pages/ProductsPage/ProductsPage";
-import ShopPage from "../../pages/ShopPage/ShopPage";
-import ShoppingCartPage from "../../pages/ShoppingCartPage/ShoppingCartPage";
+import React, { FC } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { ProductSelectors } from '../../hooks/useProductSelectors';
+import AdminPage from '../../pages/AdminPage/AdminPage';
+import AuthPage from '../../pages/AuthPage/AuthPage';
+import CategoryPage from '../../pages/CategoryPage/CategoryPage';
+import ManufacturerPage from '../../pages/BrandPage/BrandPage';
+import MaterialPage from '../../pages/MaterialPage/MaterialPage';
+import ProductPage from '../../pages/ProductPage/ProductPage';
+import ProductsPage from '../../pages/ProductsPage/ProductsPage';
+import ShopPage from '../../pages/ShopPage/ShopPage';
+import ShoppingCartPage from '../../pages/ShoppingCartPage/ShoppingCartPage';
 
 interface Props {
   selectors: ProductSelectors;
@@ -35,11 +35,19 @@ const AppRouter: FC<Props> = (props) => {
         element={<ManufacturerPage selectors={props.selectors} />}
       />
       <Route
-        path="/material"
+        path="/bladeMaterial"
         element={<MaterialPage selectors={props.selectors} />}
       />
       <Route
-        path="/product"
+        path="/category/:id"
+        element={<ProductsPage selectors={props.selectors} />}
+      />
+      <Route
+        path="/brand/:id"
+        element={<ProductsPage selectors={props.selectors} />}
+      />
+      <Route
+        path="/bladeMaterial/:id"
         element={<ProductsPage selectors={props.selectors} />}
       />
       <Route path="/product/:id" element={<ProductPage />} />

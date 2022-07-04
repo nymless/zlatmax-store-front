@@ -10,6 +10,11 @@ export const productModels = [
     totalLength: 227,
     bladeLength: 112,
     bladeWidth: 24,
+    defaultProductId: 1,
+    bladeMaterialId: 1,
+    handleMaterialId: 1,
+    handguardMaterialId: 1,
+    price: 3000,
   },
   {
     id: 2,
@@ -22,5 +27,10 @@ export const productModels = [
     totalLength: 210,
     bladeLength: 101,
     bladeWidth: 20,
+    defaultProductId: 8,
+    bladeMaterialId: 3,
+    handleMaterialId: 3,
+    handguardMaterialId: 3,
+    price: 6000,
   },
 ];

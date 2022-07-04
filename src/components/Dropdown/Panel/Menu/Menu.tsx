@@ -28,7 +28,7 @@ export const Menu: React.FC<Props> = (props) => {
             <Link
               className={s.link}
               key={item.id}
-              to={"/product"}
+              to={props.path + "/" + item.id}
               onClick={() => props.onClickHandler(item.id)}
             >
               {item.name}

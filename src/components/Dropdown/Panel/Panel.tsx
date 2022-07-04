@@ -65,7 +65,7 @@ export const Panel: FC<Props> = (props) => {
           list={bladeMaterials}
           onClickHandler={handleBladeMaterialClick}
           handleHeaderClick={handleHeaderClick}
-          path="/material"
+          path="/bladeMaterial"
           selectors={props.selectors}
         />
       )}

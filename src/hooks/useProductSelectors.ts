@@ -9,31 +9,15 @@ export const useProductSelectors = () => {
 
   const [bladeMaterialId, setBladeMaterialId] = useState(null as number | null);
 
-  const [rating, setRating] = useState(null as number | null);
-
-  const [totalLength, setTotalLength] = useState(null as number | null);
-
-  const [bladeLength, setBladeLength] = useState(null as number | null);
-
-  const [bladeWidth, setBladeWidth] = useState(null as number | null);
-
   return {
     typeId,
     brandId,
     categoryId,
     bladeMaterialId,
-    rating,
-    totalLength,
-    bladeLength,
-    bladeWidth,
     setTypeId,
     setBrandId,
     setCategoryId,
     setBladeMaterialId,
-    setRating,
-    setTotalLength,
-    setBladeLength,
-    setBladeWidth,
   };
 };
 

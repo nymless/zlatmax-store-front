@@ -4,34 +4,60 @@ import { useGetProductModelsByParamsQuery } from '../../redux/services/productsA
 import { ProductSelectors } from '../../hooks/useProductSelectors';
 import styles from './ProductsPage.module.css';
 import { withContainer } from '../../hoc/withContainer';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { filterTruthy } from '../../utils/filterTruthy';
 import ProductFilterForm from '../../components/ProductFilter/ProductFilterForm';
+import { string } from 'yup';
 
 interface ProductsPageProps {
   selectors: ProductSelectors;
 }
 
 const ProductsPage: FC<ProductsPageProps> = (props) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  const { id } = useParams();
+  const [searchParams] = useSearchParams();
 
   const allParams = {
     typeId: searchParams.get('typeId'),
-    brandId: searchParams.get('brandId'),
+    price: searchParams.get('price'),
     categoryId: searchParams.get('categoryId'),
+    brandId: searchParams.get('brandId'),
     bladeMaterialId: searchParams.get('bladeMaterialId'),
-    rating: searchParams.get('rating'),
+    handleMaterialId: searchParams.get('handleMaterialId'),
+    handguardMaterialId: searchParams.get('handguardMaterialId'),
+    gildingId: searchParams.get('gildingId'),
     totalLength: searchParams.get('totalLength'),
     bladeLength: searchParams.get('bladeLength'),
     bladeWidth: searchParams.get('bladeWidth'),
+    rating: searchParams.get('rating'),
     page: searchParams.get('page'),
     limit: searchParams.get('limit'),
-  };
+  } as Record<string, string | null>;
 
-  const realParams = filterTruthy(allParams);
+  const routes = ['category', 'brand', 'bladeMaterial'];
+  const routeSchema = string().oneOf(routes).required();
+  const route = location.pathname.split('/')[1];
+  const field = route + 'Id';
+  const isRouteValid = routeSchema.isValidSync(route);
 
-  const { data, error, isLoading } =
-    useGetProductModelsByParamsQuery(realParams);
+  if (id && isRouteValid) {
+    allParams.typeId = '1';
+    allParams[field] = id;
+    props.selectors.setTypeId(1);
+
+    if (route === 'category' && !props.selectors.categoryId) {
+      props.selectors.setCategoryId(Number.parseInt(id));
+    } else if (route === 'brand' && !props.selectors.brandId) {
+      props.selectors.setBrandId(Number.parseInt(id));
+    } else if (route === 'bladeMaterial' && !props.selectors.bladeMaterialId) {
+      props.selectors.setBladeMaterialId(Number.parseInt(id));
+    }
+  }
+
+  const params = filterTruthy(allParams);
+
+  const { data, error, isLoading } = useGetProductModelsByParamsQuery(params);
 
   // TODO: add pagination
   const count = data?.count;

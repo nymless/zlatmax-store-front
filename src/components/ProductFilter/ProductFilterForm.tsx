@@ -8,7 +8,7 @@ import {
   useGetCategoriesQuery,
   useGetGildingQuery,
   useGetHandguardMaterialsQuery,
-  useGetHandleMaterialsQuery, useGetProductModelsByParamsQuery,
+  useGetHandleMaterialsQuery,
 } from '../../redux/services/productsApi';
 import SliderForm from '../SliderForm/SliderForm';
 import { Accordion } from './Styled/Accordion';
@@ -18,50 +18,14 @@ import { ProductSelectors } from '../../hooks/useProductSelectors';
 import RatingStars from '../RatingStars/RatingStars';
 import { Form, Formik, FormikValues } from 'formik';
 import { filterTruthy } from '../../utils/filterTruthy';
-
-const rating = (rating: number, text: string) => {
-  return (
-    <div className={styles.rating}>
-      <div>
-        <RatingStars rating={rating} />
-      </div>
-      <div>{text}</div>
-    </div>
-  );
-};
-
-const ratingList = [
-  { id: 1, name: rating(5, '5/5') },
-  { id: 2, name: rating(4, '4/5') },
-  { id: 3, name: rating(3, '3/5') },
-  { id: 4, name: rating(2, '2/5') },
-  { id: 5, name: rating(1, '1/5') },
-];
+import { useSearchParams } from 'react-router-dom';
 
 interface ProductFilterFormProps {
   selectors: ProductSelectors;
 }
 
 const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
-  const initialValues = {
-    type: '',
-    price: '',
-    category: '',
-    brand: '',
-    steel: '',
-    handle: '',
-    handguard: '',
-    gilding: '',
-    totalLength: '',
-    bladeLength: '',
-    bladeWidth: '',
-    rating: '',
-  };
-
-  const handleSubmit = (values: FormikValues) => {
-    const getParams = filterTruthy(values)
-    alert(JSON.stringify(getParams, null, 2));
-  };
+  const [, setSearchParams] = useSearchParams();
 
   const categories = useGetCategoriesQuery().data;
   const brand = useGetBrandsQuery().data;
@@ -70,9 +34,48 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
   const handguardMaterials = useGetHandguardMaterialsQuery().data;
   const gilding = useGetGildingQuery().data;
 
-  const isCategory = false;
-  const isBrand = true;
-  const isMaterial = true;
+  const isCategorySelected = Boolean(props.selectors.categoryId);
+  const isBrandSelected = Boolean(props.selectors.brandId);
+  const isMaterialSelected = Boolean(props.selectors.bladeMaterialId);
+
+  const initialValues = {
+    typeId: props.selectors.typeId || '',
+    price: '',
+    categoryId: props.selectors.categoryId || '',
+    brandId: props.selectors.brandId || '',
+    bladeMaterialId: props.selectors.bladeMaterialId || '',
+    handleMaterialId: '',
+    handguardMaterialId: '',
+    gildingId: '',
+    totalLength: '',
+    bladeLength: '',
+    bladeWidth: '',
+    rating: '',
+  };
+
+  const handleSubmit = (values: FormikValues) => {
+    const getParams = filterTruthy(values);
+    setSearchParams(getParams);
+  };
+
+  const rating = (rating: number, text: string) => {
+    return (
+      <div className={styles.rating}>
+        <div>
+          <RatingStars rating={rating} />
+        </div>
+        <div>{text}</div>
+      </div>
+    );
+  };
+
+  const ratingList = [
+    { id: 5, name: rating(5, '5/5') },
+    { id: 4, name: rating(4, '4/5') },
+    { id: 3, name: rating(3, '3/5') },
+    { id: 2, name: rating(2, '2/5') },
+    { id: 1, name: rating(1, '1/5') },
+  ];
 
   return (
     <div className={styles.ProductFilterForm}>
@@ -102,25 +105,25 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                 />
               </AccordionDetails>
             </Accordion>
-            {isCategory && (
+            {!isCategorySelected && (
               <Accordion defaultExpanded={true}>
                 <AccordionSummary
                   aria-controls="panel2a-content"
                   id="panel2a-header"
                 >
-                  <Typography>Производство</Typography>
+                  <Typography>Категории</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <RadioForm
                     list={categories}
                     values={values}
                     setFieldValue={setFieldValue}
-                    field="category"
+                    field="categoryId"
                   />
                 </AccordionDetails>
               </Accordion>
             )}
-            {isBrand && (
+            {!isBrandSelected && (
               <Accordion defaultExpanded={true}>
                 <AccordionSummary
                   aria-controls="panel2a-content"
@@ -133,12 +136,12 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                     list={brand}
                     values={values}
                     setFieldValue={setFieldValue}
-                    field="brand"
+                    field="brandId"
                   />
                 </AccordionDetails>
               </Accordion>
             )}
-            {isMaterial && (
+            {!isMaterialSelected && (
               <Accordion defaultExpanded={true}>
                 <AccordionSummary
                   aria-controls="panel3a-content"
@@ -151,7 +154,7 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                     list={bladeMaterials}
                     values={values}
                     setFieldValue={setFieldValue}
-                    field="steel"
+                    field="bladeMaterialId"
                   />
                 </AccordionDetails>
               </Accordion>
@@ -168,7 +171,7 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                   list={handleMaterials}
                   values={values}
                   setFieldValue={setFieldValue}
-                  field="handle"
+                  field="handleMaterialId"
                 />
               </AccordionDetails>
             </Accordion>
@@ -184,7 +187,7 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                   list={handguardMaterials}
                   values={values}
                   setFieldValue={setFieldValue}
-                  field="handguard"
+                  field="handguardMaterialId"
                 />
               </AccordionDetails>
             </Accordion>
@@ -200,7 +203,7 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                   list={gilding}
                   values={values}
                   setFieldValue={setFieldValue}
-                  field="gilding"
+                  field="gildingId"
                 />
               </AccordionDetails>
             </Accordion>
@@ -253,11 +256,11 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
               </AccordionSummary>
               <AccordionDetails>
                 <SliderForm
-                  min={100}
+                  min={10}
                   step={10}
-                  max={300}
-                  from={100}
-                  to={300}
+                  max={100}
+                  from={10}
+                  to={100}
                   values={values}
                   setFieldValue={setFieldValue}
                   field="bladeWidth"

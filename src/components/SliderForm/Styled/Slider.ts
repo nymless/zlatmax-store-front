@@ -11,7 +11,7 @@ export const Slider = styled(MuiSlider)({
     height: 18,
     width: 18,
     backgroundColor: '#141414',
-    border: '2px solid #E8AA31',
+    border: '3px solid #E8AA31',
     '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
       boxShadow: 'inherit',
     },

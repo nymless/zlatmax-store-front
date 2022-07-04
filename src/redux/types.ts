@@ -80,13 +80,17 @@ export type GetGildingResponse = Type[];
 
 export type GetProductModelsParams = {
   typeId?: number;
+  price?: number;
   categoryId?: number;
   brandId?: number;
   bladeMaterialId?: number;
-  rating?: number;
+  handleMaterialId?: number;
+  handguardMaterialId?: number;
+  gildingId?: number;
   totalLength?: number;
   bladeLength?: number;
   bladeWidth?: number;
+  rating?: number;
   page?: number;
   limit?: number;
 };
