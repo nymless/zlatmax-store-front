@@ -69,11 +69,35 @@ export const productModelHandlers = [
       productModelsWithPageLimit.push(productModelsByParams[i]);
     }
 
+    const rangesForSliders = {
+      price: { min: Infinity, max: 0 },
+      totalLength: { min: Infinity, max: 0 },
+      bladeLength: { min: Infinity, max: 0 },
+      bladeWidth: { min: Infinity, max: 0 },
+    };
+
+    const mutateRangesMinMax = (range, value) => {
+      if (range.min > value) {
+        range.min = value;
+      }
+      if (range.max < value) {
+        range.max = value;
+      }
+    };
+
+    productModelsByParams.forEach((product) => {
+      mutateRangesMinMax(rangesForSliders.price, product.price);
+      mutateRangesMinMax(rangesForSliders.totalLength, product.totalLength);
+      mutateRangesMinMax(rangesForSliders.bladeLength, product.bladeLength);
+      mutateRangesMinMax(rangesForSliders.bladeWidth, product.bladeWidth);
+    });
+
     return res(
       ctx.status(200),
       ctx.json({
         rows: productModelsWithPageLimit,
         count: productModelsByParams.length,
+        ranges: rangesForSliders,
       })
     );
   }),

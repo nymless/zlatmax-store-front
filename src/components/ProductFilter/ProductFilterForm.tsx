@@ -19,9 +19,11 @@ import RatingStars from '../RatingStars/RatingStars';
 import { Form, Formik, FormikValues } from 'formik';
 import { filterTruthy } from '../../utils/filterTruthy';
 import { useSearchParams } from 'react-router-dom';
+import { RangesForSliders } from '../../redux/types';
 
 interface ProductFilterFormProps {
   selectors: ProductSelectors;
+  ranges: RangesForSliders | undefined;
 }
 
 const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
@@ -94,11 +96,9 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
               </AccordionSummary>
               <AccordionDetails>
                 <SliderForm
-                  min={1000}
+                  min={props.ranges?.price.min || 1000}
                   step={100}
-                  max={10000}
-                  from={2000}
-                  to={9000}
+                  max={props.ranges?.price.max || 10000}
                   values={values}
                   setFieldValue={setFieldValue}
                   field="price"
@@ -216,11 +216,9 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
               </AccordionSummary>
               <AccordionDetails>
                 <SliderForm
-                  min={100}
-                  step={10}
-                  max={300}
-                  from={100}
-                  to={300}
+                  min={props.ranges?.totalLength.min || 100}
+                  step={1}
+                  max={props.ranges?.totalLength.max || 300}
                   values={values}
                   setFieldValue={setFieldValue}
                   field="totalLength"
@@ -236,11 +234,9 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
               </AccordionSummary>
               <AccordionDetails>
                 <SliderForm
-                  min={100}
-                  step={10}
-                  max={300}
-                  from={100}
-                  to={300}
+                  min={props.ranges?.bladeLength.min || 100}
+                  step={1}
+                  max={props.ranges?.bladeLength.max || 300}
                   values={values}
                   setFieldValue={setFieldValue}
                   field="bladeLength"
@@ -256,11 +252,9 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
               </AccordionSummary>
               <AccordionDetails>
                 <SliderForm
-                  min={10}
-                  step={10}
-                  max={100}
-                  from={10}
-                  to={100}
+                  min={props.ranges?.bladeWidth.min || 10}
+                  step={1}
+                  max={props.ranges?.bladeWidth.max || 100}
                   values={values}
                   setFieldValue={setFieldValue}
                   field="bladeWidth"

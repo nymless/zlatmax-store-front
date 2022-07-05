@@ -14,8 +14,6 @@ interface SliderFormProps {
   min: number;
   step: number;
   max: number;
-  from: number;
-  to: number;
   values: FormikValues;
   setFieldValue: FormikHelpers<FormikValues>['setFieldValue'];
   field: string;
@@ -25,19 +23,18 @@ const SliderForm: FC<SliderFormProps> = ({
   min,
   step,
   max,
-  from,
-  to,
   setFieldValue,
   field,
 }) => {
-  const [value, setValue] = React.useState<Array<number | string>>([
-    from,
-    to,
-  ]);
+  const [value, setValue] = React.useState<Array<number | string>>([min, max]);
 
   useEffect(() => {
     setFieldValue(field, value.join('-'));
   }, [setFieldValue, value, field]);
+
+  useEffect(() => {
+    setValue([min, max]);
+  }, [min, max]);
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
@@ -55,8 +52,8 @@ const SliderForm: FC<SliderFormProps> = ({
 
   const handleBlur = () => {
     const newValue = value.map((n) => {
-      if (n < from) return from;
-      if (n > to) return to;
+      if (n < min) return min;
+      if (n > max) return max;
       return n;
     });
     setValue(newValue);

@@ -79,4 +79,12 @@ export const products = [
     handguardMaterialId: 5,
     price: 10000,
   },
+  {
+    id: 11,
+    modelId: 3,
+    bladeMaterialId: 1,
+    handleMaterialId: 1,
+    handguardMaterialId: 1,
+    price: 4000,
+  },
 ];

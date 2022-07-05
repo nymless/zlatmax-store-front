@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { ExtendedProductModel } from '../../redux/types';
+import { ProductModelForProductPage } from '../../redux/types';
 import { AppPaths } from '../../paths/AppPaths';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -11,7 +11,7 @@ import SwiperClass, { FreeMode, Navigation, Thumbs } from 'swiper';
 import { SwiperStyle } from './types';
 
 interface GalleryProps {
-  product: ExtendedProductModel;
+  product: ProductModelForProductPage;
 }
 
 const Gallery: FC<GalleryProps> = (props) => {

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { useGetProductModelsByParamsQuery } from '../../redux/services/productsApi';
 import { ProductSelectors } from '../../hooks/useProductSelectors';
@@ -18,42 +18,51 @@ const ProductsPage: FC<ProductsPageProps> = (props) => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
 
-  const allParams = {
-    typeId: searchParams.get('typeId'),
-    price: searchParams.get('price'),
-    categoryId: searchParams.get('categoryId'),
-    brandId: searchParams.get('brandId'),
-    bladeMaterialId: searchParams.get('bladeMaterialId'),
-    handleMaterialId: searchParams.get('handleMaterialId'),
-    handguardMaterialId: searchParams.get('handguardMaterialId'),
-    gildingId: searchParams.get('gildingId'),
-    totalLength: searchParams.get('totalLength'),
-    bladeLength: searchParams.get('bladeLength'),
-    bladeWidth: searchParams.get('bladeWidth'),
-    rating: searchParams.get('rating'),
-    page: searchParams.get('page'),
-    limit: searchParams.get('limit'),
-  } as Record<string, string | null>;
+  const allParams = useMemo(
+    () =>
+      ({
+        typeId: searchParams.get('typeId'),
+        price: searchParams.get('price'),
+        categoryId: searchParams.get('categoryId'),
+        brandId: searchParams.get('brandId'),
+        bladeMaterialId: searchParams.get('bladeMaterialId'),
+        handleMaterialId: searchParams.get('handleMaterialId'),
+        handguardMaterialId: searchParams.get('handguardMaterialId'),
+        gildingId: searchParams.get('gildingId'),
+        totalLength: searchParams.get('totalLength'),
+        bladeLength: searchParams.get('bladeLength'),
+        bladeWidth: searchParams.get('bladeWidth'),
+        rating: searchParams.get('rating'),
+        page: searchParams.get('page'),
+        limit: searchParams.get('limit'),
+      } as Record<string, string | null>),
+    [searchParams]
+  );
 
-  const routes = ['category', 'brand', 'bladeMaterial'];
-  const routeSchema = string().oneOf(routes).required();
-  const route = location.pathname.split('/')[1];
-  const field = route + 'Id';
-  const isRouteValid = routeSchema.isValidSync(route);
+  useEffect(() => {
+    const routes = ['category', 'brand', 'bladeMaterial'];
+    const routeSchema = string().oneOf(routes).required();
+    const route = location.pathname.split('/')[1];
+    const field = route + 'Id';
+    const isRouteValid = routeSchema.isValidSync(route);
 
-  if (id && isRouteValid) {
-    allParams.typeId = '1';
-    allParams[field] = id;
-    props.selectors.setTypeId(1);
+    if (id && isRouteValid) {
+      allParams.typeId = '1';
+      allParams[field] = id;
+      props.selectors.setTypeId(1);
 
-    if (route === 'category' && !props.selectors.categoryId) {
-      props.selectors.setCategoryId(Number.parseInt(id));
-    } else if (route === 'brand' && !props.selectors.brandId) {
-      props.selectors.setBrandId(Number.parseInt(id));
-    } else if (route === 'bladeMaterial' && !props.selectors.bladeMaterialId) {
-      props.selectors.setBladeMaterialId(Number.parseInt(id));
+      if (route === 'category' && !props.selectors.categoryId) {
+        props.selectors.setCategoryId(Number.parseInt(id));
+      } else if (route === 'brand' && !props.selectors.brandId) {
+        props.selectors.setBrandId(Number.parseInt(id));
+      } else if (
+        route === 'bladeMaterial' &&
+        !props.selectors.bladeMaterialId
+      ) {
+        props.selectors.setBladeMaterialId(Number.parseInt(id));
+      }
     }
-  }
+  }, [allParams, id, location.pathname, props.selectors]);
 
   const params = filterTruthy(allParams);
 
@@ -69,7 +78,10 @@ const ProductsPage: FC<ProductsPageProps> = (props) => {
       <div className={styles.breadcrumbs}>Breadcrumbs...</div>
       <div className={styles.body}>
         <div className={styles.filter}>
-          <ProductFilterForm selectors={props.selectors} />
+          <ProductFilterForm
+            selectors={props.selectors}
+            ranges={data?.ranges}
+          />
         </div>
         <div className={styles.products}>
           {isLoading && 'Данные загружаются'}
