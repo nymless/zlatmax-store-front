@@ -1,9 +1,9 @@
-import React, { FC } from "react";
-import styles from "./MaterialPage.module.css";
-import { SelectorCard } from "../../components/SelectorCard/SelectorCard";
-import { ProductSelectors } from "../../hooks/useProductSelectors";
-import { useGetBladeMaterialsQuery } from "../../redux/services/productsApi";
-import { withContainer } from "../../hoc/withContainer";
+import React, { FC } from 'react';
+import styles from './MaterialPage.module.css';
+import { SelectorCard } from '../../components/SelectorCard/SelectorCard';
+import { ProductSelectors } from '../../hooks/useProductSelectors';
+import { useGetBladeMaterialsQuery } from '../../redux/services/productsApi';
+import { withContainer } from '../../hoc/withContainer';
 
 interface MaterialPageProps {
   selectors: ProductSelectors;
@@ -27,6 +27,7 @@ const MaterialPage: FC<MaterialPageProps> = (props) => {
               return (
                 <SelectorCard
                   key={material.id}
+                  route="/bladeMaterial"
                   name={material.name}
                   img={material.img}
                   id={material.id}

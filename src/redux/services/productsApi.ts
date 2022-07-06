@@ -6,7 +6,11 @@ import {
   GetProductModelResponse,
   GetProductModelsParams,
   GetProductModelsResponse,
-  GetTypesResponse, GetHandleMaterialResponse, GetHandguardMaterialResponse, GetGildingResponse,
+  GetTypesResponse,
+  GetHandleMaterialResponse,
+  GetHandguardMaterialResponse,
+  GetGildingResponse,
+  GetCategoryByIdResponse, GetBrandByIdResponse, GetBladeMaterialByIdResponse,
 } from '../types';
 import { AppPaths } from '../../paths/AppPaths';
 
@@ -44,12 +48,24 @@ export const productsApi = createApi({
       query: () => 'category',
     }),
 
+    getCategoryById: builder.query<GetCategoryByIdResponse, void>({
+      query: (id) => 'category/' + id,
+    }),
+
     getBrands: builder.query<GetBrandsResponse, void>({
       query: () => 'brand',
     }),
 
+    getBrandById: builder.query<GetBrandByIdResponse, void>({
+      query: (id) => 'brand/' + id,
+    }),
+
     getBladeMaterials: builder.query<GetBladeMaterialsResponse, void>({
       query: () => 'blade-material',
+    }),
+
+    getBladeMaterialById: builder.query<GetBladeMaterialByIdResponse, void>({
+      query: (id) => 'blade-material/' + id,
     }),
 
     getTypes: builder.query<GetTypesResponse, void>({
@@ -74,8 +90,11 @@ export const {
   useGetProductModelsByParamsQuery,
   useGetProductModelByIdQuery,
   useGetCategoriesQuery,
+  useGetCategoryByIdQuery,
   useGetBrandsQuery,
+  useGetBrandByIdQuery,
   useGetBladeMaterialsQuery,
+  useGetBladeMaterialByIdQuery,
   useGetTypesQuery,
   useGetHandleMaterialsQuery,
   useGetHandguardMaterialsQuery,

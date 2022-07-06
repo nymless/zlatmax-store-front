@@ -17,7 +17,7 @@ export const productModelHandlers = [
     const bladeWidth = req.url.searchParams.get('bladeWidth');
     const rating = req.url.searchParams.get('rating');
     const page = req.url.searchParams.get('page') || 1;
-    const limit = req.url.searchParams.get('limit') || 10;
+    const limit = req.url.searchParams.get('limit') || 9;
 
     const searchParams = Object.entries({
       typeId,
@@ -58,7 +58,7 @@ export const productModelHandlers = [
     });
 
     const offset = page * limit - limit;
-    const length = offset + limit;
+    const length = offset + limit - 1;
 
     const productModelsWithPageLimit = [];
 
@@ -68,6 +68,15 @@ export const productModelHandlers = [
       }
       productModelsWithPageLimit.push(productModelsByParams[i]);
     }
+
+    const productModelsBySelector = productModels.filter((model) => {
+      const categoryCheck = model.categoryId === Number.parseInt(categoryId);
+      const brandCheck = model.brandId === Number.parseInt(brandId);
+      const bladeMaterialCheck =
+        model.bladeMaterialId === Number.parseInt(bladeMaterialId);
+
+      return categoryCheck || brandCheck || bladeMaterialCheck;
+    });
 
     const rangesForSliders = {
       price: { min: Infinity, max: 0 },
@@ -85,7 +94,7 @@ export const productModelHandlers = [
       }
     };
 
-    productModelsByParams.forEach((product) => {
+    productModelsBySelector.forEach((product) => {
       mutateRangesMinMax(rangesForSliders.price, product.price);
       mutateRangesMinMax(rangesForSliders.totalLength, product.totalLength);
       mutateRangesMinMax(rangesForSliders.bladeLength, product.bladeLength);

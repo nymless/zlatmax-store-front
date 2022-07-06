@@ -8,3 +8,6 @@ declare module '@mui/material/AccordionSummary';
 declare module '@mui/material/AccordionDetails';
 declare module '@mui/material/Typography';
 declare module '@mui/icons-material/ExpandMore';
+declare module '@mui/material/Pagination';
+declare module '@mui/material/Breadcrumbs';
+declare module '@mui/material/Link';

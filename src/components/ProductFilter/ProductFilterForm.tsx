@@ -98,7 +98,7 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                 <SliderForm
                   min={props.ranges?.price.min || 1000}
                   step={100}
-                  max={props.ranges?.price.max || 10000}
+                  max={props.ranges?.price.max || 50000}
                   values={values}
                   setFieldValue={setFieldValue}
                   field="price"

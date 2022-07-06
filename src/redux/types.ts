@@ -92,10 +92,13 @@ export interface RangesForSliders {
 }
 
 export type GetCategoriesResponse = Category[];
+export type GetCategoryByIdResponse = Category;
 
 export type GetBrandsResponse = Brand[];
+export type GetBrandByIdResponse = Brand;
 
 export type GetBladeMaterialsResponse = BladeMaterial[];
+export type GetBladeMaterialByIdResponse = BladeMaterial;
 
 export type GetTypesResponse = Type[];
 

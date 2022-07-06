@@ -1,9 +1,9 @@
-import React, { FC } from "react";
-import styles from "./CategoryPage.module.css";
-import { SelectorCard } from "../../components/SelectorCard/SelectorCard";
-import { ProductSelectors } from "../../hooks/useProductSelectors";
-import { useGetCategoriesQuery } from "../../redux/services/productsApi";
-import { withContainer } from "../../hoc/withContainer";
+import React, { FC } from 'react';
+import styles from './CategoryPage.module.css';
+import { SelectorCard } from '../../components/SelectorCard/SelectorCard';
+import { ProductSelectors } from '../../hooks/useProductSelectors';
+import { useGetCategoriesQuery } from '../../redux/services/productsApi';
+import { withContainer } from '../../hoc/withContainer';
 
 interface CategoryPageProps {
   selectors: ProductSelectors;
@@ -26,6 +26,7 @@ const CategoryPage: FC<CategoryPageProps> = (props) => {
             return (
               <SelectorCard
                 key={category.id}
+                route="/category"
                 name={category.name}
                 img={category.img}
                 id={category.id}

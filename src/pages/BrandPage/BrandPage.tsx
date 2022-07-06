@@ -1,9 +1,9 @@
-import React, { FC } from "react";
-import { SelectorCard } from "../../components/SelectorCard/SelectorCard";
-import { withContainer } from "../../hoc/withContainer";
-import { ProductSelectors } from "../../hooks/useProductSelectors";
-import { useGetBrandsQuery } from "../../redux/services/productsApi";
-import styles from "./BrandPage.module.css";
+import React, { FC } from 'react';
+import { SelectorCard } from '../../components/SelectorCard/SelectorCard';
+import { withContainer } from '../../hoc/withContainer';
+import { ProductSelectors } from '../../hooks/useProductSelectors';
+import { useGetBrandsQuery } from '../../redux/services/productsApi';
+import styles from './BrandPage.module.css';
 
 interface BrandPageProps {
   selectors: ProductSelectors;
@@ -27,6 +27,7 @@ const BrandPage: FC<BrandPageProps> = (props) => {
               return (
                 <SelectorCard
                   key={manufacturer.id}
+                  route="/brand"
                   name={manufacturer.name}
                   img={manufacturer.img}
                   id={manufacturer.id}

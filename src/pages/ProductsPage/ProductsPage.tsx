@@ -1,13 +1,16 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC } from 'react';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { useGetProductModelsByParamsQuery } from '../../redux/services/productsApi';
 import { ProductSelectors } from '../../hooks/useProductSelectors';
 import styles from './ProductsPage.module.css';
 import { withContainer } from '../../hoc/withContainer';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
-import { filterTruthy } from '../../utils/filterTruthy';
 import ProductFilterForm from '../../components/ProductFilter/ProductFilterForm';
 import { string } from 'yup';
+import Pagination from '@mui/material/Pagination';
+import { AppBreadcrumbs } from '../../components/AppBreadcrumbs/AppBreadcrumbs';
+import { useAppPagination } from '../../hooks/useAppPagination';
+import { useAppBreadcrumbs } from '../../hooks/useAppBreadcrumbs';
 
 interface ProductsPageProps {
   selectors: ProductSelectors;
@@ -18,64 +21,38 @@ const ProductsPage: FC<ProductsPageProps> = (props) => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
 
-  const allParams = useMemo(
-    () =>
-      ({
-        typeId: searchParams.get('typeId'),
-        price: searchParams.get('price'),
-        categoryId: searchParams.get('categoryId'),
-        brandId: searchParams.get('brandId'),
-        bladeMaterialId: searchParams.get('bladeMaterialId'),
-        handleMaterialId: searchParams.get('handleMaterialId'),
-        handguardMaterialId: searchParams.get('handguardMaterialId'),
-        gildingId: searchParams.get('gildingId'),
-        totalLength: searchParams.get('totalLength'),
-        bladeLength: searchParams.get('bladeLength'),
-        bladeWidth: searchParams.get('bladeWidth'),
-        rating: searchParams.get('rating'),
-        page: searchParams.get('page'),
-        limit: searchParams.get('limit'),
-      } as Record<string, string | null>),
-    [searchParams]
+  searchParams.set('typeId', '1');
+
+  const validRoutes = ['category', 'brand', 'bladeMaterial'];
+  const routeSchema = string().oneOf(validRoutes).required();
+  const route = location.pathname.split('/')[1];
+  const isRouteValid = routeSchema.isValidSync(route);
+  const routeId = route + 'Id';
+
+  if (id && isRouteValid) {
+    searchParams.set(routeId, id);
+  }
+
+  const { data, error, isLoading } = useGetProductModelsByParamsQuery(
+    Object.fromEntries(searchParams.entries())
   );
 
-  useEffect(() => {
-    const routes = ['category', 'brand', 'bladeMaterial'];
-    const routeSchema = string().oneOf(routes).required();
-    const route = location.pathname.split('/')[1];
-    const field = route + 'Id';
-    const isRouteValid = routeSchema.isValidSync(route);
+  const pagesCount = data?.count ? Math.ceil(data.count / 9) : null;
 
-    if (id && isRouteValid) {
-      allParams.typeId = '1';
-      allParams[field] = id;
-      props.selectors.setTypeId(1);
-
-      if (route === 'category' && !props.selectors.categoryId) {
-        props.selectors.setCategoryId(Number.parseInt(id));
-      } else if (route === 'brand' && !props.selectors.brandId) {
-        props.selectors.setBrandId(Number.parseInt(id));
-      } else if (
-        route === 'bladeMaterial' &&
-        !props.selectors.bladeMaterialId
-      ) {
-        props.selectors.setBladeMaterialId(Number.parseInt(id));
-      }
-    }
-  }, [allParams, id, location.pathname, props.selectors]);
-
-  const params = filterTruthy(allParams);
-
-  const { data, error, isLoading } = useGetProductModelsByParamsQuery(params);
-
-  // TODO: add pagination
-  const count = data?.count;
+  const { currentPage, handlePagination } = useAppPagination(searchParams);
+  const { pageName, linkName } = useAppBreadcrumbs(route, id);
 
   // TODO: add spinner
   return (
     <section className={styles.ProductsPage}>
-      <div className={styles.heading}>Название</div>
-      <div className={styles.breadcrumbs}>Breadcrumbs...</div>
+      <div className={styles.heading}>{pageName}</div>
+      <div className={styles.breadcrumbs}>
+        <AppBreadcrumbs
+          pageName={pageName}
+          linkName={linkName}
+          linkRoute={'/' + route}
+        />
+      </div>
       <div className={styles.body}>
         <div className={styles.filter}>
           <ProductFilterForm
@@ -83,21 +60,41 @@ const ProductsPage: FC<ProductsPageProps> = (props) => {
             ranges={data?.ranges}
           />
         </div>
-        <div className={styles.products}>
-          {isLoading && 'Данные загружаются'}
-          {error && 'Ошибка загрузки данных с сервера'}
-          {!isLoading && !error && !data?.rows.length
-            ? 'Нет товаров соответсвующих выбранным параметрам'
-            : data?.rows.map((product) => {
-                return (
-                  <ProductCard
-                    key={product.id}
-                    name={product.name}
-                    img={product.img}
-                    productId={product.id}
-                  />
-                );
-              })}
+        <div>
+          <div className={styles.paginator}>
+            {pagesCount && (
+              <Pagination
+                onChange={handlePagination}
+                page={currentPage}
+                count={pagesCount}
+              ></Pagination>
+            )}
+          </div>
+          <div className={styles.products}>
+            {isLoading && 'Данные загружаются'}
+            {error && 'Ошибка загрузки данных с сервера'}
+            {!isLoading && !error && !data?.rows.length
+              ? 'Нет товаров соответсвующих выбранным параметрам'
+              : data?.rows.map((product) => {
+                  return (
+                    <ProductCard
+                      key={product.id}
+                      name={product.name}
+                      img={product.img}
+                      productId={product.id}
+                    />
+                  );
+                })}
+          </div>
+          <div className={styles.paginator}>
+            {pagesCount && (
+              <Pagination
+                onChange={handlePagination}
+                page={currentPage}
+                count={pagesCount}
+              ></Pagination>
+            )}
+          </div>
         </div>
       </div>
     </section>
