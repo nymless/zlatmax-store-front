@@ -19,11 +19,11 @@ import RatingStars from '../RatingStars/RatingStars';
 import { Form, Formik, FormikValues } from 'formik';
 import { filterTruthy } from '../../utils/filterTruthy';
 import { useSearchParams } from 'react-router-dom';
-import { RangesForSliders } from '../../redux/types';
+import { Ranges } from '../../redux/types';
 
 interface ProductFilterFormProps {
   selectors: ProductSelectors;
-  ranges: RangesForSliders | undefined;
+  ranges: Ranges | undefined;
 }
 
 const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
@@ -78,6 +78,8 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
     { id: 2, name: rating(2, '2/5') },
     { id: 1, name: rating(1, '1/5') },
   ];
+
+  // todo: fix issue with category form shown, when categories page selecting
 
   return (
     <div className={styles.ProductFilterForm}>

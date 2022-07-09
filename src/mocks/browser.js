@@ -7,6 +7,8 @@ import { productModelHandlers } from './handlers/productModelHandlers';
 import { handleMaterialHandlers } from './handlers/handleMaterialHandlers';
 import { handguardMaterialHandlers } from './handlers/handguardMaterialHandlers';
 import { gildingHandlers } from './handlers/gildingHandlers';
+import { userHandlers } from './handlers/userHandlers';
+import { favoritesHandlers } from './handlers/favoritesHandlers';
 
 export const worker = setupWorker(
   ...typeHandlers,
@@ -16,5 +18,7 @@ export const worker = setupWorker(
   ...productModelHandlers,
   ...handleMaterialHandlers,
   ...handguardMaterialHandlers,
-  ...gildingHandlers
+  ...gildingHandlers,
+  ...userHandlers,
+  ...favoritesHandlers
 );

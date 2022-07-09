@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import styles from './AppBreadcrumbs.module.css';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Link } from 'react-router-dom';
 
 interface AppBreadcrumbsProps {
   linkName: string;
@@ -11,26 +11,19 @@ interface AppBreadcrumbsProps {
 }
 
 export const AppBreadcrumbs: FC<AppBreadcrumbsProps> = (props) => {
-  const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    event.preventDefault();
-    console.info('You clicked a breadcrumb.');
-  };
-
   return (
-    <div
+    <Breadcrumbs
       className={styles.AppBreadcrumbs}
-      role="presentation"
-      onClick={handleClick}
+      separator={<NavigateNextIcon fontSize="small" />}
+      aria-label="breadcrumb"
     >
-      <Breadcrumbs aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/">
-          Главная
-        </Link>
-        <Link underline="hover" color="inherit" href={props.linkRoute}>
-          {props.linkName}
-        </Link>
-        <Typography color="text.primary">{props.pageName}</Typography>
-      </Breadcrumbs>
-    </div>
+      <Link className={styles.link} to="/">
+        Главная
+      </Link>
+      <Link className={styles.link} to={props.linkRoute}>
+        {props.linkName}
+      </Link>
+      <span className={styles.page}>{props.pageName}</span>
+    </Breadcrumbs>
   );
 };

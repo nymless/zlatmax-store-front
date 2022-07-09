@@ -4,11 +4,7 @@ import {
   useGetCategoryByIdQuery,
 } from '../redux/services/productsApi';
 import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import {
-  GetBladeMaterialByIdResponse,
-  GetBrandByIdResponse,
-  GetCategoryByIdResponse,
-} from '../redux/types';
+import { Blade, Brand, Category } from '../redux/types';
 
 export const useAppBreadcrumbs = (route: string, id: string | undefined) => {
   const names = {
@@ -20,12 +16,8 @@ export const useAppBreadcrumbs = (route: string, id: string | undefined) => {
     },
   } as Record<string, { name: string; queryHook: UseQuery<any> }>;
 
-  const pageName = (
-    names[route].queryHook(id).data as
-      | GetCategoryByIdResponse
-      | GetBrandByIdResponse
-      | GetBladeMaterialByIdResponse
-  )?.name;
+  const pageName = (names[route].queryHook(id).data as Category | Brand | Blade)
+    ?.name;
 
   const linkName = names[route]?.name;
 

@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { ProductModelForProductPage } from '../../redux/types';
+import { ModelExtended } from '../../redux/types';
 import styles from './Description.module.css';
 
 interface DescriptionProps {
-  product: ProductModelForProductPage;
+  product: ModelExtended;
 }
 
 const Description: FC<DescriptionProps> = (props) => (

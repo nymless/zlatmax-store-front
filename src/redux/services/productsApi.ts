@@ -1,16 +1,18 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
-  GetCategoriesResponse,
-  GetBrandsResponse,
-  GetBladeMaterialsResponse,
-  GetProductModelResponse,
-  GetProductModelsParams,
-  GetProductModelsResponse,
-  GetTypesResponse,
-  GetHandleMaterialResponse,
-  GetHandguardMaterialResponse,
-  GetGildingResponse,
-  GetCategoryByIdResponse, GetBrandByIdResponse, GetBladeMaterialByIdResponse,
+  Blade,
+  Blades,
+  Brand,
+  Brands,
+  Categories,
+  Category,
+  GetModelsParams,
+  GetModelsResponse,
+  Gilding,
+  Handguards,
+  Handles,
+  ModelExtended,
+  Types,
 } from '../types';
 import { AppPaths } from '../../paths/AppPaths';
 
@@ -28,59 +30,58 @@ export const productsApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getProductModelsByParams: builder.query<
-      GetProductModelsResponse,
-      GetProductModelsParams
-    >({
-      query: (arg) => {
-        return {
-          url: 'product-model',
-          params: { ...arg },
-        };
-      },
-    }),
+    getProductModelsByParams: builder.query<GetModelsResponse, GetModelsParams>(
+      {
+        query: (arg) => {
+          return {
+            url: 'product-model',
+            params: arg,
+          };
+        },
+      }
+    ),
 
-    getProductModelById: builder.query<GetProductModelResponse, number>({
+    getProductModelById: builder.query<ModelExtended, number>({
       query: (id) => 'product-model/' + id,
     }),
 
-    getCategories: builder.query<GetCategoriesResponse, void>({
+    getCategories: builder.query<Categories, void>({
       query: () => 'category',
     }),
 
-    getCategoryById: builder.query<GetCategoryByIdResponse, void>({
+    getCategoryById: builder.query<Category, number>({
       query: (id) => 'category/' + id,
     }),
 
-    getBrands: builder.query<GetBrandsResponse, void>({
+    getBrands: builder.query<Brands, void>({
       query: () => 'brand',
     }),
 
-    getBrandById: builder.query<GetBrandByIdResponse, void>({
+    getBrandById: builder.query<Brand, number>({
       query: (id) => 'brand/' + id,
     }),
 
-    getBladeMaterials: builder.query<GetBladeMaterialsResponse, void>({
+    getBladeMaterials: builder.query<Blades, void>({
       query: () => 'blade-material',
     }),
 
-    getBladeMaterialById: builder.query<GetBladeMaterialByIdResponse, void>({
+    getBladeMaterialById: builder.query<Blade, number>({
       query: (id) => 'blade-material/' + id,
     }),
 
-    getTypes: builder.query<GetTypesResponse, void>({
+    getTypes: builder.query<Types, void>({
       query: () => 'type',
     }),
 
-    getHandleMaterials: builder.query<GetHandleMaterialResponse, void>({
+    getHandleMaterials: builder.query<Handles, void>({
       query: () => 'handle-material',
     }),
 
-    getHandguardMaterials: builder.query<GetHandguardMaterialResponse, void>({
+    getHandguardMaterials: builder.query<Handguards, void>({
       query: () => 'handguard-material',
     }),
 
-    getGilding: builder.query<GetGildingResponse, void>({
+    getGilding: builder.query<Gilding, void>({
       query: () => 'gilding',
     }),
   }),

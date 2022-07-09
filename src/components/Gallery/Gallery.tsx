@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { ProductModelForProductPage } from '../../redux/types';
+import { ModelExtended } from '../../redux/types';
 import { AppPaths } from '../../paths/AppPaths';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -11,7 +11,7 @@ import SwiperClass, { FreeMode, Navigation, Thumbs } from 'swiper';
 import { SwiperStyle } from './types';
 
 interface GalleryProps {
-  product: ProductModelForProductPage;
+  product: ModelExtended;
 }
 
 const Gallery: FC<GalleryProps> = (props) => {
@@ -34,7 +34,7 @@ const Gallery: FC<GalleryProps> = (props) => {
         modules={[FreeMode, Navigation, Thumbs]}
         className={styles.imageSwiper}
       >
-        {props.product.productModelGalleries.map((item) => {
+        {props.product.gallery.map((item) => {
           return (
             <SwiperSlide key={item.id} className={styles.imageSlide}>
               <img
@@ -55,7 +55,7 @@ const Gallery: FC<GalleryProps> = (props) => {
         modules={[FreeMode, Navigation, Thumbs]}
         className={styles.itemsSwiper}
       >
-        {props.product.productModelGalleries.map((item) => {
+        {props.product.gallery.map((item) => {
           return (
             <SwiperSlide key={item.id} className={styles.itemSlide}>
               <img

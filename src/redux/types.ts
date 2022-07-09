@@ -15,28 +15,28 @@ export interface Brand {
   img: string;
 }
 
-export interface BladeMaterial {
+export interface Blade {
   id: number;
   name: string;
   img: string;
 }
 
-export interface Gilding {
+export interface GildingType {
   id: number;
   name: string;
 }
 
-export interface HandleMaterial {
+export interface Handle {
   id: number;
   name: string;
 }
 
-export interface HandguardMaterial {
+export interface Handguard {
   id: number;
   name: string;
 }
 
-export interface ProductModel {
+export interface Model {
   id: number;
   typeId: number;
   categoryId: number;
@@ -52,70 +52,80 @@ export interface ProductModel {
 
 export interface Product {
   id: number;
-  productModelId: number;
-  bladeMaterialId: number;
-  handleMaterialId: number;
-  handguardMaterialId: number;
+  modelId: number;
+  bladeId: number;
+  handleId: number;
+  handguardId: number;
   price: number;
 }
 
-export interface ProductModelInfo {
+export interface Info {
   id: number;
   title: string;
   description: string;
-  productModelId: number;
+  modelId: number;
 }
 
-export interface ProductModelGallery {
+export interface Gallery {
   id: number;
   img: string;
-  productModelId: number;
+  modelId: number;
 }
 
-export interface ProductModelForProductsPage extends ProductModel {
-  bladeMaterialId: Product['bladeMaterialId'];
-  handleMaterialId: Product['handleMaterialId'];
-  handguardMaterialId: Product['handguardMaterialId'];
-  price: Product['price'];
+export interface Favorite {
+  id: number;
+  userId: number;
+  modelId: number;
 }
 
-export interface ProductModelForProductPage extends ProductModel {
-  productModelInfos: ProductModelInfo[];
-  productModelGalleries: ProductModelGallery[];
+export interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  middleName?: string;
 }
 
-export interface RangesForSliders {
+export interface ModelCard extends Model {
+  blade: Blade;
+  handle: Handle;
+  handguard: Handguard;
+  price: number;
+}
+
+export interface ModelExtended extends Model {
+  info: Info[];
+  gallery: Gallery[];
+}
+
+export interface Ranges {
   price: { min: number; max: number };
   totalLength: { min: number; max: number };
   bladeLength: { min: number; max: number };
   bladeWidth: { min: number; max: number };
 }
 
-export type GetCategoriesResponse = Category[];
-export type GetCategoryByIdResponse = Category;
+export type Categories = Category[];
 
-export type GetBrandsResponse = Brand[];
-export type GetBrandByIdResponse = Brand;
+export type Brands = Brand[];
 
-export type GetBladeMaterialsResponse = BladeMaterial[];
-export type GetBladeMaterialByIdResponse = BladeMaterial;
+export type Blades = Blade[];
 
-export type GetTypesResponse = Type[];
+export type Types = Type[];
 
-export type GetHandleMaterialResponse = Type[];
+export type Handles = Handle[];
 
-export type GetHandguardMaterialResponse = Type[];
+export type Handguards = Handguard[];
 
-export type GetGildingResponse = Type[];
+export type Gilding = GildingType[];
 
-export type GetProductModelsParams = {
+export type GetModelsParams = {
   typeId?: number;
   price?: number;
   categoryId?: number;
   brandId?: number;
-  bladeMaterialId?: number;
-  handleMaterialId?: number;
-  handguardMaterialId?: number;
+  bladeId?: number;
+  handleId?: number;
+  handguardId?: number;
   gildingId?: number;
   totalLength?: number;
   bladeLength?: number;
@@ -125,10 +135,15 @@ export type GetProductModelsParams = {
   limit?: number;
 };
 
-export type GetProductModelsResponse = {
-  rows: ProductModelForProductsPage[];
+export type GetModelsResponse = {
+  rows: ModelCard[];
   count: number;
-  ranges: RangesForSliders;
+  ranges: Ranges;
 };
 
-export type GetProductModelResponse = ProductModelForProductPage;
+export type Favorites = Favorite[];
+
+export type FavoriteData = {
+  modelId: number;
+  userId: number;
+};
