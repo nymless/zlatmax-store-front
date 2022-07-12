@@ -1,40 +1,76 @@
-import React, { FC } from 'react';
-import styles from './CategoryPage.module.css';
-import { SelectorCard } from '../../components/SelectorCard/SelectorCard';
-import { ProductSelectors } from '../../hooks/useProductSelectors';
-import { useGetCategoriesQuery } from '../../redux/services/productsApi';
+import React, { FC, useEffect, useState } from 'react';
 import { withContainer } from '../../hoc/withContainer';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import ProductsPage from '../ProductsPage/ProductsPage';
+import styles from '../ProductsPage/ProductsPage.module.css';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  resetSelectedIds,
+  setSelectedCategoryId,
+  setSelectedTypeId,
+} from '../../redux/reducers/selectedReducer';
+import { RootState } from '../../redux/store';
 
-interface CategoryPageProps {
-  selectors: ProductSelectors;
-}
+interface CategoryPageProps {}
 
-const CategoryPage: FC<CategoryPageProps> = (props) => {
-  const categories = useGetCategoriesQuery().data;
+// todo: 404 page component
 
-  const onClickHandler = (id: number) => {
-    props.selectors.setCategoryId(id);
-  };
+const CategoryPage: FC<CategoryPageProps> = () => {
+  const dispatch = useDispatch();
+  const categoryId = useParams().id;
+  const location = useLocation();
+  const [id, setId] = useState<number>();
+
+  useEffect(() => {
+    dispatch(resetSelectedIds());
+  }, [dispatch, location]);
+
+  useEffect(() => {
+    if (categoryId) {
+      setId(Number.parseInt(categoryId));
+    }
+  }, [categoryId]);
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    dispatch(setSelectedTypeId(1));
+    dispatch(setSelectedCategoryId(id));
+  }, [dispatch, id]);
+
+  const pageName = useSelector((state: RootState) => {
+    if (!id || !state.app.appCategories[id]) {
+      return null;
+    }
+    return state.app.appCategories[id];
+  });
+
+  if (!id) {
+    return <div>404 error</div>;
+  }
 
   return (
-    <div className={styles.CategoryPage}>
-      <div className={styles.heading}>Категория ножей</div>
-      <div className={styles.breadcrumbs}>Breadcrumbs...</div>
-      <div className={styles.body}>
-        {categories &&
-          categories.map((category) => {
-            return (
-              <SelectorCard
-                key={category.id}
-                route="/category"
-                name={category.name}
-                img={category.img}
-                id={category.id}
-                onClickHandler={onClickHandler}
-              />
-            );
-          })}
-      </div>
+    <div>
+      <ProductsPage queryParamName="categoryId" queryParamValue={id.toString()}>
+        <div className={styles.heading}>{pageName}</div>
+        <div className={styles.breadcrumbs}>
+          <Breadcrumbs
+            separator={<NavigateNextIcon fontSize="small" />}
+            aria-label="breadcrumb"
+          >
+            <Link className={styles.link} to="/">
+              Главная
+            </Link>
+            <Link className={styles.link} to="/category">
+              Категория ножей
+            </Link>
+            <span className={styles.page}>{pageName}</span>
+          </Breadcrumbs>
+        </div>
+      </ProductsPage>
     </div>
   );
 };

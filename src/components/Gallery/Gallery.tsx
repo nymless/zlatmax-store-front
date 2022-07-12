@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { ModelExtended } from '../../redux/types';
+import { ProductModelForPage } from '../../redux/services/types';
 import { AppPaths } from '../../paths/AppPaths';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -8,10 +8,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import styles from './Gallery.module.css';
 import SwiperClass, { FreeMode, Navigation, Thumbs } from 'swiper';
-import { SwiperStyle } from './types';
 
 interface GalleryProps {
-  product: ModelExtended;
+  product: ProductModelForPage;
 }
 
 const Gallery: FC<GalleryProps> = (props) => {
@@ -24,7 +23,7 @@ const Gallery: FC<GalleryProps> = (props) => {
           {
             '--swiper-navigation-color': '#E8AA31',
             '--swiper-pagination-color': '#E8AA31',
-          } as SwiperStyle
+          } as Record<string, string>
         }
         spaceBetween={16}
         navigation={true}

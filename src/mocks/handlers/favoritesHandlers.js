@@ -2,6 +2,8 @@ import { rest } from 'msw';
 import { AppPaths } from '../../paths/AppPaths';
 import { favorites } from '../resources/favorites';
 
+let counter = 0;
+
 export const favoritesHandlers = [
   rest.get(AppPaths.API_URL + 'favorites', (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(favorites));
@@ -12,14 +14,14 @@ export const favoritesHandlers = [
     const modelId = req.body.modelId;
 
     const newFavorite = {
-      id: favorites[favorites.length - 1].id + 1,
+      id: ++counter,
       userId,
       modelId,
     };
 
     favorites.push(newFavorite);
 
-    return res(ctx.status(200), ctx.json(favorites));
+    return res(ctx.status(200));
   }),
 
   rest.delete(AppPaths.API_URL + 'favorites', (req, res, ctx) => {
@@ -35,6 +37,6 @@ export const favoritesHandlers = [
       }
     }
 
-    return res(ctx.status(200), ctx.json(favorites));
+    return res(ctx.status(200));
   }),
 ];

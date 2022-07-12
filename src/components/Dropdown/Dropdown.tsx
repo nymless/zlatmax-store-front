@@ -1,12 +1,9 @@
 import React, { FC, useState } from 'react';
 import s from './Dropdown.module.css';
 import { Panel } from './Panel/Panel';
-import { ProductSelectors } from '../../hooks/useProductSelectors';
 import { useGetTypesQuery } from '../../redux/services/productsApi';
 
-interface Props {
-  selectors: ProductSelectors;
-}
+interface Props {}
 
 export const Dropdown: FC<Props> = (props) => {
   const types = useGetTypesQuery().data;
@@ -14,7 +11,6 @@ export const Dropdown: FC<Props> = (props) => {
 
   const handleDropClick = (id: number) => {
     setDropOpened((toggle) => !toggle);
-    props.selectors.setTypeId(id);
   };
 
   return (
@@ -33,9 +29,7 @@ export const Dropdown: FC<Props> = (props) => {
             );
           })}
       </div>
-      {dropOpened && (
-        <Panel selectors={props.selectors} setDropOpened={setDropOpened} />
-      )}
+      {dropOpened && <Panel setDropOpened={setDropOpened} />}
     </div>
   );
 };

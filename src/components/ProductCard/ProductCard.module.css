@@ -78,7 +78,7 @@
 
 .reviews:hover {
     color: #E8AA31;
-    font-weight: 600;
+    transform: scale(1.05, 1.05);
 }
 
 .footer {
@@ -98,20 +98,4 @@
 .misc {
     display: flex;
     gap: 15px;
-}
-
-.active {
-    display: none;
-}
-
-.notFavorite:hover .active {
-    display: block;
-}
-
-.passive {
-    display: block;
-}
-
-.notFavorite:hover .passive {
-    display: none;
 }

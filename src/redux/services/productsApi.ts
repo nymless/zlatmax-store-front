@@ -11,9 +11,10 @@ import {
   Gilding,
   Handguards,
   Handles,
-  ModelExtended,
+  Product,
+  ProductModelForPage,
   Types,
-} from '../types';
+} from './types';
 import { AppPaths } from '../../paths/AppPaths';
 
 export const productsApi = createApi({
@@ -41,8 +42,19 @@ export const productsApi = createApi({
       }
     ),
 
-    getProductModelById: builder.query<ModelExtended, number>({
+    getProductModelById: builder.query<ProductModelForPage, number>({
       query: (id) => 'product-model/' + id,
+    }),
+
+    getProductsByModelIdQuery: builder.query<Product[], number>({
+      query: (modelId) => ({
+        url: 'product',
+        params: { modelId },
+      }),
+    }),
+
+    getProductByIdQuery: builder.query<Product, number>({
+      query: (id) => 'product/' + id,
     }),
 
     getCategories: builder.query<Categories, void>({
@@ -90,6 +102,8 @@ export const productsApi = createApi({
 export const {
   useGetProductModelsByParamsQuery,
   useGetProductModelByIdQuery,
+  useGetProductsByModelIdQueryQuery,
+  useGetProductByIdQueryQuery,
   useGetCategoriesQuery,
   useGetCategoryByIdQuery,
   useGetBrandsQuery,

@@ -1,13 +1,10 @@
-import React, { FC } from "react";
-import { ProductSelectors } from "../../hooks/useProductSelectors";
-import Bottom from "./Bottom/Bottom";
-import styles from "./Header.module.css";
-import Middle from "./Middle/Middle";
-import Top from "./Top/Top";
+import React, { FC } from 'react';
+import Bottom from './Bottom/Bottom';
+import styles from './Header.module.css';
+import Middle from './Middle/Middle';
+import Top from './Top/Top';
 
-interface HeaderProps {
-  selectors: ProductSelectors;
-}
+interface HeaderProps {}
 
 const Header: FC<HeaderProps> = (props) => {
   // TODO: state
@@ -24,7 +21,7 @@ const Header: FC<HeaderProps> = (props) => {
       </section>
 
       <section className={styles.bottom}>
-        <Bottom selectors={props.selectors} />
+        <Bottom />
       </section>
     </div>
   );

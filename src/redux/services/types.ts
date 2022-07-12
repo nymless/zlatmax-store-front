@@ -36,7 +36,7 @@ export interface Handguard {
   name: string;
 }
 
-export interface Model {
+export interface ProductModel {
   id: number;
   typeId: number;
   categoryId: number;
@@ -85,14 +85,14 @@ export interface User {
   middleName?: string;
 }
 
-export interface ModelCard extends Model {
-  blade: Blade;
-  handle: Handle;
-  handguard: Handguard;
+export interface ProductModelForCard extends ProductModel {
+  bladeMaterial: string;
+  handleMaterial: string;
+  handguardMaterial: string;
   price: number;
 }
 
-export interface ModelExtended extends Model {
+export interface ProductModelForPage extends ProductModel {
   info: Info[];
   gallery: Gallery[];
 }
@@ -136,7 +136,7 @@ export type GetModelsParams = {
 };
 
 export type GetModelsResponse = {
-  rows: ModelCard[];
+  rows: ProductModelForCard[];
   count: number;
   ranges: Ranges;
 };

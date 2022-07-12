@@ -1,8 +1,8 @@
 import React, { FC, ReactNode } from 'react';
 import FormControl from '@mui/material/FormControl';
-import { FormControlLabel } from './Styled/FormControlLabel';
+import { FormControlLabel } from './MuiStyled/FormControlLabel';
 import RadioGroup from '@mui/material/RadioGroup';
-import { Radio } from './Styled/Radio';
+import { Radio } from './MuiStyled/Radio';
 import { FormikHelpers, FormikValues } from 'formik';
 
 interface RadioFormProps {

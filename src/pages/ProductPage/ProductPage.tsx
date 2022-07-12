@@ -1,18 +1,24 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Description from '../../components/Description/Description';
 import Gallery from '../../components/Gallery/Gallery';
 import Product from '../../components/Product/Product';
 import { withContainer } from '../../hoc/withContainer';
-import { useGetProductModelByIdQuery } from '../../redux/services/productsApi';
+import {
+  useGetCategoryByIdQuery,
+  useGetProductModelByIdQuery,
+} from '../../redux/services/productsApi';
 import styles from './ProductPage.module.css';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const ProductPage = () => {
-  const productModelId = useParams().id;
-
+  const id = useParams().id;
   const { data, error, isLoading } = useGetProductModelByIdQuery(
-    Number.parseInt(productModelId as string)
+    Number.parseInt(id as string)
   );
+  const categoryId = data?.categoryId;
+  const categoryName = useGetCategoryByIdQuery(categoryId as number).data?.name;
 
   if (isLoading) {
     return <div className={styles.ProductPage}>Данные загружаются</div>;
@@ -28,11 +34,27 @@ const ProductPage = () => {
 
   return (
     <div className={styles.ProductPage}>
-      <div className={styles.breadcrumbs}>Breadcrumbs...</div>
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs
+          separator={<NavigateNextIcon fontSize="small" />}
+          aria-label="breadcrumb"
+        >
+          <Link className={styles.link} to="/">
+            Главная
+          </Link>
+          <Link className={styles.link} to="/category">
+            Категория ножей
+          </Link>
+          <Link className={styles.link} to={`/category/${categoryId}`}>
+            {categoryName}
+          </Link>
+          <span className={styles.page}>{data.name}</span>
+        </Breadcrumbs>
+      </div>
       <div className={styles.body}>
         <div className={styles.product}>
           <Gallery product={data} />
-          <Product product={data} />
+          <Product productModel={data} />
         </div>
         <div className={styles.description}>
           <Description product={data} />

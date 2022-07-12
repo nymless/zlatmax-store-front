@@ -1,15 +1,13 @@
-import React, { FC } from "react";
-import s from "./Panel.module.css";
-import { Menu } from "./Menu/Menu";
-import { ProductSelectors } from "../../../hooks/useProductSelectors";
+import React, { FC } from 'react';
+import s from './Panel.module.css';
+import { Menu } from './Menu/Menu';
 import {
-  useGetCategoriesQuery,
-  useGetBrandsQuery,
   useGetBladeMaterialsQuery,
-} from "../../../redux/services/productsApi";
+  useGetBrandsQuery,
+  useGetCategoriesQuery,
+} from '../../../redux/services/productsApi';
 
 interface Props {
-  selectors: ProductSelectors;
   setDropOpened: (toggle: boolean) => void;
 }
 
@@ -20,17 +18,14 @@ export const Panel: FC<Props> = (props) => {
 
   const handleCategoryClick = (id: number) => {
     props.setDropOpened(false);
-    props.selectors.setCategoryId(id);
   };
 
   const handleBrandClick = (id: number) => {
     props.setDropOpened(false);
-    props.selectors.setBrandId(id);
   };
 
   const handleBladeMaterialClick = (id: number) => {
     props.setDropOpened(false);
-    props.selectors.setBladeMaterialId(id);
   };
 
   const handleHeaderClick = () => {
@@ -46,7 +41,6 @@ export const Panel: FC<Props> = (props) => {
           onClickHandler={handleCategoryClick}
           handleHeaderClick={handleHeaderClick}
           path="/category"
-          selectors={props.selectors}
         />
       )}
       {brand && (
@@ -56,7 +50,6 @@ export const Panel: FC<Props> = (props) => {
           onClickHandler={handleBrandClick}
           handleHeaderClick={handleHeaderClick}
           path="/brand"
-          selectors={props.selectors}
         />
       )}
       {bladeMaterials && (
@@ -65,8 +58,7 @@ export const Panel: FC<Props> = (props) => {
           list={bladeMaterials}
           onClickHandler={handleBladeMaterialClick}
           handleHeaderClick={handleHeaderClick}
-          path="/bladeMaterial"
-          selectors={props.selectors}
+          path="/material"
         />
       )}
     </div>

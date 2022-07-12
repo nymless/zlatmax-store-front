@@ -1,64 +1,42 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { useGetProductModelsByParamsQuery } from '../../redux/services/productsApi';
-import { ProductSelectors } from '../../hooks/useProductSelectors';
 import styles from './ProductsPage.module.css';
-import { withContainer } from '../../hoc/withContainer';
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import ProductFilterForm from '../../components/ProductFilter/ProductFilterForm';
-import { string } from 'yup';
 import Pagination from '@mui/material/Pagination';
-import { AppBreadcrumbs } from '../../components/AppBreadcrumbs/AppBreadcrumbs';
 import { useAppPagination } from '../../hooks/useAppPagination';
-import { useAppBreadcrumbs } from '../../hooks/useAppBreadcrumbs';
 import { useGetUserQuery } from '../../redux/services/userApi';
 
 interface ProductsPageProps {
-  selectors: ProductSelectors;
+  queryParamName: string;
+  queryParamValue: string;
 }
 
-const ProductsPage: FC<ProductsPageProps> = (props) => {
-  const location = useLocation();
-  const { id } = useParams();
+// todo: with pagination from many product to few product make scroll up
+// todo: add spinner
+// todo: prices range bug
+
+const ProductsPage: FC<PropsWithChildren<ProductsPageProps>> = (props) => {
   const [searchParams] = useSearchParams();
-
   searchParams.set('typeId', '1');
-
-  const validRoutes = ['category', 'brand', 'bladeMaterial'];
-  const routeSchema = string().oneOf(validRoutes).required();
-  const route = location.pathname.split('/')[1];
-  const isRouteValid = routeSchema.isValidSync(route);
-  const routeId = route + 'Id';
-
-  if (id && isRouteValid) {
-    searchParams.set(routeId, id);
-  }
+  searchParams.set(props.queryParamName, props.queryParamValue);
 
   const { data, error, isLoading } = useGetProductModelsByParamsQuery(
     Object.fromEntries(searchParams.entries())
   );
-  const pagesCount = data?.count ? Math.ceil(data.count / 9) : null;
-  const { currentPage, handlePagination } = useAppPagination(searchParams);
-  const { pageName, linkName } = useAppBreadcrumbs(route, id);
+  const { currentPage, handlePagination, pagesCount } = useAppPagination(
+    searchParams,
+    data?.count
+  );
   const user = useGetUserQuery().data;
 
-  // TODO: add spinner
   return (
     <section className={styles.ProductsPage}>
-      <div className={styles.heading}>{pageName}</div>
-      <div className={styles.breadcrumbs}>
-        <AppBreadcrumbs
-          pageName={pageName}
-          linkName={linkName}
-          linkRoute={'/' + route}
-        />
-      </div>
+      {props.children}
       <div className={styles.body}>
         <div className={styles.filter}>
-          <ProductFilterForm
-            selectors={props.selectors}
-            ranges={data?.ranges}
-          />
+          <ProductFilterForm ranges={data?.ranges} />
         </div>
         <div>
           <div className={styles.products}>
@@ -85,4 +63,4 @@ const ProductsPage: FC<ProductsPageProps> = (props) => {
   );
 };
 
-export default withContainer(ProductsPage);
+export default ProductsPage;

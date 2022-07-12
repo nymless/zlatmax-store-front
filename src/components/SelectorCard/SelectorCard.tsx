@@ -8,16 +8,11 @@ type Props = {
   name: string;
   img: string;
   id: number;
-  onClickHandler: (id: number) => void;
 };
 
 export const SelectorCard: FC<Props> = (props) => {
   return (
-    <Link
-      className={s.card}
-      to={props.route + '/' + props.id}
-      onClick={() => props.onClickHandler(props.id)}
-    >
+    <Link className={s.card} to={props.route + '/' + props.id}>
       <img
         className={s.img}
         src={AppPaths.STATIC_URL + props.img}

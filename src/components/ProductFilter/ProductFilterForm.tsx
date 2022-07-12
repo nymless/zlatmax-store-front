@@ -2,89 +2,42 @@ import React, { FC } from 'react';
 import styles from './ProductFilterForm.module.css';
 import Typography from '@mui/material/Typography';
 import RadioForm from '../RadioForm/RadioForm';
-import {
-  useGetBladeMaterialsQuery,
-  useGetBrandsQuery,
-  useGetCategoriesQuery,
-  useGetGildingQuery,
-  useGetHandguardMaterialsQuery,
-  useGetHandleMaterialsQuery,
-} from '../../redux/services/productsApi';
 import SliderForm from '../SliderForm/SliderForm';
-import { Accordion } from './Styled/Accordion';
-import { AccordionSummary } from './Styled/AccordionSummary';
-import { AccordionDetails } from './Styled/AccordionDetails';
-import { ProductSelectors } from '../../hooks/useProductSelectors';
-import RatingStars from '../RatingStars/RatingStars';
-import { Form, Formik, FormikValues } from 'formik';
-import { filterTruthy } from '../../utils/filterTruthy';
-import { useSearchParams } from 'react-router-dom';
-import { Ranges } from '../../redux/types';
+import { Accordion } from './MuiStyled/Accordion';
+import { AccordionSummary } from './MuiStyled/AccordionSummary';
+import { AccordionDetails } from './MuiStyled/AccordionDetails';
+import { Form, Formik } from 'formik';
+import { Ranges } from '../../redux/services/types';
+import { useFormsLists } from '../../hooks/useFormsLists';
+import { useFormInitialization } from '../../hooks/useFormInitialization';
 
 interface ProductFilterFormProps {
-  selectors: ProductSelectors;
-  ranges: Ranges | undefined;
+  ranges?: Ranges;
 }
 
 const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
-  const [, setSearchParams] = useSearchParams();
+  const {
+    categories,
+    brand,
+    bladeMaterials,
+    handleMaterials,
+    handguardMaterials,
+    gilding,
+    rating,
+  } = useFormsLists();
 
-  const categories = useGetCategoriesQuery().data;
-  const brand = useGetBrandsQuery().data;
-  const bladeMaterials = useGetBladeMaterialsQuery().data;
-  const handleMaterials = useGetHandleMaterialsQuery().data;
-  const handguardMaterials = useGetHandguardMaterialsQuery().data;
-  const gilding = useGetGildingQuery().data;
-
-  const isCategorySelected = Boolean(props.selectors.categoryId);
-  const isBrandSelected = Boolean(props.selectors.brandId);
-  const isMaterialSelected = Boolean(props.selectors.bladeMaterialId);
-
-  const initialValues = {
-    typeId: props.selectors.typeId || '',
-    price: '',
-    categoryId: props.selectors.categoryId || '',
-    brandId: props.selectors.brandId || '',
-    bladeMaterialId: props.selectors.bladeMaterialId || '',
-    handleMaterialId: '',
-    handguardMaterialId: '',
-    gildingId: '',
-    totalLength: '',
-    bladeLength: '',
-    bladeWidth: '',
-    rating: '',
-  };
-
-  const handleSubmit = (values: FormikValues) => {
-    const getParams = filterTruthy(values);
-    setSearchParams(getParams);
-  };
-
-  const rating = (rating: number, text: string) => {
-    return (
-      <div className={styles.rating}>
-        <div>
-          <RatingStars rating={rating} />
-        </div>
-        <div>{text}</div>
-      </div>
-    );
-  };
-
-  const ratingList = [
-    { id: 5, name: rating(5, '5/5') },
-    { id: 4, name: rating(4, '4/5') },
-    { id: 3, name: rating(3, '3/5') },
-    { id: 2, name: rating(2, '2/5') },
-    { id: 1, name: rating(1, '1/5') },
-  ];
-
-  // todo: fix issue with category form shown, when categories page selecting
+  const {
+    isCategorySelected,
+    isBrandSelected,
+    isMaterialSelected,
+    initialFormValues,
+    handleSubmitForm,
+  } = useFormInitialization();
 
   return (
     <div className={styles.ProductFilterForm}>
       <h3 className={styles.heading}>Фильтр товаров</h3>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Formik initialValues={initialFormValues} onSubmit={handleSubmitForm}>
         {({ values, setFieldValue }) => (
           <Form>
             <button type="submit">Submit</button>
@@ -272,7 +225,7 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
               </AccordionSummary>
               <AccordionDetails>
                 <RadioForm
-                  list={ratingList}
+                  list={rating}
                   values={values}
                   setFieldValue={setFieldValue}
                   field="rating"

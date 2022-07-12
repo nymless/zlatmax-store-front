@@ -1,8 +1,29 @@
 import { rest } from 'msw';
 import { AppPaths } from '../../paths/AppPaths';
 import { productModels } from '../resources/productModels';
+import { bladeMaterials } from '../resources/bladeMaterials';
+import { handleMaterials } from '../resources/handleMaterials';
+import { handguardMaterials } from '../resources/handguardMaterials';
+import { products } from '../resources/products';
+import { info } from '../resources/info';
+import { gallery } from '../resources/gallery';
 
 export const productModelHandlers = [
+  rest.get(AppPaths.API_URL + 'product-model/:id', (req, res, ctx) => {
+    const id = Number.parseInt(req.params.id);
+    const productModel = productModels.find((model) => model.id === id);
+
+    const productInfo = info.filter((inf) => inf.modelId === productModel.id);
+    const productGallery = gallery.filter(
+      (img) => img.modelId === productModel.id
+    );
+
+    productModel.info = productInfo;
+    productModel.gallery = productGallery;
+
+    return res(ctx.status(200), ctx.json(productModel));
+  }),
+
   rest.get(AppPaths.API_URL + 'product-model', (req, res, ctx) => {
     const typeId = req.url.searchParams.get('typeId');
     const price = req.url.searchParams.get('price');
@@ -69,11 +90,14 @@ export const productModelHandlers = [
       productModelsWithPageLimit.push(productModelsByParams[i]);
     }
 
+    const categoryIdInt = Number.parseInt(categoryId);
+    const brandIdInt = Number.parseInt(brandId);
+    const bladeMaterialIdInt = Number.parseInt(bladeMaterialId);
+
     const productModelsBySelector = productModels.filter((model) => {
-      const categoryCheck = model.categoryId === Number.parseInt(categoryId);
-      const brandCheck = model.brandId === Number.parseInt(brandId);
-      const bladeMaterialCheck =
-        model.bladeMaterialId === Number.parseInt(bladeMaterialId);
+      const categoryCheck = model.categoryId === categoryIdInt;
+      const brandCheck = model.brandId === brandIdInt;
+      const bladeMaterialCheck = model.bladeMaterialId === bladeMaterialIdInt;
 
       return categoryCheck || brandCheck || bladeMaterialCheck;
     });
@@ -99,6 +123,30 @@ export const productModelHandlers = [
       mutateRangesMinMax(rangesForSliders.totalLength, product.totalLength);
       mutateRangesMinMax(rangesForSliders.bladeLength, product.bladeLength);
       mutateRangesMinMax(rangesForSliders.bladeWidth, product.bladeWidth);
+    });
+
+    // adding additional business logic data, needed in Products Page
+    productModelsWithPageLimit.forEach((model) => {
+      const product = products.find(
+        (product) => model.defaultProductId === product.id
+      );
+      const bladeMaterialId = product.bladeMaterialId;
+      const handleMaterialId = product.handleMaterialId;
+      const handguardMaterialId = product.handguardMaterialId;
+      const bladeMaterial = bladeMaterials.find(
+        (blade) => blade.id === bladeMaterialId
+      );
+      const handleMaterial = handleMaterials.find(
+        (blade) => blade.id === handleMaterialId
+      );
+      const handguardMaterial = handguardMaterials.find(
+        (blade) => blade.id === handguardMaterialId
+      );
+
+      model.price = product.price;
+      model.bladeMaterial = bladeMaterial.name;
+      model.handleMaterial = handleMaterial.name;
+      model.handguardMaterial = handguardMaterial.name;
     });
 
     return res(

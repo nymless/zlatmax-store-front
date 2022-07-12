@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { FavoriteData, Favorites, User } from '../types';
+import { FavoriteData, Favorites, User } from './types';
 import { AppPaths } from '../../paths/AppPaths';
 
 export const userApi = createApi({

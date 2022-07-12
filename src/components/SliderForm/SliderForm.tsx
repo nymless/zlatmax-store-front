@@ -2,8 +2,8 @@ import React, { FC, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
-import { Slider } from './Styled/Slider';
-import { Input } from './Styled/Input';
+import { Slider } from './MuiStyled/Slider';
+import { Input } from './MuiStyled/Input';
 import { FormikHelpers, FormikValues } from 'formik';
 
 function valuetext(value: number) {

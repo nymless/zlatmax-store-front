@@ -1,55 +1,36 @@
 import React, { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { ProductSelectors } from '../../hooks/useProductSelectors';
 import AdminPage from '../../pages/AdminPage/AdminPage';
 import AuthPage from '../../pages/AuthPage/AuthPage';
-import CategoryPage from '../../pages/CategoryPage/CategoryPage';
-import ManufacturerPage from '../../pages/BrandPage/BrandPage';
-import MaterialPage from '../../pages/MaterialPage/MaterialPage';
 import ProductPage from '../../pages/ProductPage/ProductPage';
-import ProductsPage from '../../pages/ProductsPage/ProductsPage';
 import ShopPage from '../../pages/ShopPage/ShopPage';
 import ShoppingCartPage from '../../pages/ShoppingCartPage/ShoppingCartPage';
+import CategoriesPage from '../../pages/CategoriesPage/CategoriesPage';
+import BrandsPage from '../../pages/BrandsPage/BrandsPage';
+import MaterialsPage from '../../pages/MaterialsPage/MaterialsPage';
+import CategoryPage from '../../pages/CategoryPage/CategoryPage';
+import BrandPage from '../../pages/BrandPage/BrandPage';
+import MaterialPage from '../../pages/MaterialPage/MaterialPage';
 
-interface Props {
-  selectors: ProductSelectors;
-}
+interface Props {}
 
 const AppRouter: FC<Props> = (props) => {
-  // TODO: state
+  // TODO: make auth
   const isAuth = false;
 
   return (
     <Routes>
       <Route path="/" element={<ShopPage />} />
       {isAuth && <Route path="/admin" element={<AdminPage />} />}
-      {isAuth && <Route path="/shopping-cart" element={<ShoppingCartPage />} />}
+      {isAuth && <Route path="/cart" element={<ShoppingCartPage />} />}
       <Route path="/login" element={<AuthPage />} />
       <Route path="/registration" element={<AuthPage />} />
-      <Route
-        path="/category"
-        element={<CategoryPage selectors={props.selectors} />}
-      />
-      <Route
-        path="/brand"
-        element={<ManufacturerPage selectors={props.selectors} />}
-      />
-      <Route
-        path="/bladeMaterial"
-        element={<MaterialPage selectors={props.selectors} />}
-      />
-      <Route
-        path="/category/:id"
-        element={<ProductsPage selectors={props.selectors} />}
-      />
-      <Route
-        path="/brand/:id"
-        element={<ProductsPage selectors={props.selectors} />}
-      />
-      <Route
-        path="/bladeMaterial/:id"
-        element={<ProductsPage selectors={props.selectors} />}
-      />
+      <Route path="/category" element={<CategoriesPage />} />
+      <Route path="/brand" element={<BrandsPage />} />
+      <Route path="/material" element={<MaterialsPage />} />
+      <Route path="/category/:id" element={<CategoryPage />} />
+      <Route path="/brand/:id" element={<BrandPage />} />
+      <Route path="/material/:id" element={<MaterialPage />} />
       <Route path="/product/:id" element={<ProductPage />} />
       <Route path="/*" element={<ShopPage />} />
     </Routes>

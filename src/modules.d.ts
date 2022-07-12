@@ -11,3 +11,8 @@ declare module '@mui/icons-material/ExpandMore';
 declare module '@mui/material/Pagination';
 declare module '@mui/material/Breadcrumbs';
 declare module '@mui/material/Link';
+declare module '@mui/material/Box';
+declare module '@mui/material/FormControl';
+declare module '@mui/material/InputLabel';
+declare module '@mui/material/MenuItem';
+declare module '@mui/material/Select';

@@ -1,43 +1,73 @@
-import React, { FC } from 'react';
-import { SelectorCard } from '../../components/SelectorCard/SelectorCard';
+import React, { FC, useEffect, useState } from 'react';
 import { withContainer } from '../../hoc/withContainer';
-import { ProductSelectors } from '../../hooks/useProductSelectors';
-import { useGetBrandsQuery } from '../../redux/services/productsApi';
-import styles from './BrandPage.module.css';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import ProductsPage from '../ProductsPage/ProductsPage';
+import styles from '../ProductsPage/ProductsPage.module.css';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  resetSelectedIds,
+  setSelectedBrandId,
+  setSelectedTypeId,
+} from '../../redux/reducers/selectedReducer';
+import { RootState } from '../../redux/store';
 
-interface BrandPageProps {
-  selectors: ProductSelectors;
-}
+interface BrandPageProps {}
 
-const BrandPage: FC<BrandPageProps> = (props) => {
-  const manufacturers = useGetBrandsQuery().data;
+const BrandPage: FC<BrandPageProps> = () => {
+  const dispatch = useDispatch();
+  const brandId = useParams().id;
+  const location = useLocation();
+  const [id, setId] = useState<number>();
 
-  const onClickHandler = (id: number) => {
-    props.selectors.setBrandId(id);
-  };
+  useEffect(() => {
+    dispatch(resetSelectedIds());
+  }, [dispatch, location]);
+
+  useEffect(() => {
+    if (brandId) {
+      setId(Number.parseInt(brandId));
+    }
+  }, [brandId]);
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    dispatch(setSelectedTypeId(1));
+    dispatch(setSelectedBrandId(id));
+  }, [dispatch, id]);
+
+  const pageName = useSelector((state: RootState) => {
+    if (!id || !state.app.appBrands[id]) {
+      return null;
+    }
+    return state.app.appBrands[id];
+  });
+
+  if (!id) {
+    return <div>404 error</div>;
+  }
 
   return (
-    <div className="_container">
-      <div className={styles.BrandPage}>
-        <div className={styles.heading}>Производство ножей</div>
-        <div className={styles.breadcrumbs}>Breadcrumbs...</div>
-        <div className={styles.body}>
-          {manufacturers &&
-            manufacturers.map((manufacturer) => {
-              return (
-                <SelectorCard
-                  key={manufacturer.id}
-                  route="/brand"
-                  name={manufacturer.name}
-                  img={manufacturer.img}
-                  id={manufacturer.id}
-                  onClickHandler={onClickHandler}
-                />
-              );
-            })}
-        </div>
+    <ProductsPage queryParamName="brandId" queryParamValue={id.toString()}>
+      <div className={styles.heading}>{pageName}</div>
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs
+          separator={<NavigateNextIcon fontSize="small" />}
+          aria-label="breadcrumb"
+        >
+          <Link className={styles.link} to="/">
+            Главная
+          </Link>
+          <Link className={styles.link} to="/brand">
+            Производство ножей
+          </Link>
+          <span className={styles.page}>{pageName}</span>
+        </Breadcrumbs>
       </div>
-    </div>
+    </ProductsPage>
   );
 };
 

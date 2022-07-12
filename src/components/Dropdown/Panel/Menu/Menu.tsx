@@ -1,7 +1,6 @@
-import React from "react";
-import s from "./Menu.module.css";
-import { Link } from "react-router-dom";
-import { ProductSelectors } from "../../../../hooks/useProductSelectors";
+import React from 'react';
+import s from './Menu.module.css';
+import { Link } from 'react-router-dom';
 
 type Props = {
   name: string;
@@ -9,7 +8,6 @@ type Props = {
   onClickHandler: (id: number) => void;
   handleHeaderClick: () => void;
   path: string;
-  selectors: ProductSelectors;
 };
 
 export const Menu: React.FC<Props> = (props) => {
@@ -28,7 +26,7 @@ export const Menu: React.FC<Props> = (props) => {
             <Link
               className={s.link}
               key={item.id}
-              to={props.path + "/" + item.id}
+              to={props.path + '/' + item.id}
               onClick={() => props.onClickHandler(item.id)}
             >
               {item.name}
