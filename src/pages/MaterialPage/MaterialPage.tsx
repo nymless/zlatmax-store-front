@@ -26,9 +26,10 @@ const MaterialPage: FC<MaterialPageProps> = () => {
   }, [dispatch, location]);
 
   useEffect(() => {
-    if (bladeMaterialId) {
-      setId(Number.parseInt(bladeMaterialId));
+    if (!bladeMaterialId) {
+      return
     }
+    setId(Number.parseInt(bladeMaterialId));
   }, [bladeMaterialId]);
 
   useEffect(() => {

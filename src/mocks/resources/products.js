@@ -1,186 +1,45 @@
-export const products = [
-  {
-    id: 1,
-    modelId: 1,
-    bladeMaterialId: 5,
-    handleMaterialId: 2,
-    handguardMaterialId: 4,
-    price: 3000,
-  },
-  {
-    id: 2,
-    modelId: 1,
-    bladeMaterialId: 2,
-    handleMaterialId: 2,
-    handguardMaterialId: 2,
-    price: 4000,
-  },
-  {
-    id: 3,
-    modelId: 1,
-    bladeMaterialId: 3,
-    handleMaterialId: 3,
-    handguardMaterialId: 3,
-    price: 6000,
-  },
-  {
-    id: 4,
-    modelId: 1,
-    bladeMaterialId: 4,
-    handleMaterialId: 4,
-    handguardMaterialId: 4,
-    price: 8000,
-  },
-  {
-    id: 5,
-    modelId: 1,
-    bladeMaterialId: 5,
-    handleMaterialId: 5,
-    handguardMaterialId: 5,
-    price: 10000,
-  },
-  {
-    id: 6,
-    modelId: 2,
-    bladeMaterialId: 1,
-    handleMaterialId: 1,
-    handguardMaterialId: 1,
-    price: 3000,
-  },
-  {
-    id: 7,
-    modelId: 2,
-    bladeMaterialId: 2,
-    handleMaterialId: 2,
-    handguardMaterialId: 2,
-    price: 4000,
-  },
-  {
-    id: 8,
-    modelId: 2,
-    bladeMaterialId: 3,
-    handleMaterialId: 3,
-    handguardMaterialId: 3,
-    price: 6000,
-  },
-  {
-    id: 9,
-    modelId: 2,
-    bladeMaterialId: 4,
-    handleMaterialId: 4,
-    handguardMaterialId: 4,
-    price: 8000,
-  },
-  {
-    id: 10,
-    modelId: 2,
-    bladeMaterialId: 5,
-    handleMaterialId: 5,
-    handguardMaterialId: 5,
-    price: 10000,
-  },
-  {
-    id: 11,
-    modelId: 3,
-    bladeMaterialId: 2,
-    handleMaterialId: 5,
-    handguardMaterialId: 1,
-    price: 4000,
-  },
-  {
-    id: 12,
-    modelId: 4,
-    bladeMaterialId: 4,
-    handleMaterialId: 1,
-    handguardMaterialId: 1,
-    price: 4000,
-  },
-  {
-    id: 13,
-    modelId: 5,
-    bladeMaterialId: 3,
-    handleMaterialId: 5,
-    handguardMaterialId: 4,
-    price: 4000,
-  },
-  {
-    id: 14,
-    modelId: 6,
-    bladeMaterialId: 1,
-    handleMaterialId: 3,
-    handguardMaterialId: 2,
-    price: 4000,
-  },
-  {
-    id: 15,
-    modelId: 7,
-    bladeMaterialId: 8,
-    handleMaterialId: 4,
-    handguardMaterialId: 6,
-    price: 4000,
-  },
-  {
-    id: 16,
-    modelId: 8,
-    bladeMaterialId: 1,
-    handleMaterialId: 9,
-    handguardMaterialId: 5,
-    price: 4000,
-  },
-  {
-    id: 17,
-    modelId: 9,
-    bladeMaterialId: 9,
-    handleMaterialId: 5,
-    handguardMaterialId: 2,
-    price: 4000,
-  },
-  {
-    id: 18,
-    modelId: 10,
-    bladeMaterialId: 5,
-    handleMaterialId: 4,
-    handguardMaterialId: 1,
-    price: 4000,
-  },
-  {
-    id: 19,
-    modelId: 11,
-    bladeMaterialId: 6,
-    handleMaterialId: 4,
-    handguardMaterialId: 1,
-    price: 4000,
-  },
-  {
-    id: 20,
-    modelId: 12,
-    bladeMaterialId: 1,
-    handleMaterialId: 2,
-    handguardMaterialId: 4,
-    price: 4000,
-  },
-  {
-    id: 21,
-    modelId: 13,
-    bladeMaterialId: 9,
-    handleMaterialId: 8,
-    handguardMaterialId: 5,
-    price: 4000,
-  },
-  {
-    id: 22,
-    modelId: 14,
-    bladeMaterialId: 7,
-    handleMaterialId: 6,
-    handguardMaterialId: 2,
-    price: 4000,
-  },
-  {
-    id: 23,
-    modelId: 15,
-    bladeMaterialId: 8,
-    handleMaterialId: 4,
-    handguardMaterialId: 3,
-    price: 4000,
-  },
-];
+import { getRandomInt } from '../../utils/getRandomInt';
+import { generateBlade } from './blades';
+import { generateHandle } from './handles';
+import { generateHandguard } from './handguards';
+import { generateGilding } from './gilding';
+import { productModels } from './productModels';
+
+let productCounter = 1;
+let bladeCounter = 1;
+let handleCounter = 1;
+let handguardCounter = 1;
+let gildingCounter = 1;
+
+export function generateProduct(productModelId, withGilding) {
+  const price = getRandomInt(1000, 10000);
+  const productId = productCounter++;
+  const bladeId = bladeCounter++;
+  const handleId = handleCounter++;
+  const handguardId = handguardCounter++;
+
+  generateBlade(bladeId, price);
+  generateHandle(handleId, price);
+  generateHandguard(handguardId, price);
+
+  let gildingId;
+  if (withGilding) {
+    gildingId = gildingCounter++;
+    generateGilding(gildingId, price);
+  }
+
+  return {
+    id: productId,
+    productModelId,
+    handleId: handleId,
+    handguardId: handguardId,
+    bladeId: bladeId,
+    gildingId: withGilding ? gildingId : null,
+    img: 'model.jpg',
+    price: price,
+    stock: getRandomInt(0, 10),
+    code: 'AF000000' + productId,
+  };
+}
+
+export const products = [];

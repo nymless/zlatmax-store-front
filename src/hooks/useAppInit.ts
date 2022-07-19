@@ -1,15 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  useGetBladeMaterialsQuery,
-  useGetBrandsQuery,
-  useGetCategoriesQuery,
-  useGetGildingQuery,
-  useGetHandguardMaterialsQuery,
-  useGetHandleMaterialsQuery,
-  useGetTypesQuery,
-} from '../redux/services/productsApi';
-import {
   setAppBladeMaterials,
   setAppBrands,
   setAppCategories,
@@ -18,8 +9,19 @@ import {
   setAppHandleMaterials,
   setAppTypes,
 } from '../redux/reducers/appReducer';
+import {
+  useGetBrandsQuery,
+  useGetCategoriesQuery,
+  useGetTypesQuery,
+} from '../redux/services/productDetailsApi';
+import {
+  useGetBladeMaterialsQuery,
+  useGetGildingTypesQuery,
+  useGetHandguardMaterialsQuery,
+  useGetHandleMaterialsQuery,
+} from '../redux/services/knifeMaterialsApi';
 
-export const useAppInitialization = () => {
+export const useAppInit = () => {
   const dispatch = useDispatch();
 
   const types = useGetTypesQuery().data;
@@ -28,7 +30,7 @@ export const useAppInitialization = () => {
   const bladeMaterials = useGetBladeMaterialsQuery().data;
   const handleMaterials = useGetHandleMaterialsQuery().data;
   const handguardMaterials = useGetHandguardMaterialsQuery().data;
-  const gildingTypes = useGetGildingQuery().data;
+  const gildingTypes = useGetGildingTypesQuery().data;
 
   useEffect(() => {
     if (!types) {

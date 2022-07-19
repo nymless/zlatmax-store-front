@@ -2,7 +2,7 @@ import { rest } from 'msw';
 import { AppPaths } from '../../paths/AppPaths';
 import { favorites } from '../resources/favorites';
 
-let counter = 0;
+let counter = 1;
 
 export const favoritesHandlers = [
   rest.get(AppPaths.API_URL + 'favorites', (req, res, ctx) => {
@@ -11,12 +11,12 @@ export const favoritesHandlers = [
 
   rest.post(AppPaths.API_URL + 'favorites', (req, res, ctx) => {
     const userId = req.body.userId;
-    const modelId = req.body.modelId;
+    const productId = req.body.productId;
 
     const newFavorite = {
-      id: ++counter,
+      id: counter++,
       userId,
-      modelId,
+      productId,
     };
 
     favorites.push(newFavorite);
@@ -26,11 +26,11 @@ export const favoritesHandlers = [
 
   rest.delete(AppPaths.API_URL + 'favorites', (req, res, ctx) => {
     const userId = req.body.userId;
-    const modelId = req.body.modelId;
+    const productId = req.body.productId;
 
     for (let i = 0; i < favorites.length; i++) {
       const matches =
-        favorites[i].userId === userId && favorites[i].modelId === modelId;
+        favorites[i].userId === userId && favorites[i].productId === productId;
       if (matches) {
         favorites.splice(i, 1);
         i--;

@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { FavoriteData, Favorites, User } from './types';
 import { AppPaths } from '../../paths/AppPaths';
+import { User } from '../models/models';
 
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
     baseUrl: AppPaths.API_URL,
     prepareHeaders: (headers) => {
-      // todo: check token expiration
+      // todo: token auth
       const token = localStorage.getItem('token');
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
@@ -15,43 +15,12 @@ export const userApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Favorites'],
   endpoints: (builder) => ({
+    // todo: with auth
     getUser: builder.query<User, void>({
       query: () => 'user',
-    }),
-
-    getFavorites: builder.query<Favorites, number>({
-      query: (userId) => ({
-        url: 'favorites',
-        params: { userId },
-      }),
-      providesTags: ['Favorites'],
-    }),
-
-    addFavorite: builder.mutation<void, FavoriteData>({
-      query: (favorite) => ({
-        url: 'favorites',
-        method: 'POST',
-        body: favorite,
-      }),
-      invalidatesTags: ['Favorites'],
-    }),
-
-    removeFavorite: builder.mutation<void, FavoriteData>({
-      query: (favorite) => ({
-        url: 'favorites',
-        method: 'DELETE',
-        body: favorite,
-      }),
-      invalidatesTags: ['Favorites'],
     }),
   }),
 });
 
-export const {
-  useGetUserQuery,
-  useGetFavoritesQuery,
-  useAddFavoriteMutation,
-  useRemoveFavoriteMutation,
-} = userApi;
+export const { useGetUserQuery } = userApi;

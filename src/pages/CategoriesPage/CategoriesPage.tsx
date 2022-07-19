@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import styles from './CategoriesPage.module.css';
 import { SelectorCard } from '../../components/SelectorCard/SelectorCard';
-import { useGetCategoriesQuery } from '../../redux/services/productsApi';
 import { withContainer } from '../../hoc/withContainer';
+import { useGetCategoriesQuery } from '../../redux/services/productDetailsApi';
 
 interface CategoriesPageProps {}
 

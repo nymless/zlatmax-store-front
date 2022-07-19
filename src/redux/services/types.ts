@@ -1,124 +1,7 @@
-export interface Type {
-  id: number;
-  name: string;
-}
+import { Gallery, Info, Product, ProductModel } from '../models/models';
 
-export interface Category {
-  id: number;
-  name: string;
-  img: string;
-}
-
-export interface Brand {
-  id: number;
-  name: string;
-  img: string;
-}
-
-export interface Blade {
-  id: number;
-  name: string;
-  img: string;
-}
-
-export interface GildingType {
-  id: number;
-  name: string;
-}
-
-export interface Handle {
-  id: number;
-  name: string;
-}
-
-export interface Handguard {
-  id: number;
-  name: string;
-}
-
-export interface ProductModel {
-  id: number;
-  typeId: number;
-  categoryId: number;
-  brandId: number;
-  name: string;
-  rating: number;
-  img: string;
-  totalLength: number;
-  bladeLength: number;
-  bladeWidth: number;
-  defaultProductId: number;
-}
-
-export interface Product {
-  id: number;
-  modelId: number;
-  bladeId: number;
-  handleId: number;
-  handguardId: number;
-  price: number;
-}
-
-export interface Info {
-  id: number;
-  title: string;
-  description: string;
-  modelId: number;
-}
-
-export interface Gallery {
-  id: number;
-  img: string;
-  modelId: number;
-}
-
-export interface Favorite {
-  id: number;
-  userId: number;
-  modelId: number;
-}
-
-export interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  middleName?: string;
-}
-
-export interface ProductModelForCard extends ProductModel {
-  bladeMaterial: string;
-  handleMaterial: string;
-  handguardMaterial: string;
-  price: number;
-}
-
-export interface ProductModelForPage extends ProductModel {
-  info: Info[];
-  gallery: Gallery[];
-}
-
-export interface Ranges {
-  price: { min: number; max: number };
-  totalLength: { min: number; max: number };
-  bladeLength: { min: number; max: number };
-  bladeWidth: { min: number; max: number };
-}
-
-export type Categories = Category[];
-
-export type Brands = Brand[];
-
-export type Blades = Blade[];
-
-export type Types = Type[];
-
-export type Handles = Handle[];
-
-export type Handguards = Handguard[];
-
-export type Gilding = GildingType[];
-
-export type GetModelsParams = {
+export type GetProductsParams = {
+  productModelId?: number;
   typeId?: number;
   price?: number;
   categoryId?: number;
@@ -135,15 +18,50 @@ export type GetModelsParams = {
   limit?: number;
 };
 
-export type GetModelsResponse = {
-  rows: ProductModelForCard[];
+export interface RangesForFormSliders {
+  price: { min: number; max: number };
+  totalLength: { min: number; max: number };
+  bladeLength: { min: number; max: number };
+  bladeWidth: { min: number; max: number };
+}
+
+export interface ProductWithParts extends Product {
+  bladeMaterial: string;
+  bladePrice: number;
+  handleMaterial: string;
+  handlePrice: number;
+  handguardMaterial: string;
+  handguardPrice: number;
+  productModel: ProductModelForProductPage;
+}
+
+export type GetProductsResponse = {
+  rows: ProductWithParts[];
   count: number;
-  ranges: Ranges;
+  ranges: RangesForFormSliders;
 };
 
-export type Favorites = Favorite[];
+export interface ProductModelForProductPage extends ProductModel {
+  info: Info[];
+  gallery: Gallery[];
+  seriesName?: string;
+}
 
 export type FavoriteData = {
-  modelId: number;
   userId: number;
+  productId: number;
+};
+
+export type CartData = {
+  userId: number;
+  productId: number;
+};
+
+export type OrderData = {
+  userId: number;
+  paymentTypeId: number;
+  createdAt: Date;
+  totalPrice: number;
+  status: 'pending';
+  products: Product[];
 };

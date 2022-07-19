@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { SelectorCard } from '../../components/SelectorCard/SelectorCard';
 import { withContainer } from '../../hoc/withContainer';
-import { useGetBrandsQuery } from '../../redux/services/productsApi';
 import styles from './BrandsPage.module.css';
+import { useGetBrandsQuery } from '../../redux/services/productDetailsApi';
 
 interface BrandsPageProps {}
 

@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { ProductModelForPage } from '../../redux/services/types';
+import { ProductModelForProductPage } from '../../redux/services/types';
 import { AppPaths } from '../../paths/AppPaths';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -10,7 +10,7 @@ import styles from './Gallery.module.css';
 import SwiperClass, { FreeMode, Navigation, Thumbs } from 'swiper';
 
 interface GalleryProps {
-  product: ProductModelForPage;
+  productModel: ProductModelForProductPage;
 }
 
 const Gallery: FC<GalleryProps> = (props) => {
@@ -33,13 +33,13 @@ const Gallery: FC<GalleryProps> = (props) => {
         modules={[FreeMode, Navigation, Thumbs]}
         className={styles.imageSwiper}
       >
-        {props.product.gallery.map((item) => {
+        {props.productModel.gallery.map((item) => {
           return (
             <SwiperSlide key={item.id} className={styles.imageSlide}>
               <img
                 className={styles.image}
                 src={AppPaths.STATIC_URL + item.img}
-                alt={'Изображение ' + props.product.name}
+                alt={'Изображение ' + props.productModel.name}
               />
             </SwiperSlide>
           );
@@ -54,13 +54,13 @@ const Gallery: FC<GalleryProps> = (props) => {
         modules={[FreeMode, Navigation, Thumbs]}
         className={styles.itemsSwiper}
       >
-        {props.product.gallery.map((item) => {
+        {props.productModel.gallery.map((item) => {
           return (
             <SwiperSlide key={item.id} className={styles.itemSlide}>
               <img
                 className={styles.item}
                 src={AppPaths.STATIC_URL + item.img}
-                alt={'Изображение ' + props.product.name}
+                alt={'Изображение ' + props.productModel.name}
               />
             </SwiperSlide>
           );

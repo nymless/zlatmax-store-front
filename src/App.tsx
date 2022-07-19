@@ -4,10 +4,10 @@ import './App.css';
 import AppRouter from './components/AppRouter/AppRouter';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
-import { useAppInitialization } from './hooks/useAppInitialization';
+import { useAppInit } from './hooks/useAppInit';
 
 function App() {
-  useAppInitialization();
+  useAppInit();
 
   return (
     <BrowserRouter>

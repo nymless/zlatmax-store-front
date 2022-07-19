@@ -1,21 +1,23 @@
-import {
-  useGetBladeMaterialsQuery,
-  useGetBrandsQuery,
-  useGetCategoriesQuery,
-  useGetGildingQuery,
-  useGetHandguardMaterialsQuery,
-  useGetHandleMaterialsQuery,
-} from '../redux/services/productsApi';
 import RatingFormItem from '../components/ProductFilter/RatingFormItem/RatingFormItem';
 import React from 'react';
+import {
+  useGetBrandsQuery,
+  useGetCategoriesQuery,
+} from '../redux/services/productDetailsApi';
+import {
+  useGetBladeMaterialsQuery,
+  useGetGildingTypesQuery,
+  useGetHandguardMaterialsQuery,
+  useGetHandleMaterialsQuery,
+} from '../redux/services/knifeMaterialsApi';
 
-export const useFormsLists = () => {
+export const useFilterFormLists = () => {
   const categories = useGetCategoriesQuery().data;
   const brand = useGetBrandsQuery().data;
   const bladeMaterials = useGetBladeMaterialsQuery().data;
   const handleMaterials = useGetHandleMaterialsQuery().data;
   const handguardMaterials = useGetHandguardMaterialsQuery().data;
-  const gilding = useGetGildingQuery().data;
+  const gildingTypes = useGetGildingTypesQuery().data;
 
   const rating = [
     { id: 5, name: <RatingFormItem rating={5} text="5/5" /> },
@@ -31,7 +33,7 @@ export const useFormsLists = () => {
     bladeMaterials,
     handleMaterials,
     handguardMaterials,
-    gilding,
+    gildingTypes,
     rating,
   };
 };

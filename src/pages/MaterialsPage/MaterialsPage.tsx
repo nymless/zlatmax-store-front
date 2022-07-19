@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import styles from './MaterialsPage.module.css';
 import { SelectorCard } from '../../components/SelectorCard/SelectorCard';
-import { useGetBladeMaterialsQuery } from '../../redux/services/productsApi';
 import { withContainer } from '../../hoc/withContainer';
+import { useGetBladeMaterialsQuery } from '../../redux/services/knifeMaterialsApi';
 
 interface MaterialsPageProps {}
 

@@ -7,12 +7,12 @@ import { Accordion } from './MuiStyled/Accordion';
 import { AccordionSummary } from './MuiStyled/AccordionSummary';
 import { AccordionDetails } from './MuiStyled/AccordionDetails';
 import { Form, Formik } from 'formik';
-import { Ranges } from '../../redux/services/types';
-import { useFormsLists } from '../../hooks/useFormsLists';
-import { useFormInitialization } from '../../hooks/useFormInitialization';
+import { RangesForFormSliders } from '../../redux/services/types';
+import { useFilterFormLists } from '../../hooks/useFilterFormLists';
+import { useFilterFormInit } from '../../hooks/useFilterFormInit';
 
 interface ProductFilterFormProps {
-  ranges?: Ranges;
+  ranges?: RangesForFormSliders;
 }
 
 const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
@@ -22,9 +22,9 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
     bladeMaterials,
     handleMaterials,
     handguardMaterials,
-    gilding,
+    gildingTypes,
     rating,
-  } = useFormsLists();
+  } = useFilterFormLists();
 
   const {
     isCategorySelected,
@@ -32,7 +32,7 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
     isMaterialSelected,
     initialFormValues,
     handleSubmitForm,
-  } = useFormInitialization();
+  } = useFilterFormInit();
 
   return (
     <div className={styles.ProductFilterForm}>
@@ -52,8 +52,8 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
               <AccordionDetails>
                 <SliderForm
                   min={props.ranges?.price.min || 1000}
-                  step={100}
-                  max={props.ranges?.price.max || 50000}
+                  step={1}
+                  max={props.ranges?.price.max || 10000}
                   values={values}
                   setFieldValue={setFieldValue}
                   field="price"
@@ -155,10 +155,10 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
               </AccordionSummary>
               <AccordionDetails>
                 <RadioForm
-                  list={gilding}
+                  list={gildingTypes}
                   values={values}
                   setFieldValue={setFieldValue}
-                  field="gildingId"
+                  field="gildingTypeId"
                 />
               </AccordionDetails>
             </Accordion>

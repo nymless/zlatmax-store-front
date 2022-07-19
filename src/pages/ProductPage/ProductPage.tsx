@@ -2,33 +2,41 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Description from '../../components/Description/Description';
 import Gallery from '../../components/Gallery/Gallery';
-import Product from '../../components/Product/Product';
+import ProductPanel from '../../components/ProductPanel/ProductPanel';
 import { withContainer } from '../../hoc/withContainer';
-import {
-  useGetCategoryByIdQuery,
-  useGetProductModelByIdQuery,
-} from '../../redux/services/productsApi';
 import styles from './ProductPage.module.css';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { useGetProductByIdQuery } from '../../redux/services/productsApi';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 const ProductPage = () => {
-  const id = useParams().id;
-  const { data, error, isLoading } = useGetProductModelByIdQuery(
-    Number.parseInt(id as string)
-  );
-  const categoryId = data?.categoryId;
-  const categoryName = useGetCategoryByIdQuery(categoryId as number).data?.name;
+  const idString = useParams().id!;
+  const id = Number.parseInt(idString);
 
-  if (isLoading) {
+  const getProductResponse = useGetProductByIdQuery(id);
+  const getProductData = getProductResponse.data;
+  const getProductError = getProductResponse.error;
+  const getProductIsLoading = getProductResponse.isLoading;
+
+  const categoryId = getProductData?.productModel.categoryId;
+  const categoryName = useSelector((state: RootState) => {
+    if (!categoryId) {
+      return;
+    }
+    return state.app.appCategories[categoryId];
+  });
+
+  if (getProductIsLoading) {
     return <div className={styles.ProductPage}>Данные загружаются</div>;
   }
 
-  if (error) {
-    return <div className={styles.ProductPage}>Ошибка загрузки данных</div>;
+  if (getProductError) {
+    return <div className={styles.ProductPage}>Не корректный запрос</div>;
   }
 
-  if (!data) {
+  if (!getProductData) {
     return <div className={styles.ProductPage}>Товар не найден</div>;
   }
 
@@ -45,19 +53,26 @@ const ProductPage = () => {
           <Link className={styles.link} to="/category">
             Категория ножей
           </Link>
-          <Link className={styles.link} to={`/category/${categoryId}`}>
-            {categoryName}
-          </Link>
-          <span className={styles.page}>{data.name}</span>
+          {categoryName && (
+            <Link className={styles.link} to={`/category/${categoryId}`}>
+              {categoryName}
+            </Link>
+          )}
+          <span className={styles.page}>
+            {getProductData.productModel.name}
+          </span>
         </Breadcrumbs>
       </div>
       <div className={styles.body}>
         <div className={styles.product}>
-          <Gallery product={data} />
-          <Product productModel={data} />
+          <Gallery productModel={getProductData.productModel} />
+          <ProductPanel
+            productModel={getProductData.productModel}
+            product={getProductData}
+          />
         </div>
         <div className={styles.description}>
-          <Description product={data} />
+          <Description productModel={getProductData.productModel} />
         </div>
       </div>
     </div>

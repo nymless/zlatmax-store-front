@@ -6,19 +6,29 @@ import { bladeMaterialHandlers } from './handlers/bladeMaterialHandlers';
 import { productModelHandlers } from './handlers/productModelHandlers';
 import { handleMaterialHandlers } from './handlers/handleMaterialHandlers';
 import { handguardMaterialHandlers } from './handlers/handguardMaterialHandlers';
-import { gildingHandlers } from './handlers/gildingHandlers';
+import { gildingTypeHandlers } from './handlers/gildingTypeHandlers';
 import { userHandlers } from './handlers/userHandlers';
 import { favoritesHandlers } from './handlers/favoritesHandlers';
+import { productHandlers } from './handlers/productHandlers';
+import { bladeHandlers } from './handlers/bladeHandlers';
+import { handguardHandlers } from './handlers/handguardHandlers';
+import { handleHandlers } from './handlers/handleHandlers';
+
+
 
 export const worker = setupWorker(
   ...typeHandlers,
   ...categoryHandlers,
   ...brandHandlers,
+  ...bladeHandlers,
+  ...handleHandlers,
+  ...handguardHandlers,
   ...bladeMaterialHandlers,
   ...productModelHandlers,
+  ...productHandlers,
   ...handleMaterialHandlers,
   ...handguardMaterialHandlers,
-  ...gildingHandlers,
+  ...gildingTypeHandlers,
   ...userHandlers,
   ...favoritesHandlers
 );

@@ -5,7 +5,7 @@ export const MenuItem = styled(MuiMenuItem)({
   fontFamily: 'Montserrat, sans-serif',
   fontWeight: 500,
 
-  '&.Mui-selected:first-child': {
+  '&.Mui-selected:first-of-type': {
     color: '#141414',
     backgroundColor: '#FEFEFE',
   },

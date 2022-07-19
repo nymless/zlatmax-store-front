@@ -1,6 +1,6 @@
 let counter = 1;
 
-function generateInfo(modelId) {
+export function generateInfo(modelId) {
   return {
     id: counter++,
     modelId: modelId,
@@ -19,20 +19,4 @@ function generateInfo(modelId) {
   };
 }
 
-export const info = [
-  generateInfo(1),
-  generateInfo(2),
-  generateInfo(3),
-  generateInfo(4),
-  generateInfo(5),
-  generateInfo(6),
-  generateInfo(7),
-  generateInfo(8),
-  generateInfo(9),
-  generateInfo(10),
-  generateInfo(11),
-  generateInfo(12),
-  generateInfo(13),
-  generateInfo(14),
-  generateInfo(15),
-];
+export const info = [];

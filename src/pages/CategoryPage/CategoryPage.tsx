@@ -25,12 +25,13 @@ const CategoryPage: FC<CategoryPageProps> = () => {
 
   useEffect(() => {
     dispatch(resetSelectedIds());
-  }, [dispatch, location]);
+  }, [dispatch, location.pathname]);
 
   useEffect(() => {
-    if (categoryId) {
-      setId(Number.parseInt(categoryId));
+    if (!categoryId) {
+      return
     }
+    setId(Number.parseInt(categoryId));
   }, [categoryId]);
 
   useEffect(() => {

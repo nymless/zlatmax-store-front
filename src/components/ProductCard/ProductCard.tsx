@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 import styles from './ProductCard.module.css';
 import { Link } from 'react-router-dom';
 import { AppPaths } from '../../paths/AppPaths';
-import { ProductModelForCard } from '../../redux/services/types';
+import { ProductWithParts } from '../../redux/services/types';
 import RatingStars from '../RatingStars/RatingStars';
 import Favorites from '../Favorites/Favorites';
 import Compare from '../Compare/Compare';
 
 type Props = {
-  model: ProductModelForCard;
+  product: ProductWithParts;
   userId?: number;
 };
 
@@ -19,28 +19,28 @@ export const ProductCard: FC<Props> = (props) => {
 
   const discount = 50;
 
-  const localizedPrice = props.model.price.toLocaleString('ru', {
+  const localizedPrice = props.product.price.toLocaleString('ru', {
     minimumFractionDigits: 0,
     style: 'currency',
     currency: 'RUB',
   });
 
   return (
-    <Link className={styles.card} to={'/product/' + props.model.id}>
+    <Link className={styles.card} to={'/product/' + props.product.id}>
       {discount && <div className={styles.discount}>{`-${discount}%`}</div>}
       <img
         className={styles.image}
-        src={AppPaths.STATIC_URL + props.model.img}
-        alt={'Изображение ' + props.model.name}
+        src={AppPaths.STATIC_URL + props.product.img}
+        alt={'Изображение ' + props.product.productModel.name}
       />
       <div className={styles.content}>
         <div className={styles.heading}>
-          <h3 className={styles.name}>{props.model.name}</h3>
+          <h3 className={styles.name}>{props.product.productModel.name}</h3>
         </div>
         <div className={styles.info}>
-          <div className={styles.blade}>{props.model.bladeMaterial}</div>
+          <div className={styles.blade}>{props.product.bladeMaterial}</div>
           <div className={styles.handle}>
-            {`${props.model.handleMaterial}, ${props.model.handguardMaterial}`}
+            {`${props.product.handleMaterial}, ${props.product.handguardMaterial}`}
           </div>
         </div>
         <div className={styles.other}>
@@ -55,7 +55,7 @@ export const ProductCard: FC<Props> = (props) => {
         <div className={styles.misc}>
           <Compare />
           {props.userId && (
-            <Favorites userId={props.userId} modelId={props.model.id} />
+            <Favorites userId={props.userId} productId={props.product.id} />
           )}
         </div>
       </footer>

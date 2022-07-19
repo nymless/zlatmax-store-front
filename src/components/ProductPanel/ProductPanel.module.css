@@ -1,4 +1,4 @@
-.Product {
+.ProductPanel {
     border-radius: 3px;
     box-shadow: 0 0 10px rgb(204, 204, 204);
     padding: 30px;
@@ -47,16 +47,50 @@
     opacity: 50%;
 }
 
-.materials {
-    padding: 30px 0;
-    border-bottom: 1px solid rgba(14, 14, 14, 15%);
-    display: grid;
-    grid-template-columns: 195px auto;
-    align-items: center;
-    row-gap: 20px;
+.footer {
+    padding-top: 30px;
 }
 
-.formLabel {
-    font-size: 1.125rem;
+.priceBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.price {
+    font-size: 1.875rem;
+    font-weight: 700;
+}
+
+.bonusBlock {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.bonus {
+    font-size: 0.875rem;
+    opacity: 50%;
     font-weight: 500;
+}
+
+.bonusInfo {
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    background-color: rgba(14, 14, 14, 30%);
+    line-height: 19px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.quantityBlock {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 30px;
+}
+
+.quantity {
+
 }

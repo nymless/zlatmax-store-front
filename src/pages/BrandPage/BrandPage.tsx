@@ -26,9 +26,10 @@ const BrandPage: FC<BrandPageProps> = () => {
   }, [dispatch, location]);
 
   useEffect(() => {
-    if (brandId) {
-      setId(Number.parseInt(brandId));
+    if (!brandId) {
+      return
     }
+    setId(Number.parseInt(brandId));
   }, [brandId]);
 
   useEffect(() => {

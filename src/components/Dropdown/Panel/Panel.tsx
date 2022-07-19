@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import s from './Panel.module.css';
 import { Menu } from './Menu/Menu';
 import {
-  useGetBladeMaterialsQuery,
   useGetBrandsQuery,
   useGetCategoriesQuery,
-} from '../../../redux/services/productsApi';
+} from '../../../redux/services/productDetailsApi';
+import { useGetBladeMaterialsQuery } from '../../../redux/services/knifeMaterialsApi';
 
 interface Props {
   setDropOpened: (toggle: boolean) => void;

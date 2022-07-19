@@ -1,4 +1,4 @@
-export const gildings = [
+export const gildingTypes = [
   {
     id: 1,
     name: 'Золочение клинка',

@@ -4,7 +4,7 @@ import { RootState } from '../redux/store';
 import { FormikValues } from 'formik';
 import { filterTruthy } from '../utils/filterTruthy';
 
-export const useFormInitialization = () => {
+export const useFilterFormInit = () => {
   const [, setSearchParams] = useSearchParams();
 
   const selectedTypeId = useSelector(
@@ -28,7 +28,7 @@ export const useFormInitialization = () => {
     bladeMaterialId: selectedBladeMaterialId || '',
     handleMaterialId: '',
     handguardMaterialId: '',
-    gildingId: '',
+    gildingTypeId: '',
     totalLength: '',
     bladeLength: '',
     bladeWidth: '',
