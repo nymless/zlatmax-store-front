@@ -3,7 +3,6 @@ import { typeHandlers } from './handlers/typeHandlers';
 import { categoryHandlers } from './handlers/categoryHandlers';
 import { brandHandlers } from './handlers/brandHandlers';
 import { bladeMaterialHandlers } from './handlers/bladeMaterialHandlers';
-import { productModelHandlers } from './handlers/productModelHandlers';
 import { handleMaterialHandlers } from './handlers/handleMaterialHandlers';
 import { handguardMaterialHandlers } from './handlers/handguardMaterialHandlers';
 import { gildingTypeHandlers } from './handlers/gildingTypeHandlers';
@@ -14,8 +13,6 @@ import { bladeHandlers } from './handlers/bladeHandlers';
 import { handguardHandlers } from './handlers/handguardHandlers';
 import { handleHandlers } from './handlers/handleHandlers';
 
-
-
 export const worker = setupWorker(
   ...typeHandlers,
   ...categoryHandlers,
@@ -24,7 +21,6 @@ export const worker = setupWorker(
   ...handleHandlers,
   ...handguardHandlers,
   ...bladeMaterialHandlers,
-  ...productModelHandlers,
   ...productHandlers,
   ...handleMaterialHandlers,
   ...handguardMaterialHandlers,

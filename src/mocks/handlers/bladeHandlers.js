@@ -1,24 +1,18 @@
 import { rest } from 'msw';
 import { AppPaths } from '../../paths/AppPaths';
 import { blades } from '../resources/blades';
-import { products } from '../resources/products';
 
 export const bladeHandlers = [
   rest.get(AppPaths.API_URL + 'blade', (req, res, ctx) => {
-    const productModelIdString = req.url.searchParams.get('productModelId');
-    const productModelId = Number.parseInt(productModelIdString);
+    const productIdString = req.url.searchParams.get('productId');
+    const productId = Number.parseInt(productIdString);
 
-    if (productModelId) {
-      const bladesByProductModelId = blades.filter((blade) => {
-        return products.some((product) => {
-          if (product.productModelId === productModelId) {
-            return product.bladeId === blade.id;
-          }
-          return false;
-        });
+    if (productId) {
+      const bladesByProductId = blades.filter((blade) => {
+        return blade.productId === productId;
       });
 
-      return res(ctx.status(200), ctx.json(bladesByProductModelId));
+      return res(ctx.status(200), ctx.json(bladesByProductId));
     }
 
     return res(ctx.status(200), ctx.json(blades));

@@ -4,7 +4,6 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { userApi } from './services/userApi';
 import { appSlice } from './reducers/appReducer';
 import { selectedSlice } from './reducers/selectedReducer';
-import { productModelsApi } from './services/productModelsApi';
 import { cartApi } from './services/cartApi';
 import { favoriteApi } from './services/favoriteApi';
 import { knifeMaterialsApi } from './services/knifeMaterialsApi';
@@ -23,7 +22,6 @@ export const store = configureStore({
     [knifePartsApi.reducerPath]: knifePartsApi.reducer,
     [orderApi.reducerPath]: orderApi.reducer,
     [productDetailsApi.reducerPath]: productDetailsApi.reducer,
-    [productModelsApi.reducerPath]: productModelsApi.reducer,
     [productsApi.reducerPath]: productsApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
   },
@@ -35,7 +33,6 @@ export const store = configureStore({
       knifePartsApi.middleware,
       orderApi.middleware,
       productDetailsApi.middleware,
-      productModelsApi.middleware,
       productsApi.middleware,
       userApi.middleware
     ),

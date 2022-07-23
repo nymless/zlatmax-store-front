@@ -10,7 +10,7 @@ import styles from './Gallery.module.css';
 import SwiperClass, { FreeMode, Navigation, Thumbs } from 'swiper';
 
 interface GalleryProps {
-  productModel: ProductModelForProductPage;
+  product: ProductModelForProductPage;
 }
 
 const Gallery: FC<GalleryProps> = (props) => {
@@ -33,13 +33,13 @@ const Gallery: FC<GalleryProps> = (props) => {
         modules={[FreeMode, Navigation, Thumbs]}
         className={styles.imageSwiper}
       >
-        {props.productModel.gallery.map((item) => {
+        {props.product.gallery.map((item) => {
           return (
             <SwiperSlide key={item.id} className={styles.imageSlide}>
               <img
                 className={styles.image}
                 src={AppPaths.STATIC_URL + item.img}
-                alt={'Изображение ' + props.productModel.name}
+                alt={'Изображение ' + props.product.name}
               />
             </SwiperSlide>
           );
@@ -54,13 +54,13 @@ const Gallery: FC<GalleryProps> = (props) => {
         modules={[FreeMode, Navigation, Thumbs]}
         className={styles.itemsSwiper}
       >
-        {props.productModel.gallery.map((item) => {
+        {props.product.gallery.map((item) => {
           return (
             <SwiperSlide key={item.id} className={styles.itemSlide}>
               <img
                 className={styles.item}
                 src={AppPaths.STATIC_URL + item.img}
-                alt={'Изображение ' + props.productModel.name}
+                alt={'Изображение ' + props.product.name}
               />
             </SwiperSlide>
           );

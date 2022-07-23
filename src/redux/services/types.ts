@@ -1,7 +1,6 @@
-import { Gallery, Info, Product, ProductModel } from '../models/models';
+import { Gallery, Info, Product } from '../models/models';
 
 export type GetProductsParams = {
-  productModelId?: number;
   typeId?: number;
   price?: number;
   categoryId?: number;
@@ -25,26 +24,24 @@ export interface RangesForFormSliders {
   bladeWidth: { min: number; max: number };
 }
 
-export interface ProductWithParts extends Product {
-  bladeMaterial: string;
-  bladePrice: number;
-  handleMaterial: string;
-  handlePrice: number;
-  handguardMaterial: string;
-  handguardPrice: number;
-  productModel: ProductModelForProductPage;
+export interface ProductWithMaterials extends Product {
+  bladeMaterialName: string;
+  handleMaterialName: string;
+  handguardMaterialName: string;
 }
 
 export type GetProductsResponse = {
-  rows: ProductWithParts[];
+  rows: ProductWithMaterials[];
   count: number;
   ranges: RangesForFormSliders;
 };
 
-export interface ProductModelForProductPage extends ProductModel {
+export interface ProductModelForProductPage extends ProductWithMaterials {
+  bladePrice: number;
+  handlePrice: number;
+  handguardPrice: number;
   info: Info[];
   gallery: Gallery[];
-  seriesName?: string;
 }
 
 export type FavoriteData = {

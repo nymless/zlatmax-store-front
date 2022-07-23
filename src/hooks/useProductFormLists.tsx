@@ -6,13 +6,25 @@ import {
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 
-export const useProductFormLists = (
-  productModelId: number,
-  productId: number
-) => {
-  const blades = useGetBladesByParamsQuery(productModelId).data;
-  const handles = useGetHandlesByParamsQuery(productModelId).data;
-  const handguards = useGetHandguardsByParamsQuery(productModelId).data;
+export interface Part {
+  partId: number;
+  partPrice: number;
+  partMaterialName: string;
+}
+
+export interface Lists {
+  bladesList?: Part[];
+  handlesList?: Part[];
+  handguardsList?: Part[];
+  maintenanceList?: Part[];
+}
+
+// todo: maintenanceList list from server API
+
+export const useProductFormLists = (productId: number) => {
+  const blades = useGetBladesByParamsQuery(productId).data;
+  const handles = useGetHandlesByParamsQuery(productId).data;
+  const handguards = useGetHandguardsByParamsQuery(productId).data;
 
   const bladeMaterials = useSelector(
     (state: RootState) => state.app.appBladeMaterials
@@ -24,31 +36,46 @@ export const useProductFormLists = (
     (state: RootState) => state.app.appHandguardMaterials
   );
 
-  const bladesList = blades?.map((blade) => {
+  const bladesList: Part[] | undefined = blades?.map((blade) => {
     return {
-      id: blade.id,
-      price: blade.price,
-      name: bladeMaterials[blade.bladeMaterialId],
+      partId: blade.id,
+      partPrice: blade.partPrice,
+      partMaterialName: bladeMaterials[blade.bladeMaterialId],
     };
   });
-  const handlesList = handles?.map((handle) => {
+  const handlesList: Part[] | undefined = handles?.map((handle) => {
     return {
-      id: handle.id,
-      price: handle.price,
-      name: handleMaterials[handle.handleMaterialId],
+      partId: handle.id,
+      partPrice: handle.partPrice,
+      partMaterialName: handleMaterials[handle.handleMaterialId],
     };
   });
-  const handguardsList = handguards?.map((handguard) => {
+  const handguardsList: Part[] | undefined = handguards?.map((handguard) => {
     return {
-      id: handguard.id,
-      price: handguard.price,
-      name: handguardMaterials[handguard.handguardMaterialId],
+      partId: handguard.id,
+      partPrice: handguard.partPrice,
+      partMaterialName: handguardMaterials[handguard.handguardMaterialId],
     };
   });
+
+  // todo: from API
+  const maintenanceList: Part[] = [
+    {
+      partId: 1,
+      partPrice: 500,
+      partMaterialName: 'Заточка ножа',
+    },
+    {
+      partId: 2,
+      partPrice: 1000,
+      partMaterialName: 'Полировка ножа',
+    },
+  ];
 
   return {
     bladesList,
     handlesList,
     handguardsList,
+    maintenanceList,
   };
 };

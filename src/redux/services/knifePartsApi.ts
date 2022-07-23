@@ -9,9 +9,9 @@ export const knifePartsApi = createApi({
   }),
   endpoints: (builder) => ({
     getHandlesByParams: builder.query<Handle[], number>({
-      query: (productModelId) => ({
+      query: (productId) => ({
         url: 'handle',
-        params: { productModelId },
+        params: { productId },
       }),
     }),
     getHandleById: builder.query<Handle, number>({
@@ -19,9 +19,9 @@ export const knifePartsApi = createApi({
     }),
 
     getHandguardsByParams: builder.query<Handguard[], number>({
-      query: (productModelId) => ({
+      query: (productId) => ({
         url: 'handguard',
-        params: { productModelId },
+        params: { productId },
       }),
     }),
     getHandguardById: builder.query<Handguard, number>({
@@ -29,9 +29,9 @@ export const knifePartsApi = createApi({
     }),
 
     getBladesByParams: builder.query<Blade[], number>({
-      query: (productModelId) => ({
+      query: (productId) => ({
         url: 'blade',
-        params: { productModelId },
+        params: { productId },
       }),
     }),
     getBladeById: builder.query<Blade, number>({

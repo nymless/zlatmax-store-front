@@ -1,24 +1,18 @@
 import { rest } from 'msw';
 import { AppPaths } from '../../paths/AppPaths';
-import { products } from '../resources/products';
 import { handles } from '../resources/handles';
 
 export const handleHandlers = [
   rest.get(AppPaths.API_URL + 'handle', (req, res, ctx) => {
-    const productModelIdString = req.url.searchParams.get('productModelId');
-    const productModelId = Number.parseInt(productModelIdString);
+    const productIdString = req.url.searchParams.get('productId');
+    const productId = Number.parseInt(productIdString);
 
-    if (productModelId) {
-      const handlesByProductModelId = handles.filter((handle) => {
-        return products.some((product) => {
-          if (product.productModelId === productModelId) {
-            return product.handleId === handle.id;
-          }
-          return false;
-        });
+    if (productId) {
+      const handlesByProductId = handles.filter((handle) => {
+        return handle.productId === productId;
       });
 
-      return res(ctx.status(200), ctx.json(handlesByProductModelId));
+      return res(ctx.status(200), ctx.json(handlesByProductId));
     }
 
     return res(ctx.status(200), ctx.json(handles));

@@ -3,7 +3,7 @@ import { ProductModelForProductPage } from '../../redux/services/types';
 import styles from './Description.module.css';
 
 interface DescriptionProps {
-  productModel: ProductModelForProductPage;
+  product: ProductModelForProductPage;
 }
 
 const Description: FC<DescriptionProps> = (props) => (

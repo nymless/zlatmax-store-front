@@ -1,0 +1,30 @@
+.Counter {
+    width: 151px;
+    height: 50px;
+    display: flex;
+    line-height: 50px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.minus {
+    flex: 0 1 33.333%;
+    color: #FFFFFF;
+    background-color: #141414;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.value {
+    flex: 1 1 auto;
+    background-color: rgba(210, 210, 210, 20%);
+    font-size: 1.125rem;
+}
+
+.plus {
+    flex: 0 1 33.333%;
+    color: #FFFFFF;
+    background-color: #141414;
+    font-size: 1.5rem;
+    cursor: pointer;
+}

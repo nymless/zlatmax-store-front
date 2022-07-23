@@ -1,45 +1,50 @@
-import { getRandomInt } from '../../utils/getRandomInt';
-import { generateBlade } from './blades';
-import { generateHandle } from './handles';
-import { generateHandguard } from './handguards';
-import { generateGilding } from './gilding';
-import { productModels } from './productModels';
-
-let productCounter = 1;
-let bladeCounter = 1;
-let handleCounter = 1;
-let handguardCounter = 1;
-let gildingCounter = 1;
-
-export function generateProduct(productModelId, withGilding) {
-  const price = getRandomInt(1000, 10000);
-  const productId = productCounter++;
-  const bladeId = bladeCounter++;
-  const handleId = handleCounter++;
-  const handguardId = handguardCounter++;
-
-  generateBlade(bladeId, price);
-  generateHandle(handleId, price);
-  generateHandguard(handguardId, price);
-
-  let gildingId;
-  if (withGilding) {
-    gildingId = gildingCounter++;
-    generateGilding(gildingId, price);
-  }
-
-  return {
-    id: productId,
-    productModelId,
-    handleId: handleId,
-    handguardId: handguardId,
-    bladeId: bladeId,
-    gildingId: withGilding ? gildingId : null,
+export const products = [
+  {
+    id: 1,
+    typeId: 1,
+    categoryId: 1,
+    brandId: 1,
+    seriesId: 'Серия первая',
+    name: 'Нож модели 1',
+    rating: 0,
     img: 'model.jpg',
-    price: price,
-    stock: getRandomInt(0, 10),
-    code: 'AF000000' + productId,
-  };
-}
-
-export const products = [];
+    totalLength: 210,
+    bladeLength: 110,
+    bladeWidth: 22,
+    basePrice: 3000,
+    defaultHandleId: 1,
+    defaultHandguardId: 1,
+    defaultBladeId: 1,
+    defaultGildingId: null,
+    defaultPrice: 3000 + 1000 + 1000 + 1000,
+    code: 'AF0000001',
+    bladeMaterialId: 1,
+    handleMaterialId: 1,
+    handguardMaterialId: 1,
+    gildingTypeId: 1,
+  },
+  {
+    id: 2,
+    typeId: 1,
+    categoryId: 1,
+    brandId: 1,
+    seriesId: 'Серия вторая',
+    name: 'Нож модели 2',
+    rating: 0,
+    img: 'model.jpg',
+    totalLength: 220,
+    bladeLength: 120,
+    bladeWidth: 24,
+    basePrice: 4000,
+    defaultHandleId: 3,
+    defaultHandguardId: 3,
+    defaultBladeId: 5,
+    defaultGildingId: 1,
+    defaultPrice: 4000 + 1200 + 1200 + 1200 + 1000,
+    code: 'AF0000002',
+    bladeMaterialId: 2,
+    handleMaterialId: 2,
+    handguardMaterialId: 2,
+    gildingTypeId: 1,
+  },
+];

@@ -1,15 +1,26 @@
-import { getRandomInt } from '../../utils/getRandomInt';
-
-export function generateHandguard(handguardId, productPrice) {
-  const maxPrice = productPrice / 4 - 100;
-
-  const handguard = {
-    id: handguardId,
-    handguardMaterialId: getRandomInt(1, 10),
-    price: getRandomInt(100, maxPrice),
-  };
-
-  handguards.push(handguard);
-}
-
-export const handguards = [];
+export const handguards = [
+  {
+    id: 1,
+    handguardMaterialId: 1,
+    productId: 1,
+    partPrice: 1000,
+  },
+  {
+    id: 2,
+    handguardMaterialId: 2,
+    productId: 1,
+    partPrice: 1500,
+  },
+  {
+    id: 3,
+    handguardMaterialId: 2,
+    productId: 2,
+    partPrice: 1200,
+  },
+  {
+    id: 4,
+    handguardMaterialId: 3,
+    productId: 2,
+    partPrice: 1600,
+  },
+];

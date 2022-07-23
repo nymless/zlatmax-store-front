@@ -1,9 +1,18 @@
-export const useProductFormInit = () => {
+import { ProductModelForProductPage } from '../redux/services/types';
+
+export interface ProductFormValues {
+  bladeId: number;
+  handleId: number;
+  handguardId: number;
+  maintenanceId: number | string;
+}
+
+export const useProductFormInit = (product: ProductModelForProductPage) => {
   const initialValues = {
-    blade: '',
-    handle: '',
-    handguard: '',
-    maintenance: '',
+    bladeId: product.defaultBladeId,
+    handleId: product.defaultHandleId,
+    handguardId: product.defaultHandguardId,
+    maintenanceId: '',
   };
 
   const handleSubmit = (values: any, actions: any) => {

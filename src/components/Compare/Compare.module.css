@@ -1,0 +1,17 @@
+.compare img:hover {
+    transform: scale(1.1, 1.1);
+}
+
+.compare .hovered {
+    display: none;
+}
+.compare:hover .hovered {
+    display: block;
+}
+
+.compare img {
+    display: block;
+}
+.compare:hover img {
+    display: none;
+}

@@ -51,28 +51,32 @@ export interface GildingType {
 export interface Handle {
   id: number;
   handleMaterialId: number;
-  price: number;
+  productId: number;
+  partPrice: number;
 }
 
 export interface Handguard {
   id: number;
   handguardMaterialId: number;
-  price: number;
+  productId: number;
+  partPrice: number;
 }
 
 export interface Blade {
   id: number;
   bladeMaterialId: number;
-  price: number;
+  productId: number;
+  partPrice: number;
 }
 
 export interface Gilding {
   id: number;
   gildingTypeId: number;
-  price: number;
+  productId: number;
+  partPrice: number;
 }
 
-export interface ProductModel {
+export interface Product {
   id: number;
   typeId: number;
   brandId: number;
@@ -80,49 +84,44 @@ export interface ProductModel {
   seriesId: number;
   name: string;
   rating: number;
+  img: string;
   totalLength: number;
   bladeLength: number;
   bladeWidth: number;
+  basePrice: number;
+  defaultHandleId: number;
+  defaultHandguardId: number;
+  defaultBladeId: number;
+  defaultGildingId: number;
+  defaultPrice: number;
+  code: string;
 }
 
 export interface Info {
   id: number;
   title: string;
   description: string;
-  productModelId: number;
+  productId: number;
 }
 
 export interface Gallery {
   id: number;
   img: string;
-  productModelId: number;
+  productId: number;
 }
 
 export interface Rating {
   id: number;
   userId: number;
-  productModelId: number;
+  productId: number;
   rate: number;
 }
 
 export interface Review {
   id: number;
   userId: number;
-  productModelId: number;
+  productId: number;
   review: string;
-}
-
-export interface Product {
-  id: number;
-  productModelId: number;
-  handleId: number;
-  handguardId: number;
-  bladeId: number;
-  gildingId: number;
-  img: string;
-  price: number;
-  stock: number;
-  code: string;
 }
 
 export interface Favorite {
@@ -147,7 +146,7 @@ export interface PaymentType {
 
 export interface SpecialOffer {
   id: number;
-  productModelId: number;
+  productId: number;
   bonusId: number;
   discountRate: number;
   bonusRate: number;

@@ -1,24 +1,18 @@
 import { rest } from 'msw';
 import { AppPaths } from '../../paths/AppPaths';
-import { products } from '../resources/products';
 import { handguards } from '../resources/handguards';
 
 export const handguardHandlers = [
   rest.get(AppPaths.API_URL + 'handguard', (req, res, ctx) => {
-    const productModelIdString = req.url.searchParams.get('productModelId');
-    const productModelId = Number.parseInt(productModelIdString);
+    const productIdString = req.url.searchParams.get('productId');
+    const productId = Number.parseInt(productIdString);
 
-    if (productModelId) {
-      const handguardsByProductModelId = handguards.filter((handguard) => {
-        return products.some((product) => {
-          if (product.productModelId === productModelId) {
-            return product.handguardId === handguard.id;
-          }
-          return false;
-        });
+    if (productId) {
+      const handguardsByProductId = handguards.filter((handguard) => {
+        return handguard.productId === productId;
       });
 
-      return res(ctx.status(200), ctx.json(handguardsByProductModelId));
+      return res(ctx.status(200), ctx.json(handguardsByProductId));
     }
 
     return res(ctx.status(200), ctx.json(handguards));

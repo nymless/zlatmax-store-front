@@ -20,7 +20,7 @@ const ProductPage = () => {
   const getProductError = getProductResponse.error;
   const getProductIsLoading = getProductResponse.isLoading;
 
-  const categoryId = getProductData?.productModel.categoryId;
+  const categoryId = getProductData?.categoryId;
   const categoryName = useSelector((state: RootState) => {
     if (!categoryId) {
       return;
@@ -59,20 +59,19 @@ const ProductPage = () => {
             </Link>
           )}
           <span className={styles.page}>
-            {getProductData.productModel.name}
+            {getProductData.name}
           </span>
         </Breadcrumbs>
       </div>
       <div className={styles.body}>
         <div className={styles.product}>
-          <Gallery productModel={getProductData.productModel} />
+          <Gallery product={getProductData} />
           <ProductPanel
-            productModel={getProductData.productModel}
             product={getProductData}
           />
         </div>
         <div className={styles.description}>
-          <Description productModel={getProductData.productModel} />
+          <Description product={getProductData} />
         </div>
       </div>
     </div>

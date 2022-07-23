@@ -1,13 +1,10 @@
 import React, { FC, useState } from 'react';
-import {
-  ProductModelForProductPage,
-  ProductWithParts,
-} from '../../redux/services/types';
+import { ProductModelForProductPage } from '../../redux/services/types';
 import styles from './ProductPanel.module.css';
 import RatingStars from '../RatingStars/RatingStars';
 import Compare from '../Compare/Compare';
 import Favorites from '../Favorites/Favorites';
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { useProductFormInit } from '../../hooks/useProductFormInit';
 import Counter from './Counter/Counter';
 import ProductForm from './ProductForm/ProductForm';
@@ -15,8 +12,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 
 interface ProductProps {
-  productModel: ProductModelForProductPage;
-  product: ProductWithParts;
+  product: ProductModelForProductPage;
 }
 
 // todo: userId app context.
@@ -30,16 +26,16 @@ interface ProductProps {
 
 const ProductPanel: FC<ProductProps> = (props) => {
   const [quantity, setQuantity] = useState(1);
-  const { initialValues, handleSubmit } = useProductFormInit();
-
+  const { initialValues, handleSubmit } = useProductFormInit(props.product);
   const appBrands = useSelector((state: RootState) => state.app.appBrands);
+  const [price, setPrice] = useState(props.product.defaultPrice);
 
   // todo: from server API
   const bonusRate = 0.01;
-  const productBonuses = Math.floor(props.product.price * bonusRate);
+  const productBonuses = Math.floor(props.product.defaultPrice * bonusRate);
   const purchaseBonuses = productBonuses * quantity;
 
-  const totalPrice = props.product.price * quantity;
+  const totalPrice = price * quantity;
   const totalPriceLocalized = totalPrice.toLocaleString('ru', {
     minimumFractionDigits: 0,
     style: 'currency',
@@ -49,7 +45,7 @@ const ProductPanel: FC<ProductProps> = (props) => {
   return (
     <div className={styles.ProductPanel}>
       <header className={styles.header}>
-        <h2 className={styles.heading}>{props.productModel.name}</h2>
+        <h2 className={styles.heading}>{props.product.name}</h2>
         <div className={styles.stars}>
           <RatingStars rating={5} />
         </div>
@@ -64,14 +60,12 @@ const ProductPanel: FC<ProductProps> = (props) => {
         <span className={styles.description}>{props.product.code}</span>
         <span>Торговая марка:</span>
         <span className={styles.description}>
-          {appBrands[props.productModel.brandId]}
+          {appBrands[props.product.brandId]}
         </span>
-        {props.productModel.seriesName && (
+        {props.product.seriesId && (
           <>
             <span>Серия:</span>
-            <span className={styles.description}>
-              {props.productModel.seriesName}
-            </span>
+            <span className={styles.description}>{props.product.seriesId}</span>
           </>
         )}
         <span>Бонусные баллы:</span>
@@ -79,12 +73,14 @@ const ProductPanel: FC<ProductProps> = (props) => {
       </div>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {({ values, handleChange }) => (
-          <ProductForm
-            product={props.product}
-            productModelId={props.productModel.id}
-            values={values}
-            handleChange={handleChange}
-          />
+          <Form className={styles.ProductForm}>
+            <ProductForm
+              values={values}
+              setPrice={setPrice}
+              product={props.product}
+              handleChange={handleChange}
+            />
+          </Form>
         )}
       </Formik>
       <footer className={styles.footer}>
