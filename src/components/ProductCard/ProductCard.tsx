@@ -45,7 +45,7 @@ export const ProductCard: FC<Props> = (props) => {
         </div>
         <div className={styles.other}>
           <div className={styles.rating}>
-            <RatingStars rating={5} />
+            <RatingStars rating={props.product.rating} />
           </div>
           <div className={styles.reviews}>12 отзывов</div>
         </div>

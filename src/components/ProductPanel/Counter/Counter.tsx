@@ -23,13 +23,13 @@ const Counter: FC<CounterProps> = (props) => {
 
   return (
     <div className={styles.Counter}>
-      <div role={'button'} className={styles.minus} onClick={handleMinusClick}>
+      <button className={styles.minus} onClick={handleMinusClick}>
         -
-      </div>
+      </button>
       <div className={styles.value}>{props.value}</div>
-      <div role={'button'} className={styles.plus} onClick={handlePlusClick}>
+      <button className={styles.plus} onClick={handlePlusClick}>
         +
-      </div>
+      </button>
     </div>
   );
 };

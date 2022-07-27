@@ -10,6 +10,7 @@ import Counter from './Counter/Counter';
 import ProductForm from './ProductForm/ProductForm';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import cart from './cart.svg';
 
 interface ProductProps {
   product: ProductModelForProductPage;
@@ -31,8 +32,8 @@ const ProductPanel: FC<ProductProps> = (props) => {
   const [price, setPrice] = useState(props.product.defaultPrice);
 
   // todo: from server API
-  const bonusRate = 0.01;
-  const productBonuses = Math.floor(props.product.defaultPrice * bonusRate);
+  const bonusRate = 0.05;
+  const productBonuses = Math.floor(price * bonusRate);
   const purchaseBonuses = productBonuses * quantity;
 
   const totalPrice = price * quantity;
@@ -47,7 +48,7 @@ const ProductPanel: FC<ProductProps> = (props) => {
       <header className={styles.header}>
         <h2 className={styles.heading}>{props.product.name}</h2>
         <div className={styles.stars}>
-          <RatingStars rating={5} />
+          <RatingStars rating={props.product.rating} />
         </div>
         <div className={styles.misc}>
           <Compare />
@@ -90,7 +91,15 @@ const ProductPanel: FC<ProductProps> = (props) => {
             <div className={styles.bonus}>
               {`+ ${purchaseBonuses} баллов за покупку`}
             </div>
-            <div className={styles.bonusInfo}>?</div>
+            <div className={styles.bonusInfo}>
+              ?
+              <div className={styles.bonusDescription}>
+                {`Вам будут начислены баллы в размере ${
+                  bonusRate * 100
+                }% от стоимости покупки. Их
+                  можно будет использовать на оплату последующих заказов.`}
+              </div>
+            </div>
           </div>
         </div>
         <div className={styles.quantityBlock}>
@@ -98,8 +107,11 @@ const ProductPanel: FC<ProductProps> = (props) => {
             <Counter value={quantity} setValue={setQuantity} />
           </div>
           <div className={styles.buttonBlock}>
-            <div className={styles.cart}></div>
-            <div className={styles.buy}></div>
+            <button className={styles.cart}>
+              В корзину
+              <img src={cart} alt="cart" />
+            </button>
+            <button className={styles.buy}>Купить в 1 клик</button>
           </div>
         </div>
       </footer>

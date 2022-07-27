@@ -88,6 +88,7 @@ export interface Product {
   totalLength: number;
   bladeLength: number;
   bladeWidth: number;
+  bladeThickness: number;
   basePrice: number;
   defaultHandleId: number;
   defaultHandguardId: number;
@@ -99,7 +100,7 @@ export interface Product {
 
 export interface Info {
   id: number;
-  title: string;
+  title: string | null;
   description: string;
   productId: number;
 }

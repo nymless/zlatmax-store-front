@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Description from '../../components/Description/Description';
+import DataTabs from '../../components/DataTabs/DataTabs';
 import Gallery from '../../components/Gallery/Gallery';
 import ProductPanel from '../../components/ProductPanel/ProductPanel';
 import { withContainer } from '../../hoc/withContainer';
@@ -71,7 +71,7 @@ const ProductPage = () => {
           />
         </div>
         <div className={styles.description}>
-          <Description product={getProductData} />
+          <DataTabs product={getProductData} />
         </div>
       </div>
     </div>

@@ -1,0 +1,12 @@
+.DataTabs {
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgb(204, 204, 204);
+    padding: 30px;
+    background-color: #fefefe;
+}
+
+.panelChild {
+    font-family: Montserrat, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+}

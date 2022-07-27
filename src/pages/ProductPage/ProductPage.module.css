@@ -35,5 +35,6 @@
     height: 788px;
     display: grid;
     grid-template-columns: 47.482% auto;
-    column-gap: 30px;
+    gap: 30px;
+    margin-bottom: 120px;
 }

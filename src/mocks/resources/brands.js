@@ -49,4 +49,9 @@ export const brands = [
     name: 'Оружейная компания',
     img: 'manufacturer.png',
   },
+  {
+    id: 11,
+    name: 'WUESTHOF (Германия)',
+    img: 'manufacturer.png',
+  },
 ];

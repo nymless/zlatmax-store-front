@@ -4,7 +4,6 @@
     display: flex;
     line-height: 50px;
     text-align: center;
-    font-weight: 500;
 }
 
 .minus {
@@ -13,6 +12,11 @@
     background-color: #141414;
     font-size: 1.5rem;
     cursor: pointer;
+    font-weight: 500;
+}
+
+.minus:hover {
+    transform: scale(102%);
 }
 
 .value {
@@ -27,4 +31,9 @@
     background-color: #141414;
     font-size: 1.5rem;
     cursor: pointer;
+    font-weight: 500;
+}
+
+.plus:hover {
+    transform: scale(102%);
 }
