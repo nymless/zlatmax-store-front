@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { AppPaths } from '../../paths/AppPaths';
-import { Review, SpecialOffer, StoreBonus } from '../models/models';
+import { SpecialOffer, StoreBonus } from '../models/models';
 import {
   GetProductsParams,
   GetProductsResponse,
@@ -36,17 +36,6 @@ export const productsApi = createApi({
     getStoreBonusById: builder.query<StoreBonus[], number>({
       query: (id) => 'store-bonus' + id,
     }),
-
-    // todo: pagination for review
-    getReviewsByParams: builder.query<Review[], number>({
-      query: (productId) => ({
-        url: 'review',
-        params: { productId },
-      }),
-    }),
-    getReviewById: builder.query<Review, number>({
-      query: (id) => 'review/' + id,
-    }),
   }),
 });
 
@@ -55,6 +44,4 @@ export const {
   useGetProductByIdQuery,
   useGetSpecialOfferByProductIdQuery,
   useGetStoreBonusByIdQuery,
-  useGetReviewsByParamsQuery,
-  useGetReviewByIdQuery,
 } = productsApi;

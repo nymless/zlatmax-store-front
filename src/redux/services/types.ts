@@ -1,4 +1,4 @@
-import { Gallery, Info, Product } from '../models/models';
+import { Gallery, Info, Product, Review } from '../models/models';
 
 export type GetProductsParams = {
   typeId?: number;
@@ -13,8 +13,8 @@ export type GetProductsParams = {
   bladeLength?: number;
   bladeWidth?: number;
   rating?: number;
-  page?: number;
   limit?: number;
+  page?: number;
 };
 
 export interface RangesForFormSliders {
@@ -61,4 +61,23 @@ export type OrderData = {
   totalPrice: number;
   status: 'pending';
   products: Product[];
+};
+
+export type GetReviewsResponse = {
+  rows: Review[];
+  count: number;
+};
+
+export type GetReviewsParams = {
+  productId?: number;
+  limit?: number;
+  page?: number;
+};
+
+export type GetCitiesParams = {
+  countryId?: number;
+};
+
+export type GetShippingParams = {
+  cityId?: number;
 };

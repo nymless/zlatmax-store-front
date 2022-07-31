@@ -143,8 +143,8 @@ function getParamsFromUrl(req) {
   const bladeLength = req.url.searchParams.get('bladeLength');
   const bladeWidth = req.url.searchParams.get('bladeWidth');
   const rating = req.url.searchParams.get('rating');
-  const page = req.url.searchParams.get('page') || 1;
-  const limit = req.url.searchParams.get('limit') || 9;
+  const page = req.url.searchParams.get('page');
+  const limit = req.url.searchParams.get('limit');
 
   return {
     typeId,
@@ -211,7 +211,10 @@ function filterByParams(params) {
   }, []);
 }
 
-function filterByPageLimit(products, page, limit) {
+function filterByPageLimit(products, pageString, limitString) {
+  const page = Number.parseInt(pageString) || 1;
+  const limit = Number.parseInt(limitString) || 9;
+
   const offset = page * limit - limit;
   const length = offset + limit - 1;
 

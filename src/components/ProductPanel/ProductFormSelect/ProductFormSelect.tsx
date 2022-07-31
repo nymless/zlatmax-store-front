@@ -4,7 +4,7 @@ import { Select } from './MuiStyled/Select';
 import { FormikHandlers } from 'formik';
 import { InputLabel } from './MuiStyled/InputLabel';
 import { MenuItem } from './MuiStyled/MenuItem';
-import { Part } from '../../hooks/useProductFormLists';
+import { Part } from '../../../hooks/useProductFormLists';
 
 interface SelectFormProps {
   name: string;
@@ -16,7 +16,7 @@ interface SelectFormProps {
   render: (part: Part) => JSX.Element;
 }
 
-const SelectForm: FC<PropsWithChildren<SelectFormProps>> = (props) => {
+const ProductFormSelect: FC<PropsWithChildren<SelectFormProps>> = (props) => {
   const [value, setValue] = useState(props.initialValue);
   const handleChange = (event: React.ChangeEvent<any>) => {
     setValue(event.target.value);
@@ -49,4 +49,4 @@ const SelectForm: FC<PropsWithChildren<SelectFormProps>> = (props) => {
   );
 };
 
-export default SelectForm;
+export default ProductFormSelect;

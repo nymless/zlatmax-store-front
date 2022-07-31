@@ -6,7 +6,6 @@ import { GetProductsResponse } from '../../../redux/services/types';
 import { useGetUserQuery } from '../../../redux/services/userApi';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
-import { useAppPagination } from '../../../hooks/useAppPagination';
 
 interface ProductsProps {
   products?: GetProductsResponse;
@@ -14,15 +13,12 @@ interface ProductsProps {
   error: FetchBaseQueryError | SerializedError | undefined;
   queryParamName: string;
   queryParamValue: string;
-  searchParams: URLSearchParams;
+  currentPage: number;
+  pagesCount: number | null;
+  handlePagination: (event: React.ChangeEvent<unknown>, page: number) => void;
 }
 
 const Products: FC<ProductsProps> = (props) => {
-  const { currentPage, handlePagination, pagesCount } = useAppPagination(
-    props.searchParams,
-    props.products?.count
-  );
-
   const user = useGetUserQuery().data;
 
   if (props.isLoading) {
@@ -49,11 +45,11 @@ const Products: FC<ProductsProps> = (props) => {
         ))}
       </div>
       <div className={styles.paginator}>
-        {pagesCount && (
+        {props.pagesCount && (
           <Pagination
-            onChange={handlePagination}
-            page={currentPage}
-            count={pagesCount}
+            onChange={props.handlePagination}
+            page={props.currentPage}
+            count={props.pagesCount}
           />
         )}
       </div>

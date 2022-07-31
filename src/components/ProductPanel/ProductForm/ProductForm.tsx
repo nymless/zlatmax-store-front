@@ -1,12 +1,12 @@
 import React, { FC, useEffect } from 'react';
 import styles from './ProductForm.module.css';
 import { FormikHandlers } from 'formik';
-import SelectForm from '../../SelectForm/SelectForm';
+import ProductFormSelect from '../ProductFormSelect/ProductFormSelect';
 import { Part, useProductFormLists } from '../../../hooks/useProductFormLists';
 import { ProductModelForProductPage } from '../../../redux/services/types';
 import AppListItem from './ListItem/AppListItem';
 import { ProductFormValues } from '../../../hooks/useProductFormInit';
-import { MenuItem } from '../../SelectForm/MuiStyled/MenuItem';
+import { MenuItem } from '../ProductFormSelect/MuiStyled/MenuItem';
 
 interface ProductFormProps {
   values: ProductFormValues;
@@ -51,7 +51,7 @@ const ProductForm: FC<ProductFormProps> = (props) => {
   return (
     <div className={styles.ProductForm}>
       <span className={styles.formLabel}>Сталь</span>
-      <SelectForm
+      <ProductFormSelect
         name="bladeId"
         label="Выбрать сталь"
         partsList={bladesList}
@@ -63,7 +63,7 @@ const ProductForm: FC<ProductFormProps> = (props) => {
         )}
       />
       <span className={styles.formLabel}>Рукоять</span>
-      <SelectForm
+      <ProductFormSelect
         name="handleId"
         label="Выбрать рукоять"
         partsList={handlesList}
@@ -75,7 +75,7 @@ const ProductForm: FC<ProductFormProps> = (props) => {
         )}
       />
       <span className={styles.formLabel}>Гарда и тыльник</span>
-      <SelectForm
+      <ProductFormSelect
         name="handguardId"
         label="Выбрать гарду и тыльник"
         partsList={handguardsList}
@@ -90,7 +90,7 @@ const ProductForm: FC<ProductFormProps> = (props) => {
         )}
       />
       <span className={styles.formLabel}>Обработка клинка</span>
-      <SelectForm
+      <ProductFormSelect
         name="maintenanceId"
         label="Выбрать обработку клинка"
         partsList={maintenanceList}
@@ -102,7 +102,7 @@ const ProductForm: FC<ProductFormProps> = (props) => {
         )}
       >
         <MenuItem value="">Не выбрано</MenuItem>
-      </SelectForm>
+      </ProductFormSelect>
     </div>
   );
 };

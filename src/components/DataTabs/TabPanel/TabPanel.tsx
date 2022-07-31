@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import styles from './TabPanel.module.css';
 
@@ -21,11 +20,7 @@ const TabPanel: FC<TabPanelProps> = (props) => {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ pt: 4.4 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ pt: 4.4 }}>{children}</Box>}
     </div>
   );
 };

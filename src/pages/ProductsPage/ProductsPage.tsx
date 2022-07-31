@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import ProductFilterForm from '../../components/ProductFilter/ProductFilterForm';
 import { useGetProductsByParamsQuery } from '../../redux/services/productsApi';
 import Products from './Products/Products';
+import { useAppPagination } from '../../hooks/useAppPagination';
 
 interface ProductsPageProps {
   queryParamName: string;
@@ -18,8 +19,17 @@ const ProductsPage: FC<PropsWithChildren<ProductsPageProps>> = (props) => {
   searchParams.set('typeId', '1');
   searchParams.set(props.queryParamName, props.queryParamValue);
 
+  const productsLimit = 9;
+  searchParams.set('limit', productsLimit.toString());
+
   const { data, error, isLoading } = useGetProductsByParamsQuery(
     Object.fromEntries(searchParams.entries())
+  );
+
+  const { currentPage, handlePagination, pagesCount } = useAppPagination(
+    searchParams,
+    productsLimit,
+    data?.count
   );
 
   return (
@@ -35,7 +45,9 @@ const ProductsPage: FC<PropsWithChildren<ProductsPageProps>> = (props) => {
           error={error}
           queryParamName={props.queryParamName}
           queryParamValue={props.queryParamValue}
-          searchParams={searchParams}
+          currentPage={currentPage}
+          pagesCount={pagesCount}
+          handlePagination={handlePagination}
         />
       </div>
     </section>

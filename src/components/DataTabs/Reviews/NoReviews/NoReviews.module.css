@@ -1,0 +1,28 @@
+.NoReviews {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+.addReview {
+    width: 228px;
+    height: 50px;
+    background-color: #000000;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border-radius: 3px;
+}
+
+.addReview:hover {
+    transform: scale(1.02);
+}

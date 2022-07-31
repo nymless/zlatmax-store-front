@@ -120,8 +120,11 @@ export interface Rating {
 
 export interface Review {
   id: number;
-  userId: number;
   productId: number;
+  date: string;
+  name: string;
+  img: string;
+  rate: number;
   review: string;
 }
 
@@ -164,4 +167,25 @@ export interface UserBonus {
   bonusId: number;
   userId: number;
   count: number;
+}
+
+export interface Country {
+  id: number;
+  name: string;
+}
+
+export interface City {
+  id: number;
+  countryId: number;
+  name: string;
+}
+
+export interface Shipping {
+  id: number;
+  cityId: number;
+  name: string;
+  img: string;
+  minHandlingTime: number,
+  maxHandlingTime: number,
+  price: number,
 }

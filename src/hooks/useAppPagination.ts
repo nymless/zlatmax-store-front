@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 export const useAppPagination = (
   searchParams: URLSearchParams,
+  limit: number,
   count?: number
 ) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,7 +15,7 @@ export const useAppPagination = (
     setCurrentPage(page);
   };
 
-  const pagesCount = count ? Math.ceil(count / 9) : null;
+  const pagesCount = count ? Math.ceil(count / limit) : null;
 
   return {
     currentPage,

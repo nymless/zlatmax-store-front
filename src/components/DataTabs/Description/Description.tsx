@@ -10,7 +10,7 @@ const Description: FC<DescriptionProps> = (props) => (
   <div>
     {props.product.info.map((info) => {
       return (
-        <div>
+        <div key={info.id}>
           {info.title && (
             <div
               dangerouslySetInnerHTML={{
@@ -21,7 +21,7 @@ const Description: FC<DescriptionProps> = (props) => (
           <div
             className={styles.panelChild}
             dangerouslySetInnerHTML={{
-              __html: `<div class='zlatmax-product-description'>${info.description}</div>`,
+              __html: `<div class='zlatmax-product-description'>${info.description}</div>\n`,
             }}
           />
         </div>

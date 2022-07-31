@@ -21,9 +21,6 @@ interface ProductProps {
 // todo: products compare server API.
 // todo: product rating server API.
 // todo: user bonuses server API.
-// todo: product code server API.
-// todo: product series server API.
-// todo: blade maintenance server API.
 
 const ProductPanel: FC<ProductProps> = (props) => {
   const [quantity, setQuantity] = useState(1);

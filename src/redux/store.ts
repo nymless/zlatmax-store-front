@@ -10,6 +10,8 @@ import { knifeMaterialsApi } from './services/knifeMaterialsApi';
 import { knifePartsApi } from './services/knifePartsApi';
 import { orderApi } from './services/orderApi';
 import { productDetailsApi } from './services/productDetailsApi';
+import { reviewsApi } from './services/reviewsApi';
+import { shippingApi } from './services/shippingApi';
 
 export const store = configureStore({
   reducer: {
@@ -23,7 +25,9 @@ export const store = configureStore({
     [orderApi.reducerPath]: orderApi.reducer,
     [productDetailsApi.reducerPath]: productDetailsApi.reducer,
     [productsApi.reducerPath]: productsApi.reducer,
+    [reviewsApi.reducerPath]: reviewsApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [shippingApi.reducerPath]: shippingApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -34,7 +38,8 @@ export const store = configureStore({
       orderApi.middleware,
       productDetailsApi.middleware,
       productsApi.middleware,
-      userApi.middleware
+      reviewsApi.middleware,
+      shippingApi.middleware
     ),
 });
 

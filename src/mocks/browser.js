@@ -12,6 +12,10 @@ import { productHandlers } from './handlers/productHandlers';
 import { bladeHandlers } from './handlers/bladeHandlers';
 import { handguardHandlers } from './handlers/handguardHandlers';
 import { handleHandlers } from './handlers/handleHandlers';
+import { reviewHandlers } from './handlers/reviewHandlers';
+import { cityHandlers } from './handlers/cityHandlers';
+import { countryHandlers } from './handlers/countryHandlers';
+import { shippingHandlers } from './handlers/shippingHandlers';
 
 export const worker = setupWorker(
   ...typeHandlers,
@@ -22,9 +26,13 @@ export const worker = setupWorker(
   ...handguardHandlers,
   ...bladeMaterialHandlers,
   ...productHandlers,
+  ...reviewHandlers,
   ...handleMaterialHandlers,
   ...handguardMaterialHandlers,
   ...gildingTypeHandlers,
   ...userHandlers,
-  ...favoritesHandlers
+  ...favoritesHandlers,
+  ...cityHandlers,
+  ...countryHandlers,
+  ...shippingHandlers
 );

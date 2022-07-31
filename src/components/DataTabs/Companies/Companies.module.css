@@ -1,0 +1,40 @@
+.Companies {
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+.companyBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(14, 14, 14, 15%);
+    padding-top: 30px;
+}
+
+.companyBlock:not(:last-of-type) {
+    padding-bottom: 30px;
+}
+
+.company {
+    display: grid;
+    grid-template-columns: 121px 1fr;
+    align-items: center;
+    column-gap: 30px;
+}
+
+.logo {
+    display: block;
+    max-width: 121px;
+    max-height: 59px;
+    margin: 0 auto;
+}
+
+.info {
+    display: flex;
+    column-gap: 60px;
+}
+
+.price {
+    font-size: 1.25rem;
+    font-weight: 700;
+}

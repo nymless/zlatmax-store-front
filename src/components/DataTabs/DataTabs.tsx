@@ -8,13 +8,8 @@ import { Tab } from './MuiStyled/Tab';
 import { Tabs } from './MuiStyled/Tabs';
 import Features from './Features/Features';
 import Description from './Description/Description';
-
-function a11yProps(index: number) {
-  return {
-    id: `tab-${index}`,
-    'aria-controls': `tabpanel-${index}`,
-  };
-}
+import Reviews from './Reviews/Reviews';
+import Shipping from './Shipping/Shipping';
 
 interface DataTabsProps {
   product: ProductModelForProductPage;
@@ -45,14 +40,21 @@ const DataTabs: FC<DataTabsProps> = (props) => {
           <Features product={props.product} />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Item Three
+          <Reviews productId={props.product.id} />
         </TabPanel>
         <TabPanel value={value} index={3}>
-          Item Four
+          <Shipping product={props.product} />
         </TabPanel>
       </Box>
     </div>
   );
 };
+
+function a11yProps(index: number) {
+  return {
+    id: `tab-${index}`,
+    'aria-controls': `tabpanel-${index}`,
+  };
+}
 
 export default DataTabs;

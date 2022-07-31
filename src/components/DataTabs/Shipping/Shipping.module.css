@@ -1,0 +1,23 @@
+.Shipping {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 30px;
+}
+
+.forms {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+}
+
+.shippingForm {
+    display: grid;
+    grid-template-columns: 157px 301px;
+    align-items: center;
+    row-gap: 20px;
+}
+
+.formLabel {
+    font-size: 1.125rem;
+    font-weight: 500;
+}
