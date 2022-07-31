@@ -5,6 +5,9 @@ import { FormikHandlers } from 'formik';
 import { InputLabel } from './MuiStyled/InputLabel';
 import { MenuItem } from './MuiStyled/MenuItem';
 import { Part } from '../../../hooks/useProductFormLists';
+import SelectFormButton, {
+  muiSelectIconProps,
+} from '../../SelectFormButton/SelectFormButton';
 
 interface SelectFormProps {
   name: string;
@@ -28,6 +31,9 @@ const ProductFormSelect: FC<PropsWithChildren<SelectFormProps>> = (props) => {
       <InputLabel id={props.name}>{props.label}</InputLabel>
       {props.partsList && (
         <Select
+          IconComponent={(muiProps: muiSelectIconProps) => (
+            <SelectFormButton muiProps={muiProps} />
+          )}
           id={props.name}
           name={props.name}
           label={props.label}

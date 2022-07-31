@@ -99,16 +99,12 @@
     top: -125px;
     left: -395px;
     padding: 0 17px;
-    display: none;
     justify-content: center;
     align-items: center;
-    z-index: 99;
+    z-index: 999;
     border-radius: 3px;
     line-height: 22px;
-}
-
-.bonusInfo:hover {
-    transform: scale(102%);
+    display: none;
 }
 
 .bonusInfo:hover .bonusDescription {

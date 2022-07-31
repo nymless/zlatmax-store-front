@@ -3,6 +3,9 @@ import FormControl from '@mui/material/FormControl';
 import { Select } from './MuiStyled/Select';
 import { InputLabel } from './MuiStyled/InputLabel';
 import { MenuItem } from './MuiStyled/MenuItem';
+import SelectFormButton, {
+  muiSelectIconProps,
+} from '../../../SelectFormButton/SelectFormButton';
 
 interface ShippingFormProps {
   initialValue: number | '';
@@ -26,6 +29,9 @@ const ShippingFormSelect: FC<ShippingFormProps> = (props) => {
       <InputLabel id={props.name}>{props.label}</InputLabel>
       {props.list && (
         <Select
+          IconComponent={(muiProps: muiSelectIconProps) => (
+            <SelectFormButton muiProps={muiProps} />
+          )}
           id={props.name}
           name={props.name}
           label={props.label}

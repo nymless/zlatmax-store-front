@@ -1,0 +1,11 @@
+.SelectFormButton {
+    min-width: 40px;
+    min-height: 40px;
+    background-color: #141414;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    top: 0 !important;
+    right: 0 !important;
+}
