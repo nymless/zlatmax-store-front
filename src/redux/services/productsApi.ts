@@ -14,12 +14,10 @@ export const productsApi = createApi({
   }),
   endpoints: (builder) => ({
     getProductsByParams: builder.query<GetProductsResponse, GetProductsParams>({
-      query: (params) => {
-        return {
-          url: 'product',
-          params: params,
-        };
-      },
+      query: (params) => ({
+        url: 'product',
+        params: params,
+      }),
     }),
     getProductById: builder.query<ProductModelForProductPage, number>({
       query: (id) => 'product/' + id,

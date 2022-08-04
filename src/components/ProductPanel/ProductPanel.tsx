@@ -4,13 +4,13 @@ import styles from './ProductPanel.module.css';
 import RatingStars from '../RatingStars/RatingStars';
 import Compare from '../Compare/Compare';
 import Favorites from '../Favorites/Favorites';
-import { Form, Formik } from 'formik';
-import { useProductFormInit } from '../../hooks/useProductFormInit';
+import { useFormik } from 'formik';
 import Counter from './Counter/Counter';
 import ProductForm from './ProductForm/ProductForm';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import cart from './cart.svg';
+import { Link } from 'react-router-dom';
 
 interface ProductProps {
   product: ProductModelForProductPage;
@@ -24,7 +24,6 @@ interface ProductProps {
 
 const ProductPanel: FC<ProductProps> = (props) => {
   const [quantity, setQuantity] = useState(1);
-  const { initialValues, handleSubmit } = useProductFormInit(props.product);
   const appBrands = useSelector((state: RootState) => state.app.appBrands);
   const [price, setPrice] = useState(props.product.defaultPrice);
 
@@ -39,6 +38,25 @@ const ProductPanel: FC<ProductProps> = (props) => {
     style: 'currency',
     currency: 'RUB',
   });
+
+  const formik = useFormik({
+    initialValues: {
+      bladeId: props.product.defaultBladeId,
+      handleId: props.product.defaultHandleId,
+      handguardId: props.product.defaultHandguardId,
+      maintenanceId: '',
+    },
+    onSubmit: (values, actions) => {
+      console.log(values);
+      alert(JSON.stringify(values, null, 2));
+      actions.setSubmitting(false);
+    },
+  });
+
+  // todo: cart server api
+  const addToCart = (event: any) => {
+    console.log('Product added to cart');
+  };
 
   return (
     <div className={styles.ProductPanel}>
@@ -69,49 +87,50 @@ const ProductPanel: FC<ProductProps> = (props) => {
         <span>Бонусные баллы:</span>
         <span className={styles.description}>{productBonuses}</span>
       </div>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        {({ values, handleChange }) => (
-          <Form className={styles.ProductForm}>
-            <ProductForm
-              values={values}
-              setPrice={setPrice}
-              product={props.product}
-              handleChange={handleChange}
-            />
-          </Form>
-        )}
-      </Formik>
-      <footer className={styles.footer}>
-        <div className={styles.priceBlock}>
-          <div className={styles.price}>{totalPriceLocalized}</div>
-          <div className={styles.bonusBlock}>
-            <div className={styles.bonus}>
-              {`+ ${purchaseBonuses} баллов за покупку`}
-            </div>
-            <div className={styles.bonusInfo}>
-              ?
-              <div className={styles.bonusDescription}>
-                {`Вам будут начислены баллы в размере ${
-                  bonusRate * 100
-                }% от стоимости покупки. Их
-                  можно будет использовать на оплату последующих заказов.`}
+      <form className={styles.ProductForm} onSubmit={formik.handleSubmit}>
+        <ProductForm
+          values={formik.values}
+          handleChange={formik.handleChange}
+          setPrice={setPrice}
+          product={props.product}
+        />
+        <footer className={styles.footer}>
+          <div className={styles.priceBlock}>
+            <div className={styles.price}>{totalPriceLocalized}</div>
+            <div className={styles.bonusBlock}>
+              <div className={styles.bonus}>
+                {`+ ${purchaseBonuses} баллов за покупку`}
+              </div>
+              <div className={styles.bonusInfo}>
+                ?
+                <div className={styles.bonusDescription}>
+                  {'Вам будут начислены баллы в размере ' +
+                    bonusRate * 100 +
+                    '% от стоимости покупки. ' +
+                    'Их можно будет использовать на оплату ' +
+                    'последующих заказов.'}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className={styles.quantityBlock}>
-          <div className={styles.quantity}>
-            <Counter value={quantity} setValue={setQuantity} />
+          <div className={styles.quantityBlock}>
+            <div className={styles.quantity}>
+              <Counter value={quantity} setValue={setQuantity} />
+            </div>
+            <div className={styles.buttonBlock}>
+              <button type="submit" className={styles.cart} onClick={addToCart}>
+                В корзину
+                <img src={cart} alt="cart" />
+              </button>
+              <Link to={'../buy'}>
+                <button type="submit" className={styles.buy}>
+                  Купить в 1 клик
+                </button>
+              </Link>
+            </div>
           </div>
-          <div className={styles.buttonBlock}>
-            <button className={styles.cart}>
-              В корзину
-              <img src={cart} alt="cart" />
-            </button>
-            <button className={styles.buy}>Купить в 1 клик</button>
-          </div>
-        </div>
-      </footer>
+        </footer>
+      </form>
     </div>
   );
 };

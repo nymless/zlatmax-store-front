@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
 import styles from './ProductFilterForm.module.css';
 import Typography from '@mui/material/Typography';
-import RadioForm from '../RadioForm/RadioForm';
-import SliderForm from '../SliderForm/SliderForm';
 import { Accordion } from './MuiStyled/Accordion';
 import { AccordionSummary } from './MuiStyled/AccordionSummary';
 import { AccordionDetails } from './MuiStyled/AccordionDetails';
@@ -10,6 +8,8 @@ import { Form, Formik } from 'formik';
 import { RangesForFormSliders } from '../../redux/services/types';
 import { useFilterFormLists } from '../../hooks/useFilterFormLists';
 import { useFilterFormInit } from '../../hooks/useFilterFormInit';
+import SliderForm from './SliderForm/SliderForm';
+import RadioForm from './RadioForm/RadioForm';
 
 interface ProductFilterFormProps {
   ranges?: RangesForFormSliders;

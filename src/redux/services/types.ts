@@ -1,20 +1,20 @@
 import { Gallery, Info, Product, Review } from '../models/models';
 
 export type GetProductsParams = {
-  typeId?: number;
-  price?: number;
-  categoryId?: number;
-  brandId?: number;
-  bladeId?: number;
-  handleId?: number;
-  handguardId?: number;
-  gildingId?: number;
-  totalLength?: number;
-  bladeLength?: number;
-  bladeWidth?: number;
-  rating?: number;
-  limit?: number;
-  page?: number;
+  typeId?: string;
+  price?: string[];
+  categoryId?: string;
+  brandId?: string;
+  bladeId?: string;
+  handleId?: string;
+  handguardId?: string;
+  gildingId?: string;
+  totalLength?: string[];
+  bladeLength?: string[];
+  bladeWidth?: string[];
+  rating?: string;
+  limit?: string;
+  page?: string;
 };
 
 export interface RangesForFormSliders {

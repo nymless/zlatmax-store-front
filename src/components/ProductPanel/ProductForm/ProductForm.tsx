@@ -5,14 +5,20 @@ import ProductFormSelect from '../ProductFormSelect/ProductFormSelect';
 import { Part, useProductFormLists } from '../../../hooks/useProductFormLists';
 import { ProductModelForProductPage } from '../../../redux/services/types';
 import AppListItem from './ListItem/AppListItem';
-import { ProductFormValues } from '../../../hooks/useProductFormInit';
 import { MenuItem } from '../ProductFormSelect/MuiStyled/MenuItem';
+
+interface ProductFormValues {
+  bladeId: number;
+  handleId: number;
+  handguardId: number;
+  maintenanceId: number | string;
+}
 
 interface ProductFormProps {
   values: ProductFormValues;
+  handleChange: FormikHandlers['handleChange'];
   setPrice: React.Dispatch<React.SetStateAction<number>>;
   product: ProductModelForProductPage;
-  handleChange: FormikHandlers['handleChange'];
 }
 
 const ProductForm: FC<ProductFormProps> = (props) => {

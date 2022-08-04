@@ -40,6 +40,7 @@ const Shipping: FC<ShippingProps> = () => {
   ) => {
     searchParams.set('countryId', values.countryId.toString());
     setCurrentCountryId(values.countryId);
+    setCurrentCityId('');
     actions.setSubmitting(false);
   };
 
