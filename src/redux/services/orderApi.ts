@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { OrderData } from './types';
-import { AppPaths } from '../../paths/AppPaths';
+import { AppPaths } from '../../variables/AppPaths';
 import { Order, Product } from '../models/models';
 
 export const orderApi = createApi({

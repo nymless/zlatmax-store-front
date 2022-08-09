@@ -5,6 +5,7 @@ import ProductFilterForm from '../../components/ProductFilter/ProductFilterForm'
 import { useGetProductsByParamsQuery } from '../../redux/services/productsApi';
 import Products from './Products/Products';
 import { useAppPagination } from '../../hooks/useAppPagination';
+import { AppSearchParams } from '../../variables/AppSearchParams';
 
 interface ProductsPageProps {
   queryParamName: string;
@@ -16,11 +17,11 @@ interface ProductsPageProps {
 
 const ProductsPage: FC<PropsWithChildren<ProductsPageProps>> = (props) => {
   const [searchParams] = useSearchParams();
-  searchParams.set('typeId', '1');
+  searchParams.set(AppSearchParams.TYPE_ID, '1');
   searchParams.set(props.queryParamName, props.queryParamValue);
 
   const productsLimit = 9;
-  searchParams.set('limit', productsLimit.toString());
+  searchParams.set(AppSearchParams.LIMIT, productsLimit.toString());
 
   const { data, error, isLoading } = useGetProductsByParamsQuery(
     Object.fromEntries(searchParams.entries())

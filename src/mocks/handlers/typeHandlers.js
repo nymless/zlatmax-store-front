@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { AppPaths } from '../../paths/AppPaths';
+import { AppPaths } from '../../variables/AppPaths';
 import { types } from '../resources/types';
 
 export const typeHandlers = [

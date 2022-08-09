@@ -3,46 +3,96 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { FormikValues } from 'formik';
 import { filterTruthy } from '../utils/filterTruthy';
+import { AppSearchParams } from '../variables/AppSearchParams';
+
+export interface ProductFilterFormValues {
+  typeId: string;
+  price: string;
+  categoryId: string;
+  brandId: string;
+  bladeMaterialId: string;
+  handleMaterialId: string;
+  handguardMaterialId: string;
+  gildingTypeId: string;
+  totalLength: string;
+  bladeLength: string;
+  bladeWidth: string;
+  rating: string;
+
+  [key: string]: string;
+}
 
 export const useFilterFormInit = () => {
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const selectedTypeId = useSelector(
-    (state: RootState) => state.selected.typeId
-  );
-  const selectedCategoryId = useSelector(
-    (state: RootState) => state.selected.categoryId
-  );
-  const selectedBrandId = useSelector(
-    (state: RootState) => state.selected.brandId
-  );
-  const selectedBladeMaterialId = useSelector(
-    (state: RootState) => state.selected.bladeMaterialId
+  const typeId = useSelector((state: RootState) => state.select.typeId);
+  const categoryId = useSelector((state: RootState) => state.select.categoryId);
+  const brandId = useSelector((state: RootState) => state.select.brandId);
+  const bladeMaterialId = useSelector(
+    (state: RootState) => state.select.bladeMaterialId
   );
 
-  const initialFormValues = {
-    typeId: selectedTypeId || '',
-    price: '',
-    categoryId: selectedCategoryId || '',
-    brandId: selectedBrandId || '',
-    bladeMaterialId: selectedBladeMaterialId || '',
-    handleMaterialId: '',
-    handguardMaterialId: '',
-    gildingTypeId: '',
-    totalLength: '',
-    bladeLength: '',
-    bladeWidth: '',
-    rating: '',
+  const typeIdFromSelectStore = typeId ? typeId.toString() : null;
+  const categoryIdFromSelectStore = categoryId ? categoryId.toString() : null;
+  const brandIdFromSelectStore = brandId ? brandId.toString() : null;
+  const bladeMaterialIdFromSelectStore = bladeMaterialId
+    ? bladeMaterialId.toString()
+    : null;
+
+  const typeIdFromSearchParams = searchParams.get(AppSearchParams.TYPE_ID);
+  const priceFromSearchParams = searchParams.get(AppSearchParams.PRICE);
+  const categoryIdFromSearchParams = searchParams.get(
+    AppSearchParams.CATEGORY_ID
+  );
+  const brandIdFromSearchParams = searchParams.get(AppSearchParams.BRAND_ID);
+  const bladeMaterialIdFromSearchParams = searchParams.get(
+    AppSearchParams.BLADE_MATERIAL_ID
+  );
+  const handleMaterialIdFromSearchParams = searchParams.get(
+    AppSearchParams.HANDLE_MATERIAL_ID
+  );
+  const handguardMaterialIdFromSearchParams = searchParams.get(
+    AppSearchParams.HANDGUARD_MATERIAL_ID
+  );
+  const gildingTypeIdFromSearchParams = searchParams.get(
+    AppSearchParams.GILDING_TYPE_ID
+  );
+  const totalLengthFromSearchParams = searchParams.get(
+    AppSearchParams.TOTAL_LENGTH
+  );
+  const bladeLengthFromSearchParams = searchParams.get(
+    AppSearchParams.BLADE_LENGTH
+  );
+  const bladeWidthFromSearchParams = searchParams.get(
+    AppSearchParams.BLADE_WIDTH
+  );
+  const ratingFromSearchParams = searchParams.get(AppSearchParams.RATING);
+
+  const initialFormValues: ProductFilterFormValues = {
+    typeId: typeIdFromSearchParams || typeIdFromSelectStore || '',
+    price: priceFromSearchParams || '',
+    categoryId: categoryIdFromSearchParams || categoryIdFromSelectStore || '',
+    brandId: brandIdFromSearchParams || brandIdFromSelectStore || '',
+    bladeMaterialId:
+      bladeMaterialIdFromSearchParams || bladeMaterialIdFromSelectStore || '',
+    handleMaterialId: handleMaterialIdFromSearchParams || '',
+    handguardMaterialId: handguardMaterialIdFromSearchParams || '',
+    gildingTypeId: gildingTypeIdFromSearchParams || '',
+    totalLength: totalLengthFromSearchParams || '',
+    bladeLength: bladeLengthFromSearchParams || '',
+    bladeWidth: bladeWidthFromSearchParams || '',
+    rating: ratingFromSearchParams || '',
   };
 
   const handleSubmitForm = (values: FormikValues) => {
+    // todo: truthy values '' ?
     const getParams = filterTruthy(values);
     setSearchParams(getParams);
   };
 
-  const isCategorySelected = Boolean(selectedCategoryId);
-  const isBrandSelected = Boolean(selectedBrandId);
-  const isMaterialSelected = Boolean(selectedBladeMaterialId);
+  const isCategorySelected = Boolean(categoryIdFromSelectStore);
+  const isBrandSelected = Boolean(brandIdFromSelectStore);
+  const isMaterialSelected = Boolean(bladeMaterialIdFromSelectStore);
 
   return {
     isCategorySelected,

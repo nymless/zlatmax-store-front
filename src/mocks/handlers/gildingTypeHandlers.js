@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { AppPaths } from '../../paths/AppPaths';
+import { AppPaths } from '../../variables/AppPaths';
 import { gildingTypes } from '../resources/gildingTypes';
 
 export const gildingTypeHandlers = [

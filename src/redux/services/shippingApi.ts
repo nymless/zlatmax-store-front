@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { AppPaths } from '../../paths/AppPaths';
+import { AppPaths } from '../../variables/AppPaths';
 import { City, Country, Shipping } from '../models/models';
 import { GetCitiesParams, GetShippingParams } from './types';
 

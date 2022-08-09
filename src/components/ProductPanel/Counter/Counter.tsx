@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction } from 'react';
+import React, { Dispatch, FC, MouseEventHandler, SetStateAction } from 'react';
 import styles from './Counter.module.css';
 
 interface CounterProps {
@@ -7,7 +7,8 @@ interface CounterProps {
 }
 
 const Counter: FC<CounterProps> = (props) => {
-  const handleMinusClick = () => {
+  const handleMinusClick: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.preventDefault();
     if (props.value === 1) {
       return;
     }
@@ -17,7 +18,8 @@ const Counter: FC<CounterProps> = (props) => {
     props.setValue(props.value - 1);
   };
 
-  const handlePlusClick = () => {
+  const handlePlusClick: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.preventDefault();
     props.setValue(props.value + 1);
   };
 

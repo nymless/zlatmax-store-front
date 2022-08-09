@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styles from './Companies.module.css';
 import { useGetShippingByParamsQuery } from '../../../redux/services/shippingApi';
-import { AppPaths } from '../../../paths/AppPaths';
+import { AppPaths } from '../../../variables/AppPaths';
 
 interface CompaniesProps {
   cityId: number;

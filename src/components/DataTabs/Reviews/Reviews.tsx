@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styles from './Reviews.module.css';
 import { useGetReviewsByParamsQuery } from '../../../redux/services/reviewsApi';
 import NoReviews from './NoReviews/NoReviews';
-import { AppPaths } from '../../../paths/AppPaths';
+import { AppPaths } from '../../../variables/AppPaths';
 import RatingStars from '../../RatingStars/RatingStars';
 import like from './like.svg';
 import Pagination from '@mui/material/Pagination';

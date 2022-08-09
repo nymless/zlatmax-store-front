@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { ProductModelForProductPage } from '../../redux/services/types';
-import { AppPaths } from '../../paths/AppPaths';
+import { AppPaths } from '../../variables/AppPaths';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/free-mode';

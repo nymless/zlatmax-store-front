@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
-import MuiRadio from '@mui/material/Radio';
+import MuiCheckbox from '@mui/material/Checkbox';
 
-export const Radio = styled(MuiRadio)({
+export const Checkbox = styled(MuiCheckbox)({
   borderBottomColor: '#E8AA31',
   paddingLeft: 12,
   '& .outer': {

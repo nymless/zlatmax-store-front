@@ -10,8 +10,9 @@ import {
   resetSelectedIds,
   setSelectedBladeMaterialId,
   setSelectedTypeId,
-} from '../../redux/reducers/selectedReducer';
+} from '../../redux/reducers/selectReducer';
 import { RootState } from '../../redux/store';
+import { AppSearchParams } from '../../variables/AppSearchParams';
 
 interface MaterialPageProps {}
 
@@ -27,7 +28,7 @@ const MaterialPage: FC<MaterialPageProps> = () => {
 
   useEffect(() => {
     if (!bladeMaterialId) {
-      return
+      return;
     }
     setId(Number.parseInt(bladeMaterialId));
   }, [bladeMaterialId]);
@@ -52,7 +53,10 @@ const MaterialPage: FC<MaterialPageProps> = () => {
   }
 
   return (
-    <ProductsPage queryParamName="bladeMaterialId" queryParamValue={id.toString()}>
+    <ProductsPage
+      queryParamName={AppSearchParams.BLADE_MATERIAL_ID}
+      queryParamValue={id.toString()}
+    >
       <div className={styles.heading}>{pageName}</div>
       <div className={styles.breadcrumbs}>
         <Breadcrumbs

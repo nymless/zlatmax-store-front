@@ -24,6 +24,7 @@ import {
 export const useAppInit = () => {
   const dispatch = useDispatch();
 
+  // todo: redundant ?
   const types = useGetTypesQuery().data;
   const categories = useGetCategoriesQuery().data;
   const brands = useGetBrandsQuery().data;

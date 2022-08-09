@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import s from './SelectorCard.module.css';
 import { Link } from 'react-router-dom';
-import { AppPaths } from '../../paths/AppPaths';
+import { AppPaths } from '../../variables/AppPaths';
 
 type Props = {
   route: string;

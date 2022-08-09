@@ -10,8 +10,9 @@ import {
   resetSelectedIds,
   setSelectedBrandId,
   setSelectedTypeId,
-} from '../../redux/reducers/selectedReducer';
+} from '../../redux/reducers/selectReducer';
 import { RootState } from '../../redux/store';
+import { AppSearchParams } from '../../variables/AppSearchParams';
 
 interface BrandPageProps {}
 
@@ -27,7 +28,7 @@ const BrandPage: FC<BrandPageProps> = () => {
 
   useEffect(() => {
     if (!brandId) {
-      return
+      return;
     }
     setId(Number.parseInt(brandId));
   }, [brandId]);
@@ -52,7 +53,10 @@ const BrandPage: FC<BrandPageProps> = () => {
   }
 
   return (
-    <ProductsPage queryParamName="brandId" queryParamValue={id.toString()}>
+    <ProductsPage
+      queryParamName={AppSearchParams.BRAND_ID}
+      queryParamValue={id.toString()}
+    >
       <div className={styles.heading}>{pageName}</div>
       <div className={styles.breadcrumbs}>
         <Breadcrumbs

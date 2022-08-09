@@ -9,7 +9,8 @@ import { RangesForFormSliders } from '../../redux/services/types';
 import { useFilterFormLists } from '../../hooks/useFilterFormLists';
 import { useFilterFormInit } from '../../hooks/useFilterFormInit';
 import SliderForm from './SliderForm/SliderForm';
-import RadioForm from './RadioForm/RadioForm';
+import CheckboxForm from './CheckboxForm/CheckboxForm';
+import { AppSearchParams } from '../../variables/AppSearchParams';
 
 interface ProductFilterFormProps {
   ranges?: RangesForFormSliders;
@@ -38,9 +39,8 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
     <div className={styles.ProductFilterForm}>
       <h3 className={styles.heading}>Фильтр товаров</h3>
       <Formik initialValues={initialFormValues} onSubmit={handleSubmitForm}>
-        {({ values, setFieldValue }) => (
+        {({ values, setFieldValue, submitForm }) => (
           <Form>
-            <button type="submit">Submit</button>
             <Accordion defaultExpanded={true}>
               <AccordionSummary
                 sx={{ backgroundColor: '#FEFEFE' }}
@@ -52,11 +52,12 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
               <AccordionDetails>
                 <SliderForm
                   min={props.ranges?.price.min || 1000}
-                  step={1}
+                  step={100}
                   max={props.ranges?.price.max || 10000}
                   values={values}
                   setFieldValue={setFieldValue}
-                  field="price"
+                  submitForm={submitForm}
+                  name={AppSearchParams.PRICE}
                 />
               </AccordionDetails>
             </Accordion>
@@ -69,11 +70,12 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                   <Typography>Категории</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <RadioForm
+                  <CheckboxForm
                     list={categories}
                     values={values}
                     setFieldValue={setFieldValue}
-                    field="categoryId"
+                    submitForm={submitForm}
+                    name={AppSearchParams.CATEGORY_ID}
                   />
                 </AccordionDetails>
               </Accordion>
@@ -87,11 +89,12 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                   <Typography>Производство</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <RadioForm
+                  <CheckboxForm
                     list={brand}
                     values={values}
                     setFieldValue={setFieldValue}
-                    field="brandId"
+                    submitForm={submitForm}
+                    name={AppSearchParams.BRAND_ID}
                   />
                 </AccordionDetails>
               </Accordion>
@@ -105,16 +108,17 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                   <Typography>Сталь</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <RadioForm
+                  <CheckboxForm
                     list={bladeMaterials}
                     values={values}
                     setFieldValue={setFieldValue}
-                    field="bladeMaterialId"
+                    submitForm={submitForm}
+                    name={AppSearchParams.BLADE_MATERIAL_ID}
                   />
                 </AccordionDetails>
               </Accordion>
             )}
-            <Accordion defaultExpanded={true}>
+            <Accordion defaultExpanded={false}>
               <AccordionSummary
                 aria-controls="panel4a-content"
                 id="panel4a-header"
@@ -122,15 +126,16 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                 <Typography>Рукоять</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <RadioForm
+                <CheckboxForm
                   list={handleMaterials}
                   values={values}
                   setFieldValue={setFieldValue}
-                  field="handleMaterialId"
+                  submitForm={submitForm}
+                  name={AppSearchParams.HANDLE_MATERIAL_ID}
                 />
               </AccordionDetails>
             </Accordion>
-            <Accordion defaultExpanded={true}>
+            <Accordion defaultExpanded={false}>
               <AccordionSummary
                 aria-controls="panel5a-content"
                 id="panel5a-header"
@@ -138,15 +143,16 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                 <Typography>Гарда и тыльник</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <RadioForm
+                <CheckboxForm
                   list={handguardMaterials}
                   values={values}
                   setFieldValue={setFieldValue}
-                  field="handguardMaterialId"
+                  submitForm={submitForm}
+                  name={AppSearchParams.HANDGUARD_MATERIAL_ID}
                 />
               </AccordionDetails>
             </Accordion>
-            <Accordion defaultExpanded={true}>
+            <Accordion defaultExpanded={false}>
               <AccordionSummary
                 aria-controls="panel6a-content"
                 id="panel6a-header"
@@ -154,15 +160,16 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                 <Typography>Золочение</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <RadioForm
+                <CheckboxForm
                   list={gildingTypes}
                   values={values}
                   setFieldValue={setFieldValue}
-                  field="gildingTypeId"
+                  submitForm={submitForm}
+                  name={AppSearchParams.GILDING_TYPE_ID}
                 />
               </AccordionDetails>
             </Accordion>
-            <Accordion defaultExpanded={true}>
+            <Accordion defaultExpanded={false}>
               <AccordionSummary
                 aria-controls="panel7a-content"
                 id="panel7a-header"
@@ -176,11 +183,12 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                   max={props.ranges?.totalLength.max || 300}
                   values={values}
                   setFieldValue={setFieldValue}
-                  field="totalLength"
+                  submitForm={submitForm}
+                  name={AppSearchParams.TOTAL_LENGTH}
                 />
               </AccordionDetails>
             </Accordion>
-            <Accordion defaultExpanded={true}>
+            <Accordion defaultExpanded={false}>
               <AccordionSummary
                 aria-controls="panel8a-content"
                 id="panel8a-header"
@@ -194,11 +202,12 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                   max={props.ranges?.bladeLength.max || 300}
                   values={values}
                   setFieldValue={setFieldValue}
-                  field="bladeLength"
+                  submitForm={submitForm}
+                  name={AppSearchParams.BLADE_LENGTH}
                 />
               </AccordionDetails>
             </Accordion>
-            <Accordion defaultExpanded={true}>
+            <Accordion defaultExpanded={false}>
               <AccordionSummary
                 aria-controls="panel9a-content"
                 id="panel9a-header"
@@ -212,11 +221,12 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                   max={props.ranges?.bladeWidth.max || 100}
                   values={values}
                   setFieldValue={setFieldValue}
-                  field="bladeWidth"
+                  submitForm={submitForm}
+                  name={AppSearchParams.BLADE_WIDTH}
                 />
               </AccordionDetails>
             </Accordion>
-            <Accordion defaultExpanded={true}>
+            <Accordion defaultExpanded={false}>
               <AccordionSummary
                 aria-controls="panel10a-content"
                 id="panel10a-header"
@@ -224,11 +234,12 @@ const ProductFilterForm: FC<ProductFilterFormProps> = (props) => {
                 <Typography>Рейтинг</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <RadioForm
+                <CheckboxForm
                   list={rating}
                   values={values}
                   setFieldValue={setFieldValue}
-                  field="rating"
+                  submitForm={submitForm}
+                  name={AppSearchParams.RATING}
                 />
               </AccordionDetails>
             </Accordion>

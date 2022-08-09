@@ -11,14 +11,14 @@ if (process.env.NODE_ENV === 'development') {
   const { worker } = require('./mocks/browser')
   worker.start()
 }
-
+// todo: strict mode check
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );

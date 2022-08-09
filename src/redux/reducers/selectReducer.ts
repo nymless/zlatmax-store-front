@@ -8,8 +8,8 @@ const initialState: InitialStateSelected = {
   bladeMaterialId: null,
 };
 
-export const selectedSlice = createSlice({
-  name: 'selected',
+export const selectSlice = createSlice({
+  name: 'select',
   initialState,
   reducers: {
     resetSelectedIds: (state) => {
@@ -39,4 +39,4 @@ export const {
   setSelectedCategoryId,
   setSelectedBrandId,
   setSelectedBladeMaterialId,
-} = selectedSlice.actions;
+} = selectSlice.actions;

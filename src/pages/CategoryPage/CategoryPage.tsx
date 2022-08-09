@@ -10,8 +10,9 @@ import {
   resetSelectedIds,
   setSelectedCategoryId,
   setSelectedTypeId,
-} from '../../redux/reducers/selectedReducer';
+} from '../../redux/reducers/selectReducer';
 import { RootState } from '../../redux/store';
+import { AppSearchParams } from '../../variables/AppSearchParams';
 
 interface CategoryPageProps {}
 
@@ -29,7 +30,7 @@ const CategoryPage: FC<CategoryPageProps> = () => {
 
   useEffect(() => {
     if (!categoryId) {
-      return
+      return;
     }
     setId(Number.parseInt(categoryId));
   }, [categoryId]);
@@ -55,7 +56,10 @@ const CategoryPage: FC<CategoryPageProps> = () => {
 
   return (
     <div>
-      <ProductsPage queryParamName="categoryId" queryParamValue={id.toString()}>
+      <ProductsPage
+        queryParamName={AppSearchParams.CATEGORY_ID}
+        queryParamValue={id.toString()}
+      >
         <div className={styles.heading}>{pageName}</div>
         <div className={styles.breadcrumbs}>
           <Breadcrumbs

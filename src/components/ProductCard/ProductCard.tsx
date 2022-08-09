@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styles from './ProductCard.module.css';
 import { Link } from 'react-router-dom';
-import { AppPaths } from '../../paths/AppPaths';
+import { AppPaths } from '../../variables/AppPaths';
 import { ProductWithMaterials } from '../../redux/services/types';
 import RatingStars from '../RatingStars/RatingStars';
 import Favorites from '../Favorites/Favorites';

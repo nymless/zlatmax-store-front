@@ -3,7 +3,7 @@ import { productsApi } from './services/productsApi';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { userApi } from './services/userApi';
 import { appSlice } from './reducers/appReducer';
-import { selectedSlice } from './reducers/selectedReducer';
+import { selectSlice } from './reducers/selectReducer';
 import { cartApi } from './services/cartApi';
 import { favoriteApi } from './services/favoriteApi';
 import { knifeMaterialsApi } from './services/knifeMaterialsApi';
@@ -16,7 +16,7 @@ import { shippingApi } from './services/shippingApi';
 export const store = configureStore({
   reducer: {
     [appSlice.name]: appSlice.reducer,
-    [selectedSlice.name]: selectedSlice.reducer,
+    [selectSlice.name]: selectSlice.reducer,
     // API stores
     [cartApi.reducerPath]: cartApi.reducer,
     [favoriteApi.reducerPath]: favoriteApi.reducer,

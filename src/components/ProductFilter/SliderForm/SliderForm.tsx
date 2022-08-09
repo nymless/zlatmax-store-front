@@ -6,38 +6,39 @@ import { Slider } from './MuiStyled/Slider';
 import { Input } from './MuiStyled/Input';
 import { FormikHelpers, FormikValues } from 'formik';
 
-function valuetext(value: number) {
-  return `${value} рублей`;
-}
-
 interface SliderFormProps {
   min: number;
   step: number;
   max: number;
   values: FormikValues;
   setFieldValue: FormikHelpers<FormikValues>['setFieldValue'];
-  field: string;
+  submitForm: FormikHelpers<FormikValues>['submitForm'];
+  name: string;
 }
 
-const SliderForm: FC<SliderFormProps> = ({
-  min,
-  step,
-  max,
-  setFieldValue,
-  field,
-}) => {
-  const [value, setValue] = React.useState<Array<number | string>>([min, max]);
+const SliderForm: FC<SliderFormProps> = React.memo((props) => {
+  const { min, step, max, values, setFieldValue, submitForm, name } = props;
+
+  const initialValues = values[name].split('-');
+  const leftThumbValue = Number.parseInt(initialValues[0]) || min;
+  const rightThumbValue = Number.parseInt(initialValues[1]) || max;
+
+  const [value, setValue] = React.useState<Array<number | string>>([
+    leftThumbValue,
+    rightThumbValue,
+  ]);
 
   useEffect(() => {
-    setFieldValue(field, value.join('-'));
-  }, [setFieldValue, value, field]);
+    const initialValues = values[name].split('-');
+    const leftThumbValue = Number.parseInt(initialValues[0]) || min;
+    const rightThumbValue = Number.parseInt(initialValues[1]) || max;
 
-  useEffect(() => {
-    setValue([min, max]);
-  }, [min, max]);
+    setValue([leftThumbValue, rightThumbValue]);
+  }, [max, min, name, values]);
 
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number[]);
+  const handleSliderChange = (event: Event, newValue: number[]) => {
+    setValue(newValue);
+    setFieldValue(name, newValue.join('-'));
   };
 
   const handleInputChange = (flag: 'left' | 'right') => {
@@ -50,6 +51,12 @@ const SliderForm: FC<SliderFormProps> = ({
     };
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      (event.target as HTMLElement).blur();
+    }
+  };
+
   const handleBlur = () => {
     const newValue = value.map((n) => {
       if (n < min) return min;
@@ -57,6 +64,8 @@ const SliderForm: FC<SliderFormProps> = ({
       return n;
     });
     setValue(newValue);
+    setFieldValue(name, newValue.join('-'));
+    submitForm();
   };
 
   return (
@@ -85,6 +94,7 @@ const SliderForm: FC<SliderFormProps> = ({
               value={value[1]}
               size="small"
               onChange={handleInputChange('right')}
+              onKeyDown={handleKeyPress}
               onBlur={handleBlur}
               inputProps={{
                 step,
@@ -96,20 +106,20 @@ const SliderForm: FC<SliderFormProps> = ({
             />
           </Grid>
         </Grid>
-
         <Slider
           min={min}
           step={step}
           max={max}
-          value={value as number[]}
+          value={value}
           onChange={handleSliderChange}
+          onChangeCommitted={submitForm}
           valueLabelDisplay="auto"
           getAriaLabel={() => 'Диапазон цен'}
-          getAriaValueText={valuetext}
+          getAriaValueText={(value: number) => `${value} рублей`}
         />
       </Stack>
     </Box>
   );
-};
+});
 
 export default SliderForm;

@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { AppPaths } from '../../paths/AppPaths';
+import { AppPaths } from '../../variables/AppPaths';
 import { bladeMaterials } from '../resources/bladeMaterials';
 import { handleMaterials } from '../resources/handleMaterials';
 import { handguardMaterials } from '../resources/handguardMaterials';
@@ -167,13 +167,13 @@ function getParamsFromUrl(req) {
 function filterByParams(params) {
   const searchParams = Object.entries({
     typeId: params.typeId,
-    brandId: params.brandId,
-    categoryId: params.categoryId,
-    rating: params.rating,
-    bladeMaterialId: params.bladeMaterialId,
-    handleMaterialId: params.handleMaterialId,
-    handguardMaterialId: params.handguardMaterialId,
-    gildingTypeId: params.gildingTypeId,
+    brandId: params.brandId?.split(','),
+    categoryId: params.categoryId?.split(','),
+    rating: params.rating?.split(','),
+    bladeMaterialId: params.bladeMaterialId?.split(','),
+    handleMaterialId: params.handleMaterialId?.split(','),
+    handguardMaterialId: params.handguardMaterialId?.split(','),
+    gildingTypeId: params.gildingTypeId?.split(','),
   });
 
   const fromParams = Object.entries({
@@ -192,13 +192,25 @@ function filterByParams(params) {
 
   return products.reduce((resultArr, model) => {
     const searchParamsCheckPassed = searchParams.every((param) => {
-      return !param[1] || model[param[0]] === Number.parseInt(param[1]);
+      if (!param[1]) {
+        return true;
+      }
+      if (Array.isArray(param[1])) {
+        return param[1].some((i) => Number.parseInt(i) === model[param[0]]);
+      }
+      return Number.parseInt(param[1]) === model[param[0]];
     });
     const fromParamsCheckPassed = fromParams.every((param) => {
-      return !param[1] || model[param[0]] >= Number.parseInt(param[1]);
+      if (!param[1]) {
+        return true;
+      }
+      return Number.parseInt(param[1]) <= model[param[0]];
     });
     const toParamsCheckPassed = toParams.every((param) => {
-      return !param[1] || model[param[0]] <= Number.parseInt(param[1]);
+      if (!param[1]) {
+        return true;
+      }
+      return Number.parseInt(param[1]) >= model[param[0]];
     });
     if (
       searchParamsCheckPassed &&
