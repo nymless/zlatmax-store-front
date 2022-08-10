@@ -10,24 +10,22 @@ const BrandsPage: FC<BrandsPageProps> = (props) => {
   const manufacturers = useGetBrandsQuery().data;
 
   return (
-    <div className="_container">
-      <div className={styles.BrandsPage}>
-        <div className={styles.heading}>Производство ножей</div>
-        <div className={styles.breadcrumbs}>Breadcrumbs...</div>
-        <div className={styles.body}>
-          {manufacturers &&
-            manufacturers.map((manufacturer) => {
-              return (
-                <SelectorCard
-                  key={manufacturer.id}
-                  route="/brand"
-                  name={manufacturer.name}
-                  img={manufacturer.img}
-                  id={manufacturer.id}
-                />
-              );
-            })}
-        </div>
+    <div className={styles.BrandsPage}>
+      <div className={styles.heading}>Производство ножей</div>
+      <div className={styles.breadcrumbs}>Breadcrumbs...</div>
+      <div className={styles.body}>
+        {manufacturers &&
+          manufacturers.map((manufacturer) => {
+            return (
+              <SelectorCard
+                key={manufacturer.id}
+                route="/brand"
+                name={manufacturer.name}
+                img={manufacturer.img}
+                id={manufacturer.id}
+              />
+            );
+          })}
       </div>
     </div>
   );

@@ -1,3 +1,29 @@
 .ShopPage {
+}
 
+.topBanner {
+    height: 788px;
+    color: #FFFFFF;
+    background: center / contain repeat url("./img/top-banner-back-2.png"),
+    center / cover url("./img/top-banner-back-1.png"),
+    #141414;
+    position: relative;
+}
+
+.products {
+}
+
+.topSellers {
+}
+
+.newProducts {
+}
+
+.sales {
+}
+
+.articles {
+}
+
+.bottomBanner {
 }
