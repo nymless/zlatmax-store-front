@@ -1,41 +1,40 @@
 import React, { FC } from 'react';
-import styles from './TopBanner.module.css';
+import styles from './TopBanner.module.scss';
 import { withContainer } from '../../../hoc/withContainer';
 import bannerImage from './img/banner-image.png';
 import image1 from './img/image-1.svg';
 import image2 from './img/image-2.svg';
 import image3 from './img/image-3.svg';
 import image4 from './img/image-4.svg';
+import BannerSwiper from './BannerSwiper/BannerSwiper';
+import PlusDot from './PlusDot/PlusDot';
 
 interface TopBannerProps {}
 
 const TopBanner: FC<TopBannerProps> = () => (
   <div className={styles.TopBanner}>
     <div className={styles.upperBlock}>
-      <div className={styles.upperItem}>
-        <h2>
-          <span>{'Интернет магазин сертифицированных\n'}</span>
-          <span>златоустовских ножей</span>
-        </h2>
-        <p>
-          <span>
-            {
-              'Добро пожаловать на официальный сайт «ЗЛАТМАКС»! В нашем магазине\n'
-            }
-          </span>
-          <span>
-            {
-              'представлен наиболее широкий выбор Златоустовских ножей от Златоустовских\n'
-            }
-          </span>
-          <span>
-            Златоустовских Оружейных Фабрик и компаний, мы являемся официальными
-            поставщиками.
-          </span>
-        </p>
+      <div>
+        <BannerSwiper />
       </div>
-      <div className={styles.upperItem}>
-        <img src={bannerImage} alt="Кухонные ножи" />
+      <div>
+        <div className={styles.bannerImageWrapper}>
+          <div className={styles.background}></div>
+          <div className={styles.decoration__one}>
+            <PlusDot />
+          </div>
+          <div className={styles.decoration__two}>
+            <PlusDot />
+          </div>
+          <div className={styles.decoration__three}>
+            <PlusDot />
+          </div>
+          <img
+            className={styles.bannerImage}
+            src={bannerImage}
+            alt="Кухонные ножи"
+          />
+        </div>
       </div>
     </div>
     <div className={styles.bottomBlock}>

@@ -1,7 +1,10 @@
 declare module '*.module.css';
+declare module '*.module.scss';
 declare module '*.svg';
 declare module '*.png';
 declare module '*.jpg';
+declare module 'swiper';
+declare module 'swiper/react';
 declare module '@mui/material/styles';
 declare module '@mui/material/Accordion';
 declare module '@mui/material/AccordionSummary';

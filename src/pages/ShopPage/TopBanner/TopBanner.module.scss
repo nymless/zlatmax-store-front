@@ -1,0 +1,78 @@
+.TopBanner {
+  height: 100%;
+  padding: 44px 0 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.upperBlock {
+  display: grid;
+  grid-template-columns: 60% 40%;
+}
+
+.bannerImageWrapper {
+  position: relative;
+  left: 80px;
+}
+
+.decoration__one {
+  position: absolute;
+  left: 410px;
+  top: 33px;
+}
+
+.decoration__two {
+  position: absolute;
+  left: 70px;
+  top: 158px;
+}
+
+.decoration__three {
+  position: absolute;
+  left: 395px;
+  top: 340px;
+}
+
+.background {
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 50%);
+  position: absolute;
+  left: 160px;
+  top: 40px;
+}
+
+.bannerImage {
+  display: block;
+  width: 449px;
+  height: 499px;
+  position: absolute;
+  top: -20px;
+}
+
+.bottomBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.bottomItem {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 15px;
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  p {
+    text-align: center;
+    white-space: pre-wrap;
+    font-size: 1.25rem;
+    line-height: 1.6;
+  }
+}

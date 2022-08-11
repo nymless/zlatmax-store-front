@@ -7,7 +7,8 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import styles from './Gallery.module.css';
-import SwiperClass, { FreeMode, Navigation, Thumbs } from 'swiper';
+import { FreeMode, Navigation, Thumbs } from 'swiper';
+import SwiperClass from 'swiper/types/swiper-class';
 
 interface GalleryProps {
   product: ProductModelForProductPage;
