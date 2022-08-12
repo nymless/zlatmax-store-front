@@ -2,7 +2,7 @@
     min-width: 260px;
     min-height: 170px;
     border-radius: 3px;
-    box-shadow: 0 0 6px rgb(173, 173, 173);
+    box-shadow: 0 0 20px rgba(173, 173, 173, 70%);
     display: grid;
     grid-template-rows: 80% 20%;
     gap: 20px;
@@ -11,7 +11,8 @@
 }
 
 .card:hover {
-    box-shadow: 0 0 10px rgb(232, 170, 49);
+    box-shadow: 0 0 20px rgba(232, 170, 49, 70%);
+    transform: scale(102%);
 }
 
 .img {

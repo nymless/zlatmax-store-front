@@ -1,1 +1,12 @@
-.Products {}
+.Products {
+    margin: 100px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+}
+
+.img {
+    position: absolute;
+    right: -20px;
+    top: 40px;
+}
