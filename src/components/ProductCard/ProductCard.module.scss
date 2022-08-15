@@ -1,0 +1,111 @@
+.card {
+  border-radius: 3px;
+  background-color: #FEFEFE;
+  color: #141414;
+
+  &.boxShadow {
+    box-shadow: 0 0 20px rgba(173, 173, 173, 70%);
+
+    &:hover {
+      box-shadow: 0 0 20px rgba(232, 170, 49, 70%);
+    }
+  }
+
+  &.cardScale:hover {
+    transform: scale(102%);
+  }
+}
+
+.link {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+}
+
+.discount {
+  position: absolute;
+  left: 0;
+  top: 20px;
+  width: 90px;
+  height: 35px;
+  background-color: #E8AA31;
+  color: #FFFFFF;
+  line-height: 35px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.image {
+  flex: 0 0 55%;
+  margin: 0 auto;
+  display: flex;
+  object-fit: scale-down;
+}
+
+.heading {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.info {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ABABAB;
+  font-weight: 600;
+}
+
+.handle {
+  text-align: right;
+}
+
+.other {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ABABAB;
+  font-weight: 500;
+}
+
+.reviews {
+  position: relative;
+
+  &:hover {
+    color: #E8AA31;
+  }
+}
+
+.footer {
+  flex: 1 1 auto;
+  padding: 30px 0 10px;
+  border-top: 1px solid rgba(14, 14, 14, 50%);
+}
+
+.priceBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.price {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.misc {
+  display: flex;
+  gap: 15px;
+}
+
+.footerOptional {
+  padding: 20px 0 10px;
+}

@@ -7,8 +7,12 @@ import NewProducts from './NewProducts/NewProducts';
 import Sales from './Sales/Sales';
 import Articles from './Articles/Articles';
 import BottomBanner from './BottomBanner/BottomBanner';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 const ShopPage = () => {
+  // todo: uncomment on production
+  // useScrollToTop();
+
   return (
     <div className={styles.ShopPage}>
       <div className={styles.topBanner}>

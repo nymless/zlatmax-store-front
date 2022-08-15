@@ -13,10 +13,13 @@ import {
 } from '../../redux/reducers/selectReducer';
 import { RootState } from '../../redux/store';
 import { AppSearchParams } from '../../variables/AppSearchParams';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 interface MaterialPageProps {}
 
 const MaterialPage: FC<MaterialPageProps> = () => {
+  useScrollToTop();
+
   const dispatch = useDispatch();
   const bladeMaterialId = useParams().id;
   const location = useLocation();

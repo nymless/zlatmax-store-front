@@ -3,10 +3,13 @@ import { SelectorCard } from '../../components/SelectorCard/SelectorCard';
 import { withContainer } from '../../hoc/withContainer';
 import styles from './BrandsPage.module.css';
 import { useGetBrandsQuery } from '../../redux/services/productDetailsApi';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 interface BrandsPageProps {}
 
 const BrandsPage: FC<BrandsPageProps> = (props) => {
+  useScrollToTop();
+
   const manufacturers = useGetBrandsQuery().data;
 
   return (

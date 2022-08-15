@@ -41,7 +41,13 @@ const Products: FC<ProductsProps> = (props) => {
     <div className={styles.Products}>
       <div className={styles.products}>
         {props.products.rows.map((product) => (
-          <ProductCard key={product.id} product={product} userId={user?.id} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            userId={user?.id}
+            scaleOnHover={true}
+            shadowOnHover={true}
+          />
         ))}
       </div>
       <div className={styles.paginator}>

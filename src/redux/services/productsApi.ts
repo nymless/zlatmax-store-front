@@ -4,7 +4,7 @@ import { SpecialOffer, StoreBonus } from '../models/models';
 import {
   GetProductsParams,
   GetProductsResponse,
-  ProductModelForProductPage,
+  ProductModelForProductPage, ProductWithMaterials,
 } from './types';
 
 export const productsApi = createApi({
@@ -21,6 +21,10 @@ export const productsApi = createApi({
     }),
     getProductById: builder.query<ProductModelForProductPage, number>({
       query: (id) => 'product/' + id,
+    }),
+
+    getTopSellers: builder.query<ProductWithMaterials[], void>({
+      query: () => 'product/top-sellers',
     }),
 
     // todo: separate
@@ -40,6 +44,7 @@ export const productsApi = createApi({
 export const {
   useGetProductsByParamsQuery,
   useGetProductByIdQuery,
+  useGetTopSellersQuery,
   useGetSpecialOfferByProductIdQuery,
   useGetStoreBonusByIdQuery,
 } = productsApi;

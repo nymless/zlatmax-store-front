@@ -1,5 +1,4 @@
-import RatingFormItem from '../components/ProductFilter/RatingFormItem/RatingFormItem';
-import React from 'react';
+import React, { FC } from 'react';
 import {
   useGetBrandsQuery,
   useGetCategoriesQuery,
@@ -10,6 +9,24 @@ import {
   useGetHandguardMaterialsQuery,
   useGetHandleMaterialsQuery,
 } from '../redux/services/knifeMaterialsApi';
+import styles from '../components/ProductFilter/ProductFilterForm.module.css';
+import RatingStars from '../components/RatingStars/RatingStars';
+
+interface RaringFormItemProps {
+  rating: number;
+  text: string;
+}
+
+const RatingFormItem: FC<RaringFormItemProps> = (props) => {
+  return (
+    <div className={styles.rating}>
+      <div>
+        <RatingStars rating={props.rating} />
+      </div>
+      <div>{props.text}</div>
+    </div>
+  );
+};
 
 export const useFilterFormLists = () => {
   const categories = useGetCategoriesQuery().data;

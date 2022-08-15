@@ -3,6 +3,7 @@ import styles from './BannerSwiper.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper';
 import { Link } from 'react-router-dom';
+import Button from '../../../../components/Button/Button';
 
 interface BannerSwiperProps {}
 
@@ -47,8 +48,8 @@ const BannerSwiper: FC<BannerSwiperProps> = () => {
               поставщиками.
             </span>
           </p>
-          <Link to={'./details'}>
-            <button className={styles.details}>Подробнее</button>
+          <Link className={styles.details} to={'./details'}>
+            <Button>Подробнее</Button>
           </Link>
         </div>
       </SwiperSlide>
@@ -74,8 +75,8 @@ const BannerSwiper: FC<BannerSwiperProps> = () => {
               поставщиками.
             </span>
           </p>
-          <Link to={'./details'}>
-            <button className={styles.details}>Подробнее</button>
+          <Link className={styles.details} to={'./details'}>
+            <Button>Подробнее</Button>
           </Link>
         </div>
       </SwiperSlide>
@@ -101,8 +102,8 @@ const BannerSwiper: FC<BannerSwiperProps> = () => {
               поставщиками.
             </span>
           </p>
-          <Link to={'./details'}>
-            <button className={styles.details}>Подробнее</button>
+          <Link className={styles.details} to={'./details'}>
+            <Button>Подробнее</Button>
           </Link>
         </div>
       </SwiperSlide>
@@ -128,8 +129,8 @@ const BannerSwiper: FC<BannerSwiperProps> = () => {
               поставщиками.
             </span>
           </p>
-          <Link to={'./details'}>
-            <button className={styles.details}>Подробнее</button>
+          <Link className={styles.details} to={'./details'}>
+            <Button>Подробнее</Button>
           </Link>
         </div>
       </SwiperSlide>

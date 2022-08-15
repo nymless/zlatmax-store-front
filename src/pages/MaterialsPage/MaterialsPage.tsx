@@ -3,10 +3,13 @@ import styles from './MaterialsPage.module.css';
 import { SelectorCard } from '../../components/SelectorCard/SelectorCard';
 import { withContainer } from '../../hoc/withContainer';
 import { useGetBladeMaterialsQuery } from '../../redux/services/knifeMaterialsApi';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 interface MaterialsPageProps {}
 
 const MaterialsPage: FC<MaterialsPageProps> = (props) => {
+  useScrollToTop();
+
   const materials = useGetBladeMaterialsQuery().data;
 
   return (

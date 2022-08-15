@@ -6,6 +6,7 @@ import { useGetProductsByParamsQuery } from '../../redux/services/productsApi';
 import Products from './Products/Products';
 import { useAppPagination } from '../../hooks/useAppPagination';
 import { AppSearchParams } from '../../variables/AppSearchParams';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 interface ProductsPageProps {
   queryParamName: string;
@@ -16,6 +17,8 @@ interface ProductsPageProps {
 // todo: add spinner
 
 const ProductsPage: FC<PropsWithChildren<ProductsPageProps>> = (props) => {
+  useScrollToTop();
+
   const [searchParams] = useSearchParams();
   searchParams.set(AppSearchParams.TYPE_ID, '1');
   searchParams.set(props.queryParamName, props.queryParamValue);
@@ -32,6 +35,8 @@ const ProductsPage: FC<PropsWithChildren<ProductsPageProps>> = (props) => {
     productsLimit,
     data?.count
   );
+
+
 
   return (
     <section className={styles.ProductsPage}>

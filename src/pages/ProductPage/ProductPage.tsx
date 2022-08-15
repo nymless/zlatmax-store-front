@@ -10,8 +10,11 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { useGetProductByIdQuery } from '../../redux/services/productsApi';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 const ProductPage = () => {
+  useScrollToTop();
+
   const idString = useParams().id!;
   const id = Number.parseInt(idString);
 

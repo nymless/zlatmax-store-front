@@ -13,12 +13,15 @@ import {
 } from '../../redux/reducers/selectReducer';
 import { RootState } from '../../redux/store';
 import { AppSearchParams } from '../../variables/AppSearchParams';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 interface CategoryPageProps {}
 
 // todo: 404 page component
 
 const CategoryPage: FC<CategoryPageProps> = () => {
+  useScrollToTop();
+
   const dispatch = useDispatch();
   const categoryId = useParams().id;
   const location = useLocation();

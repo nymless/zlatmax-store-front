@@ -1,11 +1,10 @@
 import React from 'react';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 const ShoppingCartPage = () => {
-    return (
-        <div>
-            ShoppingCart
-        </div>
-    );
+  useScrollToTop();
+
+  return <div>ShoppingCart</div>;
 };
 
 export default ShoppingCartPage;

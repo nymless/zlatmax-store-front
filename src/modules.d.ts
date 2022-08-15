@@ -5,6 +5,7 @@ declare module '*.png';
 declare module '*.jpg';
 declare module 'swiper';
 declare module 'swiper/react';
+declare module 'styled-components';
 declare module '@mui/material/styles';
 declare module '@mui/material/Accordion';
 declare module '@mui/material/AccordionSummary';

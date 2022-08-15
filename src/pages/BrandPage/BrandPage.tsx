@@ -13,10 +13,13 @@ import {
 } from '../../redux/reducers/selectReducer';
 import { RootState } from '../../redux/store';
 import { AppSearchParams } from '../../variables/AppSearchParams';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 interface BrandPageProps {}
 
 const BrandPage: FC<BrandPageProps> = () => {
+  useScrollToTop();
+
   const dispatch = useDispatch();
   const brandId = useParams().id;
   const location = useLocation();

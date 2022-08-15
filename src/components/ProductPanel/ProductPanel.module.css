@@ -118,46 +118,12 @@
     padding-top: 30px;
 }
 
-.quantity {
-
-}
-
 .buttonBlock {
-    display: flex;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: 228px 228px;
+    column-gap: 30px;
 }
 
-.cart {
-    width: 228px;
-    height: 50px;
-    background-color: #E8AA31;
-    border: none;
-    color: #FFFFFF;
-    cursor: pointer;
-    border-radius: 3px;
-    font-size: 1.125rem;
-    font-weight: 600;
-}
-
-.cart img {
+.buttonSvg {
     margin-left: 15px;
-}
-
-.cart:hover {
-    transform: scale(102%);
-}
-
-.buy {
-    width: 228px;
-    height: 50px;
-    background-color: #000000;
-    border: none;
-    color: #FFFFFF;
-    cursor: pointer;
-    border-radius: 3px;
-    font-weight: 600;
-}
-
-.buy:hover {
-    transform: scale(102%);
 }

@@ -9,8 +9,26 @@ import { handguards } from '../resources/handguards';
 import { info } from '../resources/info';
 import { gallery } from '../resources/gallery';
 import { products } from '../resources/products';
+import { topSellers } from '../resources/topSellers';
 
 export const productHandlers = [
+  rest.get(AppPaths.API_URL + 'product/top-sellers', (req, res, ctx) => {
+    const topSellingProducts = topSellers.productsId.map((productId) => {
+      return products.find((product) => product.id === productId);
+    });
+
+    topSellingProducts.forEach((product) => {
+      const { bladeMaterialName, handleMaterialName, handguardMaterialName } =
+        findMaterialsNameAndPrice(product);
+
+      product.bladeMaterialName = bladeMaterialName;
+      product.handleMaterialName = handleMaterialName;
+      product.handguardMaterialName = handguardMaterialName;
+    });
+
+    return res(ctx.status(200), ctx.json(topSellingProducts));
+  }),
+
   rest.get(AppPaths.API_URL + 'product/:id', (req, res, ctx) => {
     const idString = req.params.id;
     const id = Number.parseInt(idString);

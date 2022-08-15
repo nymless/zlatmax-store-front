@@ -17,6 +17,10 @@
 }
 
 .newProducts {
+    height: 761px;
+    color: #FFFFFF;
+    background: center / cover url("./img/new-product-back.png"),
+    #2A2A2A;
 }
 
 .sales {

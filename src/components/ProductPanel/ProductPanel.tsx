@@ -9,8 +9,9 @@ import Counter from './Counter/Counter';
 import ProductForm from './ProductForm/ProductForm';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import cart from './cart.svg';
+import cart from '../../assets/svg/cart.svg';
 import { Link } from 'react-router-dom';
+import Button from '../Button/Button';
 
 interface ProductProps {
   product: ProductModelForProductPage;
@@ -118,14 +119,19 @@ const ProductPanel: FC<ProductProps> = (props) => {
               <Counter value={quantity} setValue={setQuantity} />
             </div>
             <div className={styles.buttonBlock}>
-              <button type="submit" className={styles.cart} onClick={addToCart}>
+              <Button onClick={addToCart} submitForm={true} scaleOnHover={true}>
                 В корзину
-                <img src={cart} alt="cart" />
-              </button>
-              <Link to={'../buy'}>
-                <button type="submit" className={styles.buy}>
+                <img className={styles.buttonSvg} src={cart} alt="cart" />
+              </Button>
+              <Link className={styles.link} to={'../buy'}>
+                <Button
+                  onClick={addToCart}
+                  submitForm={true}
+                  darkBackground={true}
+                  scaleOnHover={true}
+                >
                   Купить в 1 клик
-                </button>
+                </Button>
               </Link>
             </div>
           </div>

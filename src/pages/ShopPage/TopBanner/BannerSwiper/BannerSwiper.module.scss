@@ -2,7 +2,6 @@
   & :global {
     .swiper-pagination {
       display: flex;
-      align-items: flex-start;
       gap: 5px;
     }
   }
@@ -47,18 +46,6 @@
 }
 
 .details {
+  display: block;
   width: 228px;
-  height: 50px;
-  padding: 0;
-  cursor: pointer;
-  border: none;
-  border-radius: 3px;
-  background-color: #E8AA31;
-  color: #fff;
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.details:hover {
-  background-color: #ce9321;
 }

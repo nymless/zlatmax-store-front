@@ -1,11 +1,10 @@
 import React from 'react';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 const AdminPage = () => {
-    return (
-        <div>
-            Admin
-        </div>
-    );
+  useScrollToTop();
+
+  return <div>Admin</div>;
 };
 
 export default AdminPage;
