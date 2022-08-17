@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from './MaterialsPage.module.css';
-import { SelectorCard } from '../../components/SelectorCard/SelectorCard';
+import { SelectorCard } from '../../shared/SelectorCard/SelectorCard';
 import { withContainer } from '../../hoc/withContainer';
 import { useGetBladeMaterialsQuery } from '../../redux/services/knifeMaterialsApi';
 import { useScrollToTop } from '../../hooks/useScrollToTop';

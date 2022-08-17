@@ -3,7 +3,7 @@ import styles from './ProductForm.module.css';
 import { FormikHandlers } from 'formik';
 import ProductFormSelect from '../ProductFormSelect/ProductFormSelect';
 import { Part, useProductFormLists } from '../../../hooks/useProductFormLists';
-import { ProductModelForProductPage } from '../../../redux/services/types';
+import { ProductForProductPage } from '../../../redux/services/types';
 import AppListItem from './ListItem/AppListItem';
 import { MenuItem } from '../ProductFormSelect/MuiStyled/MenuItem';
 
@@ -18,7 +18,7 @@ interface ProductFormProps {
   values: ProductFormValues;
   handleChange: FormikHandlers['handleChange'];
   setPrice: React.Dispatch<React.SetStateAction<number>>;
-  product: ProductModelForProductPage;
+  product: ProductForProductPage;
 }
 
 const ProductForm: FC<ProductFormProps> = (props) => {

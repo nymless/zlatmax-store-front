@@ -2,14 +2,14 @@ import React, { FC, PropsWithChildren } from 'react';
 import styles from './ProductCard.module.scss';
 import { Link } from 'react-router-dom';
 import { AppPaths } from '../../variables/AppPaths';
-import { ProductWithMaterials } from '../../redux/services/types';
+import { ProductForProductCard } from '../../redux/services/types';
 import RatingStars from '../RatingStars/RatingStars';
 import Favorites from '../Favorites/Favorites';
 import Compare from '../Compare/Compare';
 import classNames from 'classnames';
 
 type ProductCardProps = {
-  product: ProductWithMaterials;
+  product: ProductForProductCard;
   userId?: number;
   scaleOnHover?: boolean;
   shadowOnHover?: boolean;
@@ -17,12 +17,18 @@ type ProductCardProps = {
 
 export const ProductCard: FC<PropsWithChildren<ProductCardProps>> = (props) => {
   // todo: reviews server API
-  // todo: discounts server API
   // todo: rating server API
+  const discount = props.product.discountRate;
+  const defaultPrice = props.product.defaultPrice;
+  const priceWithDiscount = defaultPrice * (1 - discount / 100);
 
-  const discount = 50;
+  const localizedDefaultPrice = defaultPrice.toLocaleString('ru', {
+    minimumFractionDigits: 0,
+    style: 'currency',
+    currency: 'RUB',
+  });
 
-  const localizedPrice = props.product.defaultPrice.toLocaleString('ru', {
+  const localizedPriceWithDiscount = priceWithDiscount.toLocaleString('ru', {
     minimumFractionDigits: 0,
     style: 'currency',
     currency: 'RUB',
@@ -59,7 +65,12 @@ export const ProductCard: FC<PropsWithChildren<ProductCardProps>> = (props) => {
         </div>
         <footer className={styles.footer}>
           <div className={styles.priceBlock}>
-            <div className={styles.price}>{localizedPrice}</div>
+            <div className={styles.priceBox}>
+              <div className={styles.price}>{localizedPriceWithDiscount}</div>
+              {discount && (
+                <div className={styles.oldPrice}>{localizedDefaultPrice}</div>
+              )}
+            </div>
             <div className={styles.misc}>
               <Compare />
               {props.userId && (

@@ -10,7 +10,7 @@ import {
   useGetHandleMaterialsQuery,
 } from '../redux/services/knifeMaterialsApi';
 import styles from '../components/ProductFilter/ProductFilterForm.module.css';
-import RatingStars from '../components/RatingStars/RatingStars';
+import RatingStars from '../shared/RatingStars/RatingStars';
 
 interface RaringFormItemProps {
   rating: number;

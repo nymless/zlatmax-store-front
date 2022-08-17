@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { AppPaths } from '../../variables/AppPaths';
-import { SpecialOffer, StoreBonus } from '../models/models';
 import {
   GetProductsParams,
   GetProductsResponse,
-  ProductModelForProductPage, ProductWithMaterials,
+  ProductForProductCard,
+  ProductForProductPage,
 } from './types';
 
 export const productsApi = createApi({
@@ -19,24 +19,20 @@ export const productsApi = createApi({
         params: params,
       }),
     }),
-    getProductById: builder.query<ProductModelForProductPage, number>({
+    getProductById: builder.query<ProductForProductPage, number>({
       query: (id) => 'product/' + id,
     }),
 
-    getTopSellers: builder.query<ProductWithMaterials[], void>({
+    getSpecialOffers: builder.query<ProductForProductCard[], void>({
+      query: () => 'product/special-offers',
+    }),
+
+    getTopSellers: builder.query<ProductForProductCard[], void>({
       query: () => 'product/top-sellers',
     }),
 
-    // todo: separate
-    getSpecialOfferByProductId: builder.query<SpecialOffer, number>({
-      query: (productId) => ({
-        url: 'special-offer',
-        params: { productId },
-      }),
-    }),
-
-    getStoreBonusById: builder.query<StoreBonus[], number>({
-      query: (id) => 'store-bonus' + id,
+    getNewProducts: builder.query<ProductForProductCard[], void>({
+      query: () => 'product/new-products',
     }),
   }),
 });
@@ -44,7 +40,7 @@ export const productsApi = createApi({
 export const {
   useGetProductsByParamsQuery,
   useGetProductByIdQuery,
+  useGetSpecialOffersQuery,
   useGetTopSellersQuery,
-  useGetSpecialOfferByProductIdQuery,
-  useGetStoreBonusByIdQuery,
+  useGetNewProductsQuery,
 } = productsApi;

@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import styles from '../DataTabs.module.css';
-import { ProductModelForProductPage } from '../../../redux/services/types';
+import { ProductForProductPage } from '../../../redux/services/types';
 
 interface DescriptionProps {
-  product: ProductModelForProductPage;
+  product: ProductForProductPage;
 }
 
 const Description: FC<DescriptionProps> = (props) => (

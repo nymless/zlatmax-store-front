@@ -1,21 +1,21 @@
 import React, { FC } from 'react';
-import styles from './NewProducts.module.scss';
+import styles from './SpecialOffers.module.scss';
 import { withContainer } from '../../../hoc/withContainer';
+import { useGetUserQuery } from '../../../redux/services/userApi';
+import { useGetSpecialOffersQuery } from '../../../redux/services/productsApi';
 import { Link } from 'react-router-dom';
 import arrow from '../../../assets/svg/Arrow.svg';
-import { useGetUserQuery } from '../../../redux/services/userApi';
-import { useGetNewProductsQuery } from '../../../redux/services/productsApi';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper';
 import { ProductCard } from '../../../shared/ProductCard/ProductCard';
 import Button from '../../../shared/Button/Button';
 import cart from '../../../assets/svg/cart.svg';
 
-interface NewProductsProps {}
+interface SpecialOffersProps {}
 
-const NewProducts: FC<NewProductsProps> = () => {
+const SpecialOffers: FC<SpecialOffersProps> = React.memo(() => {
   const user = useGetUserQuery().data;
-  const { data } = useGetNewProductsQuery();
+  const { data } = useGetSpecialOffersQuery();
 
   if (!data?.length) {
     return null;
@@ -28,24 +28,18 @@ const NewProducts: FC<NewProductsProps> = () => {
   };
 
   return (
-    <div className={styles.NewProducts}>
-      <div>
-        <h2 className={styles.heading}>Новинки</h2>
-        <p className={styles.text}>
-          Добро пожаловать на официальный сайт «ЗЛАТМАКС»! В нашем магазине
-          представлен наиболее широкий выбор Златоустовских ножей от
-          Златоустовских Оружейных Фабрик и компаний, мы являемся официальными
-          поставщиками.
-        </p>
-        <Link className={styles.link} to={'/new-products'}>
-          {'Перейти в каталог'} <img src={arrow} alt="Стрелка перехода" />
+    <div className={styles.SpecialOffers}>
+      <header className={styles.header}>
+        <h2>Акции</h2>
+        <Link className={styles.link} to={'/special-offers'}>
+          {'Все акции'} <img src={arrow} alt="Стрелка перехода" />
         </Link>
-      </div>
+      </header>
       <Swiper
-        className={styles.newProductsSwiper}
+        className={styles.specialOffersSwiper}
         modules={[Autoplay, Pagination]}
-        slidesPerView={3}
-        slidesPerGroup={3}
+        slidesPerView={4}
+        slidesPerGroup={4}
         spaceBetween={30}
         speed={500}
         pagination={{
@@ -57,13 +51,17 @@ const NewProducts: FC<NewProductsProps> = () => {
         }}
         style={{
           '--swiper-pagination-color': '#E8AA31',
-          '--swiper-pagination-bullet-inactive-color': '#fff',
+          '--swiper-pagination-bullet-inactive-color': '#000000',
           '--swiper-pagination-bullet-inactive-opacity': '0.5',
         }}
       >
         {data.map((product) => (
           <SwiperSlide key={product.id}>
-            <ProductCard product={product} userId={user?.id}>
+            <ProductCard
+              product={product}
+              userId={user?.id}
+              shadowOnHover={true}
+            >
               <Button onClick={handleOnClick} value={product.id}>
                 В корзину
                 <img className={styles.buttonSvg} src={cart} alt="Корзина" />
@@ -74,6 +72,6 @@ const NewProducts: FC<NewProductsProps> = () => {
       </Swiper>
     </div>
   );
-};
+});
 
-export default withContainer(NewProducts);
+export default withContainer(SpecialOffers);

@@ -3,7 +3,7 @@ import styles from './BannerSwiper.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper';
 import { Link } from 'react-router-dom';
-import Button from '../../../../components/Button/Button';
+import Button from '../../../../shared/Button/Button';
 
 interface BannerSwiperProps {}
 

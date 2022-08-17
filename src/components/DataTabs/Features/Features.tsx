@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import styles from './Features.module.css';
-import { ProductModelForProductPage } from '../../../redux/services/types';
+import { ProductForProductPage } from '../../../redux/services/types';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 
 interface FeaturesProps {
-  product: ProductModelForProductPage;
+  product: ProductForProductPage;
 }
 
 const Features: FC<FeaturesProps> = (props) => {

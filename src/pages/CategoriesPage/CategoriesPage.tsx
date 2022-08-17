@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from './CategoriesPage.module.css';
-import { SelectorCard } from '../../components/SelectorCard/SelectorCard';
+import { SelectorCard } from '../../shared/SelectorCard/SelectorCard';
 import { withContainer } from '../../hoc/withContainer';
 import { useGetCategoriesQuery } from '../../redux/services/productDetailsApi';
 import { useScrollToTop } from '../../hooks/useScrollToTop';

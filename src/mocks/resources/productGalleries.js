@@ -1,4 +1,4 @@
-export const productModelGalleries = [
+export const productGalleries = [
   {
     id: 1,
     productModelId: 1,

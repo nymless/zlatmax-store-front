@@ -17,22 +17,24 @@
   left: 80px;
 }
 
-.decoration__one {
-  position: absolute;
-  left: 410px;
-  top: 33px;
-}
+.decoration {
+  &__one {
+    position: absolute;
+    left: 410px;
+    top: 33px;
+  }
 
-.decoration__two {
-  position: absolute;
-  left: 70px;
-  top: 158px;
-}
+  &__two {
+    position: absolute;
+    left: 70px;
+    top: 158px;
+  }
 
-.decoration__three {
-  position: absolute;
-  left: 395px;
-  top: 340px;
+  &__three {
+    position: absolute;
+    left: 395px;
+    top: 340px;
+  }
 }
 
 .background {

@@ -4,7 +4,7 @@ import TopBanner from './TopBanner/TopBanner';
 import Products from './Products/Products';
 import TopSellers from './TopSellers/TopSellers';
 import NewProducts from './NewProducts/NewProducts';
-import Sales from './Sales/Sales';
+import SpecialOffers from './SpecialOffers/SpecialOffers';
 import Articles from './Articles/Articles';
 import BottomBanner from './BottomBanner/BottomBanner';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
@@ -28,7 +28,7 @@ const ShopPage = () => {
         <NewProducts />
       </div>
       <div className={styles.sales}>
-        <Sales />
+        <SpecialOffers />
       </div>
       <div className={styles.articles}>
         <Articles />

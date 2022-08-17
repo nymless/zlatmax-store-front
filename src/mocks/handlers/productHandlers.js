@@ -10,8 +10,30 @@ import { info } from '../resources/info';
 import { gallery } from '../resources/gallery';
 import { products } from '../resources/products';
 import { topSellers } from '../resources/topSellers';
+import { newProducts } from '../resources/newProducts';
+import { specialOffers } from '../resources/specialOffers';
 
 export const productHandlers = [
+  rest.get(AppPaths.API_URL + 'product/special-offers', (req, res, ctx) => {
+    const specialOfferProducts = specialOffers.map((specialOffer) => {
+      return products.find((product) => product.id === specialOffer.productId);
+    });
+
+    specialOfferProducts.forEach((product) => {
+      const { bladeMaterialName, handleMaterialName, handguardMaterialName } =
+        findMaterialsNameAndPrice(product);
+
+      product.bladeMaterialName = bladeMaterialName;
+      product.handleMaterialName = handleMaterialName;
+      product.handguardMaterialName = handguardMaterialName;
+
+      const { discountRate } = findSpecialOffer(product);
+      product.discountRate = discountRate;
+    });
+
+    return res(ctx.status(200), ctx.json(specialOfferProducts));
+  }),
+
   rest.get(AppPaths.API_URL + 'product/top-sellers', (req, res, ctx) => {
     const topSellingProducts = topSellers.productsId.map((productId) => {
       return products.find((product) => product.id === productId);
@@ -24,9 +46,32 @@ export const productHandlers = [
       product.bladeMaterialName = bladeMaterialName;
       product.handleMaterialName = handleMaterialName;
       product.handguardMaterialName = handguardMaterialName;
+
+      const { discountRate } = findSpecialOffer(product);
+      product.discountRate = discountRate;
     });
 
     return res(ctx.status(200), ctx.json(topSellingProducts));
+  }),
+
+  rest.get(AppPaths.API_URL + 'product/new-products', (req, res, ctx) => {
+    const newProductsArray = newProducts.productsId.map((productId) => {
+      return products.find((product) => product.id === productId);
+    });
+
+    newProductsArray.forEach((product) => {
+      const { bladeMaterialName, handleMaterialName, handguardMaterialName } =
+        findMaterialsNameAndPrice(product);
+
+      product.bladeMaterialName = bladeMaterialName;
+      product.handleMaterialName = handleMaterialName;
+      product.handguardMaterialName = handguardMaterialName;
+
+      const { discountRate } = findSpecialOffer(product);
+      product.discountRate = discountRate;
+    });
+
+    return res(ctx.status(200), ctx.json(newProductsArray));
   }),
 
   rest.get(AppPaths.API_URL + 'product/:id', (req, res, ctx) => {
@@ -61,6 +106,9 @@ export const productHandlers = [
     product.handleMaterialName = handleMaterialName;
     product.handguardMaterialName = handguardMaterialName;
 
+    const { discountRate } = findSpecialOffer(product);
+    product.discountRate = discountRate;
+
     return res(ctx.status(200), ctx.json(product));
   }),
 
@@ -84,6 +132,9 @@ export const productHandlers = [
       product.bladeMaterialName = bladeMaterialName;
       product.handleMaterialName = handleMaterialName;
       product.handguardMaterialName = handguardMaterialName;
+
+      const { discountRate } = findSpecialOffer(product);
+      product.discountRate = discountRate;
     });
 
     return res(
@@ -114,6 +165,16 @@ function findProductsInfoAndGallery(product) {
   return {
     productInfo,
     productGallery,
+  };
+}
+
+function findSpecialOffer(product) {
+  const specialOffer = specialOffers.find((specialOffer) => {
+    return specialOffer.productId === product.id;
+  });
+
+  return {
+    discountRate: specialOffer?.discountRate || null,
   };
 }
 

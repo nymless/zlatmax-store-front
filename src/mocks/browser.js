@@ -16,6 +16,7 @@ import { reviewHandlers } from './handlers/reviewHandlers';
 import { cityHandlers } from './handlers/cityHandlers';
 import { countryHandlers } from './handlers/countryHandlers';
 import { shippingHandlers } from './handlers/shippingHandlers';
+import { articleHandlers } from './handlers/articleHandlers';
 
 export const worker = setupWorker(
   ...typeHandlers,
@@ -34,5 +35,6 @@ export const worker = setupWorker(
   ...favoritesHandlers,
   ...cityHandlers,
   ...countryHandlers,
-  ...shippingHandlers
+  ...shippingHandlers,
+  ...articleHandlers
 );

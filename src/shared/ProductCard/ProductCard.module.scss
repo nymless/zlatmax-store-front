@@ -96,9 +96,33 @@
   align-items: flex-end;
 }
 
+.priceBox {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+}
+
 .price {
   font-size: 1.25rem;
   font-weight: 600;
+}
+
+.oldPrice {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #ABABAB;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 110%;
+    top: 40%;
+    left: -5%;
+    background-color: #E8AA31;
+    transform: rotate(-15deg);
+  }
 }
 
 .misc {

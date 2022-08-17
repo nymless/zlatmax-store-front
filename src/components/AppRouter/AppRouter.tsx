@@ -11,7 +11,7 @@ import MaterialsPage from '../../pages/MaterialsPage/MaterialsPage';
 import CategoryPage from '../../pages/CategoryPage/CategoryPage';
 import BrandPage from '../../pages/BrandPage/BrandPage';
 import MaterialPage from '../../pages/MaterialPage/MaterialPage';
-import UnderConstruction from '../UnderConstruction/UnderConstruction';
+import UnderConstruction from '../../pages/ShopPage/UnderConstruction/UnderConstruction';
 
 interface Props {}
 
@@ -61,6 +61,9 @@ const AppRouter: FC<Props> = (props) => {
       <Route path="/top-sellers" element={<UnderConstruction />} />
       <Route path="/details" element={<UnderConstruction />} />
       <Route path="/new-products" element={<UnderConstruction />} />
+      <Route path="/special-offers" element={<UnderConstruction />} />
+      <Route path="/articles" element={<UnderConstruction />} />
+      <Route path="/articles/:id" element={<UnderConstruction />} />
 
       <Route path="/*" element={<ShopPage />} />
     </Routes>

@@ -1,4 +1,4 @@
-export const productModelInfos = [
+export const productInfos = [
   {
     id: 1,
     productModelId: 1,

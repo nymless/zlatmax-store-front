@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
-import { ProductModelForProductPage } from '../../redux/services/types';
+import { ProductForProductPage } from '../../redux/services/types';
 import styles from './ProductPanel.module.css';
-import RatingStars from '../RatingStars/RatingStars';
-import Compare from '../Compare/Compare';
-import Favorites from '../Favorites/Favorites';
+import RatingStars from '../../shared/RatingStars/RatingStars';
+import Compare from '../../shared/Compare/Compare';
+import Favorites from '../../shared/Favorites/Favorites';
 import { useFormik } from 'formik';
 import Counter from './Counter/Counter';
 import ProductForm from './ProductForm/ProductForm';
@@ -11,10 +11,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import cart from '../../assets/svg/cart.svg';
 import { Link } from 'react-router-dom';
-import Button from '../Button/Button';
+import Button from '../../shared/Button/Button';
 
 interface ProductProps {
-  product: ProductModelForProductPage;
+  product: ProductForProductPage;
 }
 
 // todo: userId app context.

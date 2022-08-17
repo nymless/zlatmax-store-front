@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import DataTabs from '../../components/DataTabs/DataTabs';
-import Gallery from '../../components/Gallery/Gallery';
+import Gallery from '../../shared/Gallery/Gallery';
 import ProductPanel from '../../components/ProductPanel/ProductPanel';
 import { withContainer } from '../../hoc/withContainer';
 import styles from './ProductPage.module.css';

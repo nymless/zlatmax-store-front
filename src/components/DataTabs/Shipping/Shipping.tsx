@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import styles from './Shipping.module.css';
-import { ProductModelForProductPage } from '../../../redux/services/types';
+import { ProductForProductPage } from '../../../redux/services/types';
 import { Form, Formik, FormikHelpers } from 'formik';
 import ShippingFormSelect from './ShippingFormSelect/ShippingFormSelect';
 import { CityValue, CountryValue } from './types';
@@ -12,7 +12,7 @@ import { useSearchParams } from 'react-router-dom';
 import Companies from '../Companies/Companies';
 
 interface ShippingProps {
-  product: ProductModelForProductPage;
+  product: ProductForProductPage;
 }
 
 const Shipping: FC<ShippingProps> = () => {

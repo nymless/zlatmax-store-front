@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ProductModelForProductPage } from '../../redux/services/types';
+import { ProductForProductPage } from '../../redux/services/types';
 import Box from '@mui/material/Box';
 import styles from './DataTabs.module.css';
 import TabPanel from './TabPanel/TabPanel';
@@ -12,7 +12,7 @@ import Reviews from './Reviews/Reviews';
 import Shipping from './Shipping/Shipping';
 
 interface DataTabsProps {
-  product: ProductModelForProductPage;
+  product: ProductForProductPage;
 }
 
 const DataTabs: FC<DataTabsProps> = (props) => {

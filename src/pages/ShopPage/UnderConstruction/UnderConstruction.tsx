@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import styles from './UnderConstruction.module.css';
 import { useNavigate } from 'react-router-dom';
-import { withContainer } from '../../hoc/withContainer';
-import { useScrollToTop } from '../../hooks/useScrollToTop';
-import Button from '../Button/Button';
+import { withContainer } from '../../../hoc/withContainer';
+import { useScrollToTop } from '../../../hooks/useScrollToTop';
+import Button from '../../../shared/Button/Button';
 
 interface UnderConstructionProps {}
 

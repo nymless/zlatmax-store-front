@@ -128,6 +128,15 @@ export interface Review {
   review: string;
 }
 
+export interface Article {
+  id: number;
+  date: string;
+  name: string;
+  img: string;
+  title: string;
+  content: string;
+}
+
 export interface Favorite {
   id: number;
   userId: number;
@@ -146,14 +155,6 @@ export interface Order {
 export interface PaymentType {
   id: number;
   name: string;
-}
-
-export interface SpecialOffer {
-  id: number;
-  productId: number;
-  bonusId: number;
-  discountRate: number;
-  bonusRate: number;
 }
 
 export interface StoreBonus {
@@ -185,7 +186,7 @@ export interface Shipping {
   cityId: number;
   name: string;
   img: string;
-  minHandlingTime: number,
-  maxHandlingTime: number,
-  price: number,
+  minHandlingTime: number;
+  maxHandlingTime: number;
+  price: number;
 }

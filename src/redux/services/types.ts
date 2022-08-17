@@ -1,4 +1,4 @@
-import { Gallery, Info, Product, Review } from '../models/models';
+import { Article, Gallery, Info, Product, Review } from '../models/models';
 
 export type GetProductsParams = {
   typeId?: string;
@@ -24,19 +24,20 @@ export interface RangesForFormSliders {
   bladeWidth: { min: number; max: number };
 }
 
-export interface ProductWithMaterials extends Product {
+export interface ProductForProductCard extends Product {
   bladeMaterialName: string;
   handleMaterialName: string;
   handguardMaterialName: string;
+  discountRate: number;
 }
 
 export type GetProductsResponse = {
-  rows: ProductWithMaterials[];
+  rows: ProductForProductCard[];
   count: number;
   ranges: RangesForFormSliders;
 };
 
-export interface ProductModelForProductPage extends ProductWithMaterials {
+export interface ProductForProductPage extends ProductForProductCard {
   bladePrice: number;
   handlePrice: number;
   handguardPrice: number;
@@ -81,3 +82,5 @@ export type GetCitiesParams = {
 export type GetShippingParams = {
   cityId?: number;
 };
+
+export type ArticleForCard = Omit<Article, 'content'>;

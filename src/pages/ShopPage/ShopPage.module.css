@@ -30,4 +30,8 @@
 }
 
 .bottomBanner {
+    height: 331px;
+    color: #FFFFFF;
+    background: center / cover url("./img/bottom-banner-back.png"),
+    #2A2A2A;
 }

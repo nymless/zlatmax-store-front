@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from './Products.module.css';
-import { ProductCard } from '../../../components/ProductCard/ProductCard';
+import { ProductCard } from '../../../shared/ProductCard/ProductCard';
 import Pagination from '@mui/material/Pagination';
 import { GetProductsResponse } from '../../../redux/services/types';
 import { useGetUserQuery } from '../../../redux/services/userApi';
