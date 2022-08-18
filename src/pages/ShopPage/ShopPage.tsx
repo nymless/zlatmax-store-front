@@ -10,8 +10,7 @@ import BottomBanner from './BottomBanner/BottomBanner';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 const ShopPage = () => {
-  // todo: uncomment on production
-  // useScrollToTop();
+  useScrollToTop();
 
   return (
     <div className={styles.ShopPage}>

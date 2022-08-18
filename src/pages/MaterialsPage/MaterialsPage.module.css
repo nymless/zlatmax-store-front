@@ -11,7 +11,24 @@
     margin: 25px 0;
     font-size: 1rem;
     font-weight: 500;
-    opacity: 50%;
+}
+
+.link {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: #141414;
+    opacity: 0.5;
+}
+
+.link:hover {
+    color: #E8AA31;
+    opacity: 1;
+}
+
+.page {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: #E8AA31;
 }
 
 .body {

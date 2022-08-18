@@ -14,6 +14,7 @@ import {
 import { RootState } from '../../redux/store';
 import { AppSearchParams } from '../../variables/AppSearchParams';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
+import { parseInt } from '../../utils/parseInt';
 
 interface CategoryPageProps {}
 
@@ -23,9 +24,10 @@ const CategoryPage: FC<CategoryPageProps> = () => {
   useScrollToTop();
 
   const dispatch = useDispatch();
-  const categoryId = useParams().id;
+  const categoryIdString = useParams().id;
+  const categoryId = parseInt(categoryIdString);
   const location = useLocation();
-  const [id, setId] = useState<number>();
+  const [id, setId] = useState<number>(categoryId);
 
   useEffect(() => {
     dispatch(resetSelectedIds());
@@ -35,7 +37,7 @@ const CategoryPage: FC<CategoryPageProps> = () => {
     if (!categoryId) {
       return;
     }
-    setId(Number.parseInt(categoryId));
+    setId(categoryId);
   }, [categoryId]);
 
   useEffect(() => {
@@ -53,8 +55,12 @@ const CategoryPage: FC<CategoryPageProps> = () => {
     return state.app.appCategories[id];
   });
 
-  if (!id) {
+  if (!categoryId) {
     return <div>404 error</div>;
+  }
+
+  if (!id) {
+    return null;
   }
 
   return (

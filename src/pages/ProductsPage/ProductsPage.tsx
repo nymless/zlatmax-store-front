@@ -36,8 +36,6 @@ const ProductsPage: FC<PropsWithChildren<ProductsPageProps>> = (props) => {
     data?.count
   );
 
-
-
   return (
     <section className={styles.ProductsPage}>
       {props.children}

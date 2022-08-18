@@ -4,6 +4,9 @@ import { withContainer } from '../../hoc/withContainer';
 import styles from './BrandsPage.module.css';
 import { useGetBrandsQuery } from '../../redux/services/productDetailsApi';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Link } from 'react-router-dom';
 
 interface BrandsPageProps {}
 
@@ -15,7 +18,17 @@ const BrandsPage: FC<BrandsPageProps> = (props) => {
   return (
     <div className={styles.BrandsPage}>
       <div className={styles.heading}>Производство ножей</div>
-      <div className={styles.breadcrumbs}>Breadcrumbs...</div>
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs
+          separator={<NavigateNextIcon fontSize="small" />}
+          aria-label="breadcrumb"
+        >
+          <Link className={styles.link} to="/">
+            Главная
+          </Link>
+          <span className={styles.page}>Производство ножей</span>
+        </Breadcrumbs>
+      </div>
       <div className={styles.body}>
         {manufacturers &&
           manufacturers.map((manufacturer) => {
