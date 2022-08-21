@@ -18,6 +18,8 @@ interface ProductFormProps {
   values: ProductFormValues;
   handleChange: FormikHandlers['handleChange'];
   setPrice: React.Dispatch<React.SetStateAction<number>>;
+  setOldPrice: React.Dispatch<React.SetStateAction<number>>;
+  discountMultiplier: number;
   product: ProductForProductPage;
 }
 
@@ -51,7 +53,8 @@ const ProductForm: FC<ProductFormProps> = (props) => {
     const price =
       basePrice + handguardPrice + handlePrice + bladePrice + maintenancePrice;
 
-    props.setPrice(price);
+    props.setPrice(price * props.discountMultiplier);
+    props.setOldPrice(price);
   }, [bladesList, handguardsList, handlesList, maintenanceList, props]);
 
   return (
@@ -65,7 +68,11 @@ const ProductForm: FC<ProductFormProps> = (props) => {
         currentPartPrice={props.product.bladePrice}
         initialValue={props.product.defaultBladeId}
         render={(part: Part) => (
-          <AppListItem part={part} currentPrice={props.product.bladePrice} />
+          <AppListItem
+            part={part}
+            currentPrice={props.product.bladePrice}
+            discountMultiplier={props.discountMultiplier}
+          />
         )}
       />
       <span className={styles.formLabel}>Рукоять</span>
@@ -77,7 +84,11 @@ const ProductForm: FC<ProductFormProps> = (props) => {
         currentPartPrice={props.product.handlePrice}
         initialValue={props.product.defaultHandleId}
         render={(part: Part) => (
-          <AppListItem part={part} currentPrice={props.product.handlePrice} />
+          <AppListItem
+            part={part}
+            currentPrice={props.product.handlePrice}
+            discountMultiplier={props.discountMultiplier}
+          />
         )}
       />
       <span className={styles.formLabel}>Гарда и тыльник</span>
@@ -92,6 +103,7 @@ const ProductForm: FC<ProductFormProps> = (props) => {
           <AppListItem
             part={part}
             currentPrice={props.product.handguardPrice}
+            discountMultiplier={props.discountMultiplier}
           />
         )}
       />

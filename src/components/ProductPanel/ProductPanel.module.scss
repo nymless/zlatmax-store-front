@@ -57,9 +57,33 @@
     justify-content: space-between;
 }
 
+.priceBox {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
 .price {
     font-size: 1.875rem;
     font-weight: 700;
+}
+
+.oldPrice {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ABABAB;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        height: 2px;
+        width: 110%;
+        top: 40%;
+        left: -5%;
+        background-color: #E8AA31;
+        transform: rotate(-15deg);
+    }
 }
 
 .bonusBlock {

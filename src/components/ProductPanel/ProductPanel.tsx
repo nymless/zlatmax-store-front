@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { ProductForProductPage } from '../../redux/services/types';
-import styles from './ProductPanel.module.css';
+import styles from './ProductPanel.module.scss';
 import RatingStars from '../../shared/RatingStars/RatingStars';
 import Compare from '../../shared/Compare/Compare';
 import Favorites from '../../shared/Favorites/Favorites';
@@ -26,7 +26,14 @@ interface ProductProps {
 const ProductPanel: FC<ProductProps> = (props) => {
   const [quantity, setQuantity] = useState(1);
   const appBrands = useSelector((state: RootState) => state.app.appBrands);
-  const [price, setPrice] = useState(props.product.defaultPrice);
+
+  const discount = props.product.discountRate;
+  const discountMultiplier = 1 - discount / 100;
+  const defaultPrice = props.product.defaultPrice;
+  const priceWithDiscount = defaultPrice * discountMultiplier;
+
+  const [price, setPrice] = useState(priceWithDiscount);
+  const [oldPrice, setOldPrice] = useState(defaultPrice);
 
   // todo: from server API
   const bonusRate = 0.05;
@@ -35,6 +42,13 @@ const ProductPanel: FC<ProductProps> = (props) => {
 
   const totalPrice = price * quantity;
   const totalPriceLocalized = totalPrice.toLocaleString('ru', {
+    minimumFractionDigits: 0,
+    style: 'currency',
+    currency: 'RUB',
+  });
+
+  const oldTotalPrice = oldPrice * quantity;
+  const oldTotalPriceLocalized = oldTotalPrice.toLocaleString('ru', {
     minimumFractionDigits: 0,
     style: 'currency',
     currency: 'RUB',
@@ -93,11 +107,18 @@ const ProductPanel: FC<ProductProps> = (props) => {
           values={formik.values}
           handleChange={formik.handleChange}
           setPrice={setPrice}
+          setOldPrice={setOldPrice}
+          discountMultiplier={discountMultiplier}
           product={props.product}
         />
         <footer className={styles.footer}>
           <div className={styles.priceBlock}>
-            <div className={styles.price}>{totalPriceLocalized}</div>
+            <div className={styles.priceBox}>
+              <div className={styles.price}>{totalPriceLocalized}</div>
+              {discount && (
+                <div className={styles.oldPrice}>{oldTotalPriceLocalized}</div>
+              )}
+            </div>
             <div className={styles.bonusBlock}>
               <div className={styles.bonus}>
                 {`+ ${purchaseBonuses} баллов за покупку`}
