@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { withContainer } from '../../hoc/withContainer';
+import { AppContainer } from '../../shared/AppContainer/AppContainer';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import ProductsPage from '../ProductsPage/ProductsPage';
 import styles from '../ProductsPage/ProductsPage.module.css';
@@ -10,10 +10,11 @@ import {
   resetSelectedIds,
   setSelectedBrandId,
   setSelectedTypeId,
-} from '../../redux/reducers/selectReducer';
+} from '../../redux/reducers/selectSlice';
 import { RootState } from '../../redux/store';
 import { AppSearchParams } from '../../variables/AppSearchParams';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
+import { AppRouts } from '../../variables/AppRouts';
 
 interface BrandPageProps {}
 
@@ -45,10 +46,10 @@ const BrandPage: FC<BrandPageProps> = () => {
   }, [dispatch, id]);
 
   const pageName = useSelector((state: RootState) => {
-    if (!id || !state.app.appBrands[id]) {
+    if (!id || !state.appState.appBrands[id]) {
       return null;
     }
-    return state.app.appBrands[id];
+    return state.appState.appBrands[id];
   });
 
   if (!id) {
@@ -56,27 +57,29 @@ const BrandPage: FC<BrandPageProps> = () => {
   }
 
   return (
-    <ProductsPage
-      queryParamName={AppSearchParams.BRAND_ID}
-      queryParamValue={id.toString()}
-    >
-      <div className={styles.heading}>{pageName}</div>
-      <div className={styles.breadcrumbs}>
-        <Breadcrumbs
-          separator={<NavigateNextIcon fontSize="small" />}
-          aria-label="breadcrumb"
-        >
-          <Link className={styles.link} to="/">
-            Главная
-          </Link>
-          <Link className={styles.link} to="/brand">
-            Производство ножей
-          </Link>
-          <span className={styles.page}>{pageName}</span>
-        </Breadcrumbs>
-      </div>
-    </ProductsPage>
+    <AppContainer>
+      <ProductsPage
+        queryParamName={AppSearchParams.BRAND_ID}
+        queryParamValue={id.toString()}
+      >
+        <div className={styles.heading}>{pageName}</div>
+        <div className={styles.breadcrumbs}>
+          <Breadcrumbs
+            separator={<NavigateNextIcon fontSize="small" />}
+            aria-label="breadcrumb"
+          >
+            <Link className={styles.link} to="/">
+              Главная
+            </Link>
+            <Link className={styles.link} to={AppRouts.BRAND}>
+              Производство ножей
+            </Link>
+            <span className={styles.page}>{pageName}</span>
+          </Breadcrumbs>
+        </div>
+      </ProductsPage>
+    </AppContainer>
   );
 };
 
-export default withContainer(BrandPage);
+export default BrandPage;

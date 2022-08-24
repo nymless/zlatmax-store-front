@@ -6,7 +6,7 @@ import {
   useAddProductToFavoriteMutation,
   useGetFavoritesByUserIdQuery,
   useRemoveProductFromFavoriteMutation,
-} from '../../redux/services/favoriteApi';
+} from '../../redux/api/favoriteApi';
 
 interface FavoritesProps {
   userId: number;

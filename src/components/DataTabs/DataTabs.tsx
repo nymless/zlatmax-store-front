@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ProductForProductPage } from '../../redux/services/types';
+import { ProductForProductPage } from '../../redux/models/types';
 import Box from '@mui/material/Box';
 import styles from './DataTabs.module.css';
 import TabPanel from './TabPanel/TabPanel';

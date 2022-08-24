@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { ProductForProductPage } from '../../redux/services/types';
+import { ProductForProductPage } from '../../redux/models/types';
 import styles from './ProductPanel.module.scss';
 import RatingStars from '../../shared/RatingStars/RatingStars';
 import Compare from '../../shared/Compare/Compare';
@@ -12,6 +12,7 @@ import { RootState } from '../../redux/store';
 import cart from '../../assets/svg/cart.svg';
 import { Link } from 'react-router-dom';
 import Button from '../../shared/Button/Button';
+import { AppRouts } from '../../variables/AppRouts';
 
 interface ProductProps {
   product: ProductForProductPage;
@@ -21,11 +22,11 @@ interface ProductProps {
 // todo: product stock server API. Color representation of stock status.
 // todo: products compare server API.
 // todo: product rating server API.
-// todo: user bonuses server API.
+// todo: users bonuses server API.
 
 const ProductPanel: FC<ProductProps> = (props) => {
   const [quantity, setQuantity] = useState(1);
-  const appBrands = useSelector((state: RootState) => state.app.appBrands);
+  const appBrands = useSelector((state: RootState) => state.appState.appBrands);
 
   const discount = props.product.discountRate;
   const discountMultiplier = 1 - discount / 100;
@@ -144,7 +145,7 @@ const ProductPanel: FC<ProductProps> = (props) => {
                 В корзину
                 <img className={styles.buttonSvg} src={cart} alt="cart" />
               </Button>
-              <Link className={styles.link} to={'../buy'}>
+              <Link className={styles.link} to={AppRouts.BUY}>
                 <Button
                   onClick={addToCart}
                   submitForm={true}

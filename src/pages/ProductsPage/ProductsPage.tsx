@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren } from 'react';
 import styles from './ProductsPage.module.css';
 import { useSearchParams } from 'react-router-dom';
 import ProductFilterForm from '../../components/ProductFilter/ProductFilterForm';
-import { useGetProductsByParamsQuery } from '../../redux/services/productsApi';
+import { useGetProductsByParamsQuery } from '../../redux/api/productsApi';
 import Products from './Products/Products';
 import { useAppPagination } from '../../hooks/useAppPagination';
 import { AppSearchParams } from '../../variables/AppSearchParams';

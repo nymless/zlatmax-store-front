@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from './Reviews.module.css';
-import { useGetReviewsByParamsQuery } from '../../../redux/services/reviewsApi';
+import { useGetReviewsByParamsQuery } from '../../../redux/api/reviewsApi';
 import NoReviews from './NoReviews/NoReviews';
 import { AppPaths } from '../../../variables/AppPaths';
 import RatingStars from '../../../shared/RatingStars/RatingStars';
@@ -68,7 +68,7 @@ const Reviews: FC<ReviewsProps> = (props) => {
             <div key={review.id} className={styles.review}>
               <img
                 className={styles.avatar}
-                src={AppPaths.STATIC_URL + review.img}
+                src={AppPaths.IMG_URL + review.img}
                 alt="Avatar"
               />
               <div className={styles.content}>

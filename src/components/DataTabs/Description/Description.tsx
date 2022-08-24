@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from '../DataTabs.module.css';
-import { ProductForProductPage } from '../../../redux/services/types';
+import { ProductForProductPage } from '../../../redux/models/types';
 
 interface DescriptionProps {
   product: ProductForProductPage;

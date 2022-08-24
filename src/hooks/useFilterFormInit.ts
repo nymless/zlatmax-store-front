@@ -25,11 +25,11 @@ export interface ProductFilterFormValues {
 export const useFilterFormInit = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const typeId = useSelector((state: RootState) => state.select.typeId);
-  const categoryId = useSelector((state: RootState) => state.select.categoryId);
-  const brandId = useSelector((state: RootState) => state.select.brandId);
+  const typeId = useSelector((state: RootState) => state.selectState.typeId);
+  const categoryId = useSelector((state: RootState) => state.selectState.categoryId);
+  const brandId = useSelector((state: RootState) => state.selectState.brandId);
   const bladeMaterialId = useSelector(
-    (state: RootState) => state.select.bladeMaterialId
+    (state: RootState) => state.selectState.bladeMaterialId
   );
 
   const typeIdFromSelectStore = typeId ? typeId.toString() : null;

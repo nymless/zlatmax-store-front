@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { withContainer } from '../../hoc/withContainer';
+import { AppContainer } from '../../shared/AppContainer/AppContainer';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import ProductsPage from '../ProductsPage/ProductsPage';
 import styles from '../ProductsPage/ProductsPage.module.css';
@@ -10,10 +10,11 @@ import {
   resetSelectedIds,
   setSelectedBladeMaterialId,
   setSelectedTypeId,
-} from '../../redux/reducers/selectReducer';
+} from '../../redux/reducers/selectSlice';
 import { RootState } from '../../redux/store';
 import { AppSearchParams } from '../../variables/AppSearchParams';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
+import { AppRouts } from '../../variables/AppRouts';
 
 interface MaterialPageProps {}
 
@@ -45,10 +46,10 @@ const MaterialPage: FC<MaterialPageProps> = () => {
   }, [dispatch, id]);
 
   const pageName = useSelector((state: RootState) => {
-    if (!id || !state.app.appBladeMaterials[id]) {
+    if (!id || !state.appState.appBladeMaterials[id]) {
       return null;
     }
-    return state.app.appBladeMaterials[id];
+    return state.appState.appBladeMaterials[id];
   });
 
   if (!id) {
@@ -56,27 +57,29 @@ const MaterialPage: FC<MaterialPageProps> = () => {
   }
 
   return (
-    <ProductsPage
-      queryParamName={AppSearchParams.BLADE_MATERIAL_ID}
-      queryParamValue={id.toString()}
-    >
-      <div className={styles.heading}>{pageName}</div>
-      <div className={styles.breadcrumbs}>
-        <Breadcrumbs
-          separator={<NavigateNextIcon fontSize="small" />}
-          aria-label="breadcrumb"
-        >
-          <Link className={styles.link} to="/">
-            Главная
-          </Link>
-          <Link className={styles.link} to="/material">
-            Ножи по маркам стали
-          </Link>
-          <span className={styles.page}>{pageName}</span>
-        </Breadcrumbs>
-      </div>
-    </ProductsPage>
+    <AppContainer>
+      <ProductsPage
+        queryParamName={AppSearchParams.BLADE_MATERIAL_ID}
+        queryParamValue={id.toString()}
+      >
+        <div className={styles.heading}>{pageName}</div>
+        <div className={styles.breadcrumbs}>
+          <Breadcrumbs
+            separator={<NavigateNextIcon fontSize="small" />}
+            aria-label="breadcrumb"
+          >
+            <Link className={styles.link} to="/">
+              Главная
+            </Link>
+            <Link className={styles.link} to={AppRouts.MATERIAL}>
+              Ножи по маркам стали
+            </Link>
+            <span className={styles.page}>{pageName}</span>
+          </Breadcrumbs>
+        </div>
+      </ProductsPage>
+    </AppContainer>
   );
 };
 
-export default withContainer(MaterialPage);
+export default MaterialPage;

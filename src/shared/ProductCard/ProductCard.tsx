@@ -2,11 +2,12 @@ import React, { FC, PropsWithChildren } from 'react';
 import styles from './ProductCard.module.scss';
 import { Link } from 'react-router-dom';
 import { AppPaths } from '../../variables/AppPaths';
-import { ProductForProductCard } from '../../redux/services/types';
+import { ProductForProductCard } from '../../redux/models/types';
 import RatingStars from '../RatingStars/RatingStars';
 import Favorites from '../Favorites/Favorites';
 import Compare from '../Compare/Compare';
 import classNames from 'classnames';
+import { AppRouts } from '../../variables/AppRouts';
 
 type ProductCardProps = {
   product: ProductForProductCard;
@@ -41,11 +42,14 @@ export const ProductCard: FC<PropsWithChildren<ProductCardProps>> = (props) => {
         [styles.boxShadow]: props.shadowOnHover,
       })}
     >
-      <Link className={styles.link} to={'/product/' + props.product.id}>
+      <Link
+        className={styles.link}
+        to={AppRouts.PRODUCT + '/' + props.product.id}
+      >
         {discount && <div className={styles.discount}>{`-${discount}%`}</div>}
         <img
           className={styles.image}
-          src={AppPaths.STATIC_URL + props.product.img}
+          src={AppPaths.IMG_URL + props.product.img}
           alt={'Изображение ' + props.product.name}
         />
         <h3 className={styles.heading}>{props.product.name}</h3>

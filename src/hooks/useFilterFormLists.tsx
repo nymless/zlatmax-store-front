@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 import {
   useGetBrandsQuery,
   useGetCategoriesQuery,
-} from '../redux/services/productDetailsApi';
+} from '../redux/api/productDetailsApi';
 import {
   useGetBladeMaterialsQuery,
   useGetGildingTypesQuery,
   useGetHandguardMaterialsQuery,
   useGetHandleMaterialsQuery,
-} from '../redux/services/knifeMaterialsApi';
+} from '../redux/api/knifeMaterialsApi';
 import styles from '../components/ProductFilter/ProductFilterForm.module.css';
 import RatingStars from '../shared/RatingStars/RatingStars';
 

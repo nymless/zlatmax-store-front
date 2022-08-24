@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styles from './Articles.module.css';
-import { withContainer } from '../../../hoc/withContainer';
-import { useGetArticlesQuery } from '../../../redux/services/articlesApi';
+import { AppContainer } from '../../../shared/AppContainer/AppContainer';
+import { useGetArticlesQuery } from '../../../redux/api/articlesApi';
 import { ArticleCard } from '../../../shared/ArticleCard/ArticleCard';
 
 interface ArticlesProps {}
@@ -14,15 +14,17 @@ const Articles: FC<ArticlesProps> = () => {
   }
 
   return (
-    <div className={styles.Articles}>
-      <h2 className={styles.heading}>Наши статьи</h2>
-      <div className={styles.articlesBlock}>
-        {articles.map((article) => (
-          <ArticleCard article={article} />
-        ))}
+    <AppContainer>
+      <div className={styles.Articles}>
+        <h2 className={styles.heading}>Наши статьи</h2>
+        <div className={styles.articlesBlock}>
+          {articles.map((article) => (
+            <ArticleCard key={article.id} article={article} />
+          ))}
+        </div>
       </div>
-    </div>
+    </AppContainer>
   );
 };
 
-export default withContainer(Articles);
+export default Articles;

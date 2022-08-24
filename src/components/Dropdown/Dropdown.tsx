@@ -1,7 +1,7 @@
 import React, { FC, useRef } from 'react';
 import styles from './Dropdown.module.css';
 import Panel from './Panel/Panel';
-import { useGetTypesQuery } from '../../redux/services/productDetailsApi';
+import { useGetTypesQuery } from '../../redux/api/productDetailsApi';
 
 interface Props {}
 

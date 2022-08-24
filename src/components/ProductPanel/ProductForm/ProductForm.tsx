@@ -3,7 +3,7 @@ import styles from './ProductForm.module.css';
 import { FormikHandlers } from 'formik';
 import ProductFormSelect from '../ProductFormSelect/ProductFormSelect';
 import { Part, useProductFormLists } from '../../../hooks/useProductFormLists';
-import { ProductForProductPage } from '../../../redux/services/types';
+import { ProductForProductPage } from '../../../redux/models/types';
 import AppListItem from './ListItem/AppListItem';
 import { MenuItem } from '../ProductFormSelect/MuiStyled/MenuItem';
 

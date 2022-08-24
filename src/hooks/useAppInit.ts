@@ -8,18 +8,18 @@ import {
   setAppHandguardMaterials,
   setAppHandleMaterials,
   setAppTypes,
-} from '../redux/reducers/appReducer';
+} from '../redux/reducers/appSlice';
 import {
   useGetBrandsQuery,
   useGetCategoriesQuery,
   useGetTypesQuery,
-} from '../redux/services/productDetailsApi';
+} from '../redux/api/productDetailsApi';
 import {
   useGetBladeMaterialsQuery,
   useGetGildingTypesQuery,
   useGetHandguardMaterialsQuery,
   useGetHandleMaterialsQuery,
-} from '../redux/services/knifeMaterialsApi';
+} from '../redux/api/knifeMaterialsApi';
 
 export const useAppInit = () => {
   const dispatch = useDispatch();

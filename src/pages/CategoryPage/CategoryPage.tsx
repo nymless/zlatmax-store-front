@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { withContainer } from '../../hoc/withContainer';
+import { AppContainer } from '../../shared/AppContainer/AppContainer';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import ProductsPage from '../ProductsPage/ProductsPage';
 import styles from '../ProductsPage/ProductsPage.module.css';
@@ -10,11 +10,12 @@ import {
   resetSelectedIds,
   setSelectedCategoryId,
   setSelectedTypeId,
-} from '../../redux/reducers/selectReducer';
+} from '../../redux/reducers/selectSlice';
 import { RootState } from '../../redux/store';
 import { AppSearchParams } from '../../variables/AppSearchParams';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
 import { parseInt } from '../../utils/parseInt';
+import { AppRouts } from '../../variables/AppRouts';
 
 interface CategoryPageProps {}
 
@@ -49,10 +50,10 @@ const CategoryPage: FC<CategoryPageProps> = () => {
   }, [dispatch, id]);
 
   const pageName = useSelector((state: RootState) => {
-    if (!id || !state.app.appCategories[id]) {
+    if (!id || !state.appState.appCategories[id]) {
       return null;
     }
-    return state.app.appCategories[id];
+    return state.appState.appCategories[id];
   });
 
   if (!categoryId) {
@@ -64,7 +65,7 @@ const CategoryPage: FC<CategoryPageProps> = () => {
   }
 
   return (
-    <div>
+    <AppContainer>
       <ProductsPage
         queryParamName={AppSearchParams.CATEGORY_ID}
         queryParamValue={id.toString()}
@@ -78,15 +79,15 @@ const CategoryPage: FC<CategoryPageProps> = () => {
             <Link className={styles.link} to="/">
               Главная
             </Link>
-            <Link className={styles.link} to="/category">
+            <Link className={styles.link} to={AppRouts.CATEGORY}>
               Категория ножей
             </Link>
             <span className={styles.page}>{pageName}</span>
           </Breadcrumbs>
         </div>
       </ProductsPage>
-    </div>
+    </AppContainer>
   );
 };
 
-export default withContainer(CategoryPage);
+export default CategoryPage;

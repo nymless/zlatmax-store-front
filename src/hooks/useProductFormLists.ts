@@ -2,7 +2,7 @@ import {
   useGetBladesByParamsQuery,
   useGetHandguardsByParamsQuery,
   useGetHandlesByParamsQuery,
-} from '../redux/services/knifePartsApi';
+} from '../redux/api/knifePartsApi';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 
@@ -27,13 +27,13 @@ export const useProductFormLists = (productId: number) => {
   const handguards = useGetHandguardsByParamsQuery(productId).data;
 
   const bladeMaterials = useSelector(
-    (state: RootState) => state.app.appBladeMaterials
+    (state: RootState) => state.appState.appBladeMaterials
   );
   const handleMaterials = useSelector(
-    (state: RootState) => state.app.appHandleMaterials
+    (state: RootState) => state.appState.appHandleMaterials
   );
   const handguardMaterials = useSelector(
-    (state: RootState) => state.app.appHandguardMaterials
+    (state: RootState) => state.appState.appHandguardMaterials
   );
 
   const bladesList: Part[] | undefined = blades?.map((blade) => {

@@ -1,24 +1,29 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { productsApi } from './services/productsApi';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { userApi } from './services/userApi';
-import { appSlice } from './reducers/appReducer';
-import { selectSlice } from './reducers/selectReducer';
-import { cartApi } from './services/cartApi';
-import { favoriteApi } from './services/favoriteApi';
-import { knifeMaterialsApi } from './services/knifeMaterialsApi';
-import { knifePartsApi } from './services/knifePartsApi';
-import { orderApi } from './services/orderApi';
-import { productDetailsApi } from './services/productDetailsApi';
-import { reviewsApi } from './services/reviewsApi';
-import { shippingApi } from './services/shippingApi';
-import { articlesApi } from './services/articlesApi';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { productsApi } from './api/productsApi';
+import { userApi } from './api/userApi';
+import { appSlice } from './reducers/appSlice';
+import { selectSlice } from './reducers/selectSlice';
+import { cartApi } from './api/cartApi';
+import { favoriteApi } from './api/favoriteApi';
+import { knifeMaterialsApi } from './api/knifeMaterialsApi';
+import { knifePartsApi } from './api/knifePartsApi';
+import { orderApi } from './api/orderApi';
+import { productDetailsApi } from './api/productDetailsApi';
+import { reviewsApi } from './api/reviewsApi';
+import { shippingApi } from './api/shippingApi';
+import { articlesApi } from './api/articlesApi';
+import { authApi } from './api/authApi';
+import { userSlice } from './reducers/userSlice';
 
 export const store = configureStore({
   reducer: {
-    [appSlice.name]: appSlice.reducer,
-    [selectSlice.name]: selectSlice.reducer,
-    // API stores
+    appState: appSlice.reducer,
+    selectState: selectSlice.reducer,
+    userState: userSlice.reducer,
+    [userApi.reducerPath]: userApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
     [cartApi.reducerPath]: cartApi.reducer,
     [favoriteApi.reducerPath]: favoriteApi.reducer,
     [knifeMaterialsApi.reducerPath]: knifeMaterialsApi.reducer,
@@ -27,12 +32,14 @@ export const store = configureStore({
     [productDetailsApi.reducerPath]: productDetailsApi.reducer,
     [productsApi.reducerPath]: productsApi.reducer,
     [reviewsApi.reducerPath]: reviewsApi.reducer,
-    [userApi.reducerPath]: userApi.reducer,
     [shippingApi.reducerPath]: shippingApi.reducer,
     [articlesApi.reducerPath]: articlesApi.reducer,
   },
+  devTools: process.env.NODE_ENV === 'development',
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
+      userApi.middleware,
+      authApi.middleware,
       cartApi.middleware,
       favoriteApi.middleware,
       knifeMaterialsApi.middleware,
@@ -41,7 +48,6 @@ export const store = configureStore({
       productDetailsApi.middleware,
       productsApi.middleware,
       reviewsApi.middleware,
-      userApi.middleware,
       shippingApi.middleware,
       articlesApi.middleware
     ),
@@ -51,3 +57,5 @@ setupListeners(store.dispatch);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

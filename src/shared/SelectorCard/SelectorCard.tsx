@@ -15,7 +15,7 @@ export const SelectorCard: FC<Props> = (props) => {
     <Link className={s.card} to={props.route + '/' + props.id}>
       <img
         className={s.img}
-        src={AppPaths.STATIC_URL + props.img}
+        src={AppPaths.IMG_URL + props.img}
         alt={'Изображение ' + props.name}
       />
       <div className={s.name}>{props.name}</div>

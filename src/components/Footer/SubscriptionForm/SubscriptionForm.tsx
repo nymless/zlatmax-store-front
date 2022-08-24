@@ -7,6 +7,7 @@ import arrow from './arrow.svg';
 import { Button } from './MuiStyled/Button';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { AppRouts } from '../../../variables/AppRouts';
 
 interface SubscriptionFormProps {}
 
@@ -61,7 +62,7 @@ const SubscriptionForm: FC<SubscriptionFormProps> = () => {
               <Grid item sx={{ flex: '0 1 auto' }}>
                 <div className={styles.terms}>
                   {'Я прочитал Условия соглашения и\nсогласен с '}
-                  <Link className={styles.link} to={'./terms'}>
+                  <Link className={styles.link} to={AppRouts.TERMS}>
                     условиями
                   </Link>
                 </div>

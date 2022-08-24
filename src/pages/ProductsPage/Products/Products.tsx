@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import styles from './Products.module.css';
 import { ProductCard } from '../../../shared/ProductCard/ProductCard';
 import Pagination from '@mui/material/Pagination';
-import { GetProductsResponse } from '../../../redux/services/types';
-import { useGetUserQuery } from '../../../redux/services/userApi';
+import { GetProductsResponse } from '../../../redux/models/types';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import { useAppSelector } from '../../../redux/store';
 
 interface ProductsProps {
   products?: GetProductsResponse;
@@ -19,7 +19,7 @@ interface ProductsProps {
 }
 
 const Products: FC<ProductsProps> = (props) => {
-  const user = useGetUserQuery().data;
+  const user = useAppSelector((state) => state.userState.user);
 
   if (props.isLoading) {
     return <div className={styles.Products}>Данные загружаются</div>;

@@ -1,19 +1,21 @@
-import React, { FC } from "react";
-import { withContainer } from "../../../hoc/withContainer";
-import { Login } from "../../Login/Login";
-import { Nav } from "../../Nav/Nav";
-import { User } from "../../User/User";
-import styles from "./Top.module.css";
+import React, { FC } from 'react';
+import { AppContainer } from '../../../shared/AppContainer/AppContainer';
+import { LoginLink } from './LoginLink/LoginLink';
+import { Nav } from '../../Nav/Nav';
+import { UserLink } from './UserLink/UserLink';
+import styles from './Top.module.css';
 
 interface TopProps {
-  isAuth: boolean
+  isAuth: boolean;
 }
 
 const Top: FC<TopProps> = (props) => (
-  <div className={styles.Top}>
-    <Nav />
-    {props.isAuth ? <User /> : <Login />}
-  </div>
+  <AppContainer>
+    <div className={styles.Top}>
+      <Nav />
+      {props.isAuth ? <UserLink /> : <LoginLink />}
+    </div>
+  </AppContainer>
 );
 
-export default withContainer(Top);
+export default Top;

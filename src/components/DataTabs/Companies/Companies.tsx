@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from './Companies.module.css';
-import { useGetShippingByParamsQuery } from '../../../redux/services/shippingApi';
+import { useGetShippingByParamsQuery } from '../../../redux/api/shippingApi';
 import { AppPaths } from '../../../variables/AppPaths';
 
 interface CompaniesProps {
@@ -55,7 +55,7 @@ const Companies: FC<CompaniesProps> = (props) => {
             <div className={styles.company}>
               <img
                 className={styles.logo}
-                src={AppPaths.STATIC_URL + company.img}
+                src={AppPaths.IMG_URL + company.img}
                 alt="Logo"
               />
               <div>{company.name}</div>

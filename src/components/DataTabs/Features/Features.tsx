@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from './Features.module.css';
-import { ProductForProductPage } from '../../../redux/services/types';
+import { ProductForProductPage } from '../../../redux/models/types';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 
@@ -9,7 +9,7 @@ interface FeaturesProps {
 }
 
 const Features: FC<FeaturesProps> = (props) => {
-  const appBrands = useSelector((state: RootState) => state.app.appBrands);
+  const appBrands = useSelector((state: RootState) => state.appState.appBrands);
 
   return (
     <div className={styles.Features}>

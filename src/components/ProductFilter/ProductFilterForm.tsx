@@ -5,7 +5,7 @@ import { Accordion } from './MuiStyled/Accordion';
 import { AccordionSummary } from './MuiStyled/AccordionSummary';
 import { AccordionDetails } from './MuiStyled/AccordionDetails';
 import { Form, Formik } from 'formik';
-import { RangesForFormSliders } from '../../redux/services/types';
+import { RangesForFormSliders } from '../../redux/models/types';
 import { useFilterFormLists } from '../../hooks/useFilterFormLists';
 import { useFilterFormInit } from '../../hooks/useFilterFormInit';
 import SliderForm from './SliderForm/SliderForm';

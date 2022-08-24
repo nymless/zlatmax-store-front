@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react';
 import styles from './Shipping.module.css';
-import { ProductForProductPage } from '../../../redux/services/types';
+import { ProductForProductPage } from '../../../redux/models/types';
 import { Form, Formik, FormikHelpers } from 'formik';
 import ShippingFormSelect from './ShippingFormSelect/ShippingFormSelect';
 import { CityValue, CountryValue } from './types';
 import {
   useGetCitiesByParamsQuery,
   useGetCountiesQuery,
-} from '../../../redux/services/shippingApi';
+} from '../../../redux/api/shippingApi';
 import { useSearchParams } from 'react-router-dom';
 import Companies from '../Companies/Companies';
 

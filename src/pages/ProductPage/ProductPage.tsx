@@ -3,14 +3,15 @@ import { Link, useParams } from 'react-router-dom';
 import DataTabs from '../../components/DataTabs/DataTabs';
 import Gallery from '../../shared/Gallery/Gallery';
 import ProductPanel from '../../components/ProductPanel/ProductPanel';
-import { withContainer } from '../../hoc/withContainer';
+import { AppContainer } from '../../shared/AppContainer/AppContainer';
 import styles from './ProductPage.module.css';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { useGetProductByIdQuery } from '../../redux/services/productsApi';
+import { useGetProductByIdQuery } from '../../redux/api/productsApi';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
+import { AppRouts } from '../../variables/AppRouts';
 
 const ProductPage = () => {
   useScrollToTop();
@@ -28,7 +29,7 @@ const ProductPage = () => {
     if (!categoryId) {
       return;
     }
-    return state.app.appCategories[categoryId];
+    return state.appState.appCategories[categoryId];
   });
 
   if (getProductIsLoading) {
@@ -44,41 +45,42 @@ const ProductPage = () => {
   }
 
   return (
-    <div className={styles.ProductPage}>
-      <div className={styles.breadcrumbs}>
-        <Breadcrumbs
-          separator={<NavigateNextIcon fontSize="small" />}
-          aria-label="breadcrumb"
-        >
-          <Link className={styles.link} to="/">
-            Главная
-          </Link>
-          <Link className={styles.link} to="/category">
-            Категория ножей
-          </Link>
-          {categoryName && (
-            <Link className={styles.link} to={`/category/${categoryId}`}>
-              {categoryName}
+    <AppContainer>
+      <div className={styles.ProductPage}>
+        <div className={styles.breadcrumbs}>
+          <Breadcrumbs
+            separator={<NavigateNextIcon fontSize="small" />}
+            aria-label="breadcrumb"
+          >
+            <Link className={styles.link} to="/">
+              Главная
             </Link>
-          )}
-          <span className={styles.page}>
-            {getProductData.name}
-          </span>
-        </Breadcrumbs>
-      </div>
-      <div className={styles.body}>
-        <div className={styles.product}>
-          <Gallery product={getProductData} />
-          <ProductPanel
-            product={getProductData}
-          />
+            <Link className={styles.link} to={AppRouts.CATEGORY}>
+              Категория ножей
+            </Link>
+            {categoryName && (
+              <Link
+                className={styles.link}
+                to={AppRouts.CATEGORY + '/' + categoryId}
+              >
+                {categoryName}
+              </Link>
+            )}
+            <span className={styles.page}>{getProductData.name}</span>
+          </Breadcrumbs>
         </div>
-        <div className={styles.description}>
-          <DataTabs product={getProductData} />
+        <div className={styles.body}>
+          <div className={styles.product}>
+            <Gallery product={getProductData} />
+            <ProductPanel product={getProductData} />
+          </div>
+          <div className={styles.description}>
+            <DataTabs product={getProductData} />
+          </div>
         </div>
       </div>
-    </div>
+    </AppContainer>
   );
 };
 
-export default withContainer(ProductPage);
+export default ProductPage;

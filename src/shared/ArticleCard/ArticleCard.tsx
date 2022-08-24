@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 import styles from './ArticleCard.module.scss';
 import { Link } from 'react-router-dom';
 import { AppPaths } from '../../variables/AppPaths';
-import { ArticleForCard } from '../../redux/services/types';
+import { ArticleForCard } from '../../redux/models/types';
+import { AppRouts } from '../../variables/AppRouts';
 
 type ArticleCardProps = {
   article: ArticleForCard;
@@ -14,10 +15,13 @@ export const ArticleCard: FC<ArticleCardProps> = (props) => {
 
   return (
     <article className={styles.ArticleCard}>
-      <Link className={styles.link} to={'/articles/' + props.article.id}>
+      <Link
+        className={styles.link}
+        to={AppRouts.ARTICLES + '/' + props.article.id}
+      >
         <img
           className={styles.img}
-          src={AppPaths.STATIC_URL + props.article.img}
+          src={AppPaths.IMG_URL + props.article.img}
           alt={'Статья'}
         />
         <div className={styles.descriptionBlock}>

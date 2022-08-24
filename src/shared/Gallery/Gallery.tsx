@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { ProductForProductPage } from '../../redux/services/types';
+import { ProductForProductPage } from '../../redux/models/types';
 import { AppPaths } from '../../variables/AppPaths';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -39,7 +39,7 @@ const Gallery: FC<GalleryProps> = (props) => {
             <SwiperSlide key={item.id} className={styles.imageSlide}>
               <img
                 className={styles.image}
-                src={AppPaths.STATIC_URL + item.img}
+                src={AppPaths.IMG_URL + item.img}
                 alt={'Изображение ' + props.product.name}
               />
             </SwiperSlide>
@@ -60,7 +60,7 @@ const Gallery: FC<GalleryProps> = (props) => {
             <SwiperSlide key={item.id} className={styles.itemSlide}>
               <img
                 className={styles.item}
-                src={AppPaths.STATIC_URL + item.img}
+                src={AppPaths.IMG_URL + item.img}
                 alt={'Изображение ' + props.product.name}
               />
             </SwiperSlide>

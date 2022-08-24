@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper';
 import { Link } from 'react-router-dom';
 import Button from '../../../../shared/Button/Button';
+import { AppRouts } from '../../../../variables/AppRouts';
 
 interface BannerSwiperProps {}
 
@@ -48,7 +49,7 @@ const BannerSwiper: FC<BannerSwiperProps> = () => {
               поставщиками.
             </span>
           </p>
-          <Link className={styles.details} to={'./details'}>
+          <Link className={styles.details} to={AppRouts.DETAILS}>
             <Button>Подробнее</Button>
           </Link>
         </div>
@@ -75,7 +76,7 @@ const BannerSwiper: FC<BannerSwiperProps> = () => {
               поставщиками.
             </span>
           </p>
-          <Link className={styles.details} to={'./details'}>
+          <Link className={styles.details} to={AppRouts.DETAILS}>
             <Button>Подробнее</Button>
           </Link>
         </div>
@@ -102,7 +103,7 @@ const BannerSwiper: FC<BannerSwiperProps> = () => {
               поставщиками.
             </span>
           </p>
-          <Link className={styles.details} to={'./details'}>
+          <Link className={styles.details} to={AppRouts.DETAILS}>
             <Button>Подробнее</Button>
           </Link>
         </div>
@@ -129,7 +130,7 @@ const BannerSwiper: FC<BannerSwiperProps> = () => {
               поставщиками.
             </span>
           </p>
-          <Link className={styles.details} to={'./details'}>
+          <Link className={styles.details} to={AppRouts.DETAILS}>
             <Button>Подробнее</Button>
           </Link>
         </div>

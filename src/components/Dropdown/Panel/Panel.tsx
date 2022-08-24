@@ -4,12 +4,12 @@ import { Menu } from './Menu/Menu';
 import {
   useGetBrandsQuery,
   useGetCategoriesQuery,
-} from '../../../redux/services/productDetailsApi';
-import { useGetBladeMaterialsQuery } from '../../../redux/services/knifeMaterialsApi';
+} from '../../../redux/api/productDetailsApi';
+import { useGetBladeMaterialsQuery } from '../../../redux/api/knifeMaterialsApi';
 import { shortenedArray } from '../../../utils/shortenedArray';
 import MuiDialog from '@mui/material/Dialog';
 import { styled } from '@mui/material/styles';
-import { withContainer } from '../../../hoc/withContainer';
+import { AppContainer } from '../../../shared/AppContainer/AppContainer';
 
 export const Dialog = styled(MuiDialog)(
   (props: { offset: number | undefined }) => `
@@ -54,41 +54,43 @@ const Panel: FC<Props> = (props) => {
       className={styles.panel}
       onClose={handleClose}
       open={open}
-      PaperComponent={withContainer(() => {
+      PaperComponent={() => {
         return (
-          <div className={styles.menu}>
-            {shortenedCategories && (
-              <Menu
-                name="Категория ножей"
-                list={shortenedCategories}
-                onClickHandler={handleListItemClick}
-                handleHeaderClick={handleListItemClick}
-                path="/category"
-              />
-            )}
-            {shortenedBrands && (
-              <Menu
-                name="Производство ножей"
-                list={shortenedBrands}
-                onClickHandler={handleListItemClick}
-                handleHeaderClick={handleListItemClick}
-                path="/brand"
-                prefix="Ножи"
-              />
-            )}
-            {shortenedBladeMaterials && (
-              <Menu
-                name="Ножи по маркам стали"
-                list={shortenedBladeMaterials}
-                onClickHandler={handleListItemClick}
-                handleHeaderClick={handleListItemClick}
-                path="/material"
-                prefix="Ножи из стали"
-              />
-            )}
-          </div>
+          <AppContainer>
+            <div className={styles.menu}>
+              {shortenedCategories && (
+                <Menu
+                  name="Категория ножей"
+                  list={shortenedCategories}
+                  onClickHandler={handleListItemClick}
+                  handleHeaderClick={handleListItemClick}
+                  path="/category"
+                />
+              )}
+              {shortenedBrands && (
+                <Menu
+                  name="Производство ножей"
+                  list={shortenedBrands}
+                  onClickHandler={handleListItemClick}
+                  handleHeaderClick={handleListItemClick}
+                  path="/brand"
+                  prefix="Ножи"
+                />
+              )}
+              {shortenedBladeMaterials && (
+                <Menu
+                  name="Ножи по маркам стали"
+                  list={shortenedBladeMaterials}
+                  onClickHandler={handleListItemClick}
+                  handleHeaderClick={handleListItemClick}
+                  path="/material"
+                  prefix="Ножи из стали"
+                />
+              )}
+            </div>
+          </AppContainer>
         );
-      })}
+      }}
     ></Dialog>
   );
 };

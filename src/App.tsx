@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import styles from './App.module.css';
 import AppRouter from './components/AppRouter/AppRouter';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import { useAppInit } from './hooks/useAppInit';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   useEffect(() => {
@@ -14,19 +15,18 @@ function App() {
   useAppInit();
 
   return (
-    <BrowserRouter>
-      <div className="App">
-        <header className={styles.header}>
-          <Header />
-        </header>
-        <main className={styles.main}>
-          <AppRouter />
-        </main>
-        <footer className={styles.footer}>
-          <Footer />
-        </footer>
-      </div>
-    </BrowserRouter>
+    <div className="App">
+      <header className={styles.header}>
+        <Header />
+      </header>
+      <main className={styles.main}>
+        <AppRouter />
+      </main>
+      <footer className={styles.footer}>
+        <Footer />
+      </footer>
+      <ToastContainer />
+    </div>
   );
 }
 
