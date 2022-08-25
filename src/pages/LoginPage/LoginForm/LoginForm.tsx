@@ -48,7 +48,7 @@ const LoginForm: FC<LoginFormProps> = (props) => {
       toast.success('Вы успешно авторизовались.', {
         position: 'bottom-right',
       });
-      navigate(-1);
+      navigate('/');
     }
     if (error) {
       if ('status' in error) {

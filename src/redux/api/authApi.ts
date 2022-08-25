@@ -42,17 +42,18 @@ export const authApi = createApi({
       },
     }),
 
-    verifyEmail: builder.mutation<
-      GenericResponse,
-      { verificationCode: string }
-    >({
-      query({ verificationCode }) {
-        return {
-          url: `verify-email/${verificationCode}`,
-          method: 'GET',
-        };
-      },
-    }),
+    // todo: email verification server api
+    // verifyEmail: builder.mutation<
+    //   void,
+    //   { verificationCode: string }
+    // >({
+    //   query({ verificationCode }) {
+    //     return {
+    //       url: `verify-email/${verificationCode}`,
+    //       method: 'GET',
+    //     };
+    //   },
+    // }),
 
     logoutUser: builder.mutation<void, void>({
       query() {
@@ -68,6 +69,5 @@ export const authApi = createApi({
 export const {
   useLoginUserMutation,
   useRegisterUserMutation,
-  useVerifyEmailMutation,
   useLogoutUserMutation,
 } = authApi;

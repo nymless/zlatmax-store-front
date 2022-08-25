@@ -1,10 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import styles from './RegistrationForm.module.scss';
 import TextField from '@mui/material/TextField';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import Button from '../../../shared/Button/Button';
 import { useRegisterUserMutation } from '../../../redux/api/authApi';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 interface RegistrationFormProps {}
 
@@ -31,8 +33,20 @@ export type RegistrationValues = {
 };
 
 const RegistrationForm: FC<RegistrationFormProps> = (props) => {
+  // todo: error toast to user
   const [registerUser, { isLoading, error, isSuccess }] =
     useRegisterUserMutation();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('Вы успешно зарегистрировались.', {
+        position: 'bottom-right',
+      });
+      navigate('/login');
+    }
+  }, [isLoading]);
 
   const formik = useFormik({
     initialValues: {
