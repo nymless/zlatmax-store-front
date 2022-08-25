@@ -3,6 +3,8 @@ export interface User {
   firstName: string;
   lastName: string;
   middleName?: string;
+  role: string;
+  email: string;
 }
 
 export interface Type {
