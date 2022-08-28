@@ -10,7 +10,7 @@ const initialState: UserState = {
 };
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: 'userState',
   initialState,
   reducers: {
     logout: () => initialState,

@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './LoginLink.module.css';
 import { Link } from 'react-router-dom';
-import user from './user.svg';
+import user from '../../../../assets/svg/avatar.svg';
 import { AppRouts } from '../../../../variables/AppRouts';
 
 export const LoginLink = () => {

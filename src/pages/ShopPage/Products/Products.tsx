@@ -8,14 +8,10 @@ import sword from './img/sword.png';
 import souvenir from './img/souvenir.png';
 import related from './img/related.png';
 import workshop from './img/workshop.png';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
 
 interface ProductsProps {}
 
 const Products: FC<ProductsProps> = () => {
-  const some = useSelector((state: RootState) => state.appState.appCategories);
-
   const knifeCatalog = [
     { id: 1, name: 'Разделочные' },
     { id: 2, name: 'Туристические' },

@@ -7,5 +7,6 @@ export const users = [
     email: 'ivanov@email.com',
     password: 'XsLnZj5f',
     role: 'ADMIN',
+    img: 'avatar-2.jpg',
   },
 ];

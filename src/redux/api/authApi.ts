@@ -12,10 +12,8 @@ export const authApi = createApi({
     baseUrl: `${BASE_URL}/api/auth/`,
   }),
   endpoints: (builder) => ({
-    loginUser: builder.mutation<
-      void,
-      LoginValues
-    >({
+    loginUser: builder.mutation<void,
+      LoginValues>({
       query(data) {
         return {
           url: 'login',
@@ -27,8 +25,9 @@ export const authApi = createApi({
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled;
-          await dispatch(userApi.endpoints.getCurrentUser.initiate());
-        } catch (error) {}
+          await dispatch(userApi.endpoints.getCurrentUser.initiate(null));
+        } catch (error) {
+        }
       },
     }),
 
@@ -41,33 +40,10 @@ export const authApi = createApi({
         };
       },
     }),
-
-    // todo: email verification server api
-    // verifyEmail: builder.mutation<
-    //   void,
-    //   { verificationCode: string }
-    // >({
-    //   query({ verificationCode }) {
-    //     return {
-    //       url: `verify-email/${verificationCode}`,
-    //       method: 'GET',
-    //     };
-    //   },
-    // }),
-
-    logoutUser: builder.mutation<void, void>({
-      query() {
-        return {
-          url: 'logout',
-          credentials: 'include',
-        };
-      },
-    }),
   }),
 });
 
 export const {
   useLoginUserMutation,
   useRegisterUserMutation,
-  useLogoutUserMutation,
 } = authApi;

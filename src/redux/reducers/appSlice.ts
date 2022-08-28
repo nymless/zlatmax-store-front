@@ -21,7 +21,7 @@ const initialState: AppState = {
 };
 
 export const appSlice = createSlice({
-  name: 'app',
+  name: 'appState',
   initialState,
   reducers: {
     setAppTypes: (state, action: PayloadAction<Record<number, string>>) => {

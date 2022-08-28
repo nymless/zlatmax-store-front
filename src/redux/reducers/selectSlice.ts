@@ -15,7 +15,7 @@ const initialState: SelectState = {
 };
 
 export const selectSlice = createSlice({
-  name: 'select',
+  name: 'selectState',
   initialState,
   reducers: {
     resetSelectedIds: (state) => {

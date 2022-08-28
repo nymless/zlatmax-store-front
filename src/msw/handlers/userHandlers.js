@@ -11,7 +11,7 @@ export const userHandlers = [
   rest.post(`${BASE_URL}/api/auth/login`, (req, res, ctx) => {
     const { email, password } = req.body.loginCredentials;
     const user = users.find(
-      (user) => user.email === email && user.password === password
+      (user) => user.email === email && user.password === password,
     );
 
     if (!user) {
@@ -19,16 +19,22 @@ export const userHandlers = [
         ctx.status(403),
         ctx.json({
           errorMessage: `Пользователь не найден`,
-        })
+        }),
       );
     }
 
     const token = jwt.sign(
       { id: user.id, email: user.email, role: user.role },
       notSoSecretKey,
-      { expiresIn: '24h' }
+      { expiresIn: '24h' },
     );
-    return res(ctx.status(200), ctx.cookie('access_token', token));
+    return res(
+      ctx.status(200),
+      ctx.cookie('access_token', token, {
+        httpOnly: true,
+      }),
+      ctx.cookie('logged_in', 'true'),
+    );
   }),
 
   rest.get(`${BASE_URL}/api/users/current`, (req, res, ctx) => {
@@ -37,7 +43,7 @@ export const userHandlers = [
     try {
       const { id, email, role } = jwt.verify(accessToken, notSoSecretKey);
       const user = users.find(
-        (user) => user.id === id && user.email === email && user.role === role
+        (user) => user.id === id && user.email === email && user.role === role,
       );
 
       if (!user) {
@@ -45,7 +51,7 @@ export const userHandlers = [
           ctx.status(403),
           ctx.json({
             errorMessage: `Пользователь не найден`,
-          })
+          }),
         );
       }
 
@@ -82,7 +88,7 @@ export const userHandlers = [
     users.push(user);
     return res(
       ctx.status(200),
-      ctx.json({ message: 'User registered', status: 'ok' })
+      ctx.json({ message: 'User registered', status: 'ok' }),
     );
   }),
 ];

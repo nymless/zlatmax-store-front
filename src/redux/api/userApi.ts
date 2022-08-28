@@ -8,17 +8,9 @@ export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}/api/users/`,
-    // prepareHeaders: (headers) => {
-    //   const token = localStorage.getItem('token');
-    //   if (token) {
-    //     headers.set('authorization', `Bearer ${token}`);
-    //   }
-    //   return headers;
-    // },
   }),
-  tagTypes: ['User'],
   endpoints: (builder) => ({
-    getCurrentUser: builder.query<User, void>({
+    getCurrentUser: builder.query<User, null>({
       query: () => {
         return {
           url: 'current',
@@ -30,7 +22,8 @@ export const userApi = createApi({
         try {
           const { data } = await queryFulfilled;
           dispatch(setUser(data));
-        } catch (error) {}
+        } catch (error) {
+        }
       },
     }),
   }),

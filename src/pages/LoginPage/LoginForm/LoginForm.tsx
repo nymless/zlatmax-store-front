@@ -26,7 +26,7 @@ export type LoginValues = {
   password: string;
 };
 
-const LoginForm: FC<LoginFormProps> = (props) => {
+const LoginForm: FC<LoginFormProps> = () => {
   const [loginUser, { isLoading, error, isSuccess }] = useLoginUserMutation();
 
   const formik = useFormik({
@@ -76,6 +76,7 @@ const LoginForm: FC<LoginFormProps> = (props) => {
         });
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   return (

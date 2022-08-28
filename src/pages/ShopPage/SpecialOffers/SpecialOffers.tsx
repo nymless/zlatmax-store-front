@@ -3,7 +3,7 @@ import styles from './SpecialOffers.module.scss';
 import { AppContainer } from '../../../shared/AppContainer/AppContainer';
 import { useGetSpecialOffersQuery } from '../../../redux/api/productsApi';
 import { Link } from 'react-router-dom';
-import arrow from '../../../assets/svg/Arrow.svg';
+import arrow from '../../../assets/svg/arrow.svg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper';
 import { ProductCard } from '../../../shared/ProductCard/ProductCard';

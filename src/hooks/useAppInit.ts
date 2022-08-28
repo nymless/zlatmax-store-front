@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   setAppBladeMaterials,
   setAppBrands,
@@ -9,20 +8,25 @@ import {
   setAppHandleMaterials,
   setAppTypes,
 } from '../redux/reducers/appSlice';
-import {
-  useGetBrandsQuery,
-  useGetCategoriesQuery,
-  useGetTypesQuery,
-} from '../redux/api/productDetailsApi';
+import { useGetBrandsQuery, useGetCategoriesQuery, useGetTypesQuery } from '../redux/api/productDetailsApi';
 import {
   useGetBladeMaterialsQuery,
   useGetGildingTypesQuery,
   useGetHandguardMaterialsQuery,
   useGetHandleMaterialsQuery,
 } from '../redux/api/knifeMaterialsApi';
+import { userApi } from '../redux/api/userApi';
+import { useAppDispatch } from '../redux/store';
+import { useCookies } from 'react-cookie';
 
 export const useAppInit = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+
+  const [cookie] = useCookies(['logged_in']);
+  userApi.endpoints.getCurrentUser.useQuery(null, {
+    skip: cookie.logged_in !== 'true',
+    refetchOnMountOrArgChange: true,
+  });
 
   // todo: redundant ?
   const types = useGetTypesQuery().data;

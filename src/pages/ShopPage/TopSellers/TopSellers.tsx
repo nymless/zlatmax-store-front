@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styles from './TopSellers.module.scss';
 import { AppContainer } from '../../../shared/AppContainer/AppContainer';
 import { Link } from 'react-router-dom';
-import arrow from '../../../assets/svg/Arrow.svg';
+import arrow from '../../../assets/svg/arrow.svg';
 import { ProductCard } from '../../../shared/ProductCard/ProductCard';
 import { useGetTopSellersQuery } from '../../../redux/api/productsApi';
 import Button from '../../../shared/Button/Button';

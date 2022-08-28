@@ -32,9 +32,9 @@ export type RegistrationValues = {
   middleName: string;
 };
 
-const RegistrationForm: FC<RegistrationFormProps> = (props) => {
+const RegistrationForm: FC<RegistrationFormProps> = () => {
   // todo: error toast to user
-  const [registerUser, { isLoading, error, isSuccess }] =
+  const [registerUser, { isLoading, isSuccess }] =
     useRegisterUserMutation();
 
   const navigate = useNavigate();
@@ -46,6 +46,7 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
       });
       navigate('/login');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   const formik = useFormik({

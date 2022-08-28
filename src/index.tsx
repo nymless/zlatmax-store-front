@@ -7,20 +7,23 @@ import 'swiper/css/bundle';
 import App from './App';
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
+import { CookiesProvider } from 'react-cookie';
 
 if (process.env.NODE_ENV === 'development') {
-  const { worker } = require('./mocks/browser');
+  const { worker } = require('./msw/browser');
   worker.start();
 }
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root') as HTMLElement,
 );
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <CookiesProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </CookiesProvider>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

@@ -2,9 +2,10 @@ export interface User {
   id: number;
   firstName: string;
   lastName: string;
-  middleName?: string;
+  middleName: string | null;
   role: string;
   email: string;
+  img: string | null;
 }
 
 export interface Type {

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styles from './NewProducts.module.scss';
 import { AppContainer } from '../../../shared/AppContainer/AppContainer';
 import { Link } from 'react-router-dom';
-import arrow from '../../../assets/svg/Arrow.svg';
+import arrow from '../../../assets/svg/arrow.svg';
 import { useGetNewProductsQuery } from '../../../redux/api/productsApi';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper';
