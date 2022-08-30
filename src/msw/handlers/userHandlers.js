@@ -1,14 +1,14 @@
 import { rest } from 'msw';
 import { users } from '../resources/users';
+import { AppPaths } from '../../variables/AppPaths';
 
 const jwt = require('jsonwebtoken');
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
 const notSoSecretKey = 'your-256-bit-secret';
 let counter = 1;
 
 export const userHandlers = [
-  rest.post(`${BASE_URL}/api/auth/login`, (req, res, ctx) => {
+  rest.post(AppPaths.API_URL + 'auth/login', (req, res, ctx) => {
     const { email, password } = req.body.loginCredentials;
     const user = users.find(
       (user) => user.email === email && user.password === password,
@@ -37,7 +37,7 @@ export const userHandlers = [
     );
   }),
 
-  rest.get(`${BASE_URL}/api/users/current`, (req, res, ctx) => {
+  rest.get(AppPaths.API_URL + 'users/current', (req, res, ctx) => {
     const accessToken = req.cookies['access_token'];
 
     try {
@@ -63,7 +63,7 @@ export const userHandlers = [
     }
   }),
 
-  rest.post(`${BASE_URL}/api/auth/registration`, (req, res, ctx) => {
+  rest.post(AppPaths.API_URL + 'auth/registration', (req, res, ctx) => {
     const user = req.body?.user;
 
     if (!user) {

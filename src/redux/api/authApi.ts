@@ -3,13 +3,12 @@ import { GenericResponse } from '../models/types';
 import { userApi } from './userApi';
 import { LoginValues } from '../../pages/LoginPage/LoginForm/LoginForm';
 import { RegistrationValues } from '../../pages/RegistrationPage/RegistrationForm/RegistrationForm';
-
-const BASE_URL = process.env.REACT_APP_BASE_URL as string;
+import { AppPaths } from '../../variables/AppPaths';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${BASE_URL}/api/auth/`,
+    baseUrl: AppPaths.API_URL,
   }),
   endpoints: (builder) => ({
     loginUser: builder.mutation<void, LoginValues>({

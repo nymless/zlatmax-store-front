@@ -1,7 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { AppPaths } from '../../variables/AppPaths';
 import { Brand, Category, Series, Type } from '../models/models';
-import { setAppBrands, setAppCategories, setAppTypes } from '../reducers/appSlice';
+import {
+  setAppBrands,
+  setAppCategories,
+  setAppTypes,
+} from '../reducers/appSlice';
 
 export const productDetailsApi = createApi({
   reducerPath: 'productDetailsApi',
@@ -66,8 +70,5 @@ export const productDetailsApi = createApi({
   }),
 });
 
-export const {
-  useGetTypesQuery,
-  useGetBrandsQuery,
-  useGetCategoriesQuery,
-} = productDetailsApi;
+export const { useGetTypesQuery, useGetBrandsQuery, useGetCategoriesQuery } =
+  productDetailsApi;

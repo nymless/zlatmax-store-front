@@ -1,4 +1,5 @@
 import {
+  productDetailsApi,
   useGetBrandsQuery,
   useGetCategoriesQuery,
   useGetTypesQuery,
@@ -15,21 +16,20 @@ import { useCookies } from 'react-cookie';
 export const useAppInit = () => {
   const [cookie] = useCookies(['logged_in']);
 
-  userApi.endpoints.getCurrentUser.useQuery(
-    null,
-    {
-      skip: cookie.logged_in !== 'true',
-      refetchOnMountOrArgChange: true,
-    }
-  );
+  userApi.endpoints.getCurrentUser.useQuery(null, {
+    skip: cookie.logged_in !== 'true',
+    refetchOnMountOrArgChange: true,
+  });
 
-  const typesLoaded = useGetTypesQuery().isSuccess;
-  const categoriesLoaded = useGetCategoriesQuery().isSuccess;
-  const brandsLoaded = useGetBrandsQuery().isSuccess;
-  const bladeMaterialsLoaded = useGetBladeMaterialsQuery().isSuccess;
-  const handleMaterialsLoaded = useGetHandleMaterialsQuery().isSuccess;
-  const handguardMaterialsLoaded = useGetHandguardMaterialsQuery().isSuccess;
-  const gildingTypesLoaded = useGetGildingTypesQuery().isSuccess;
+  const typesLoaded = Boolean(useGetTypesQuery().data);
+  const categoriesLoaded = Boolean(useGetCategoriesQuery().data);
+  const brandsLoaded = Boolean(useGetBrandsQuery().data);
+  const bladeMaterialsLoaded = Boolean(useGetBladeMaterialsQuery().data);
+  const handleMaterialsLoaded = Boolean(useGetHandleMaterialsQuery().data);
+  const handguardMaterialsLoaded = Boolean(
+    useGetHandguardMaterialsQuery().data
+  );
+  const gildingTypesLoaded = Boolean(useGetGildingTypesQuery().data);
 
   return (
     typesLoaded &&

@@ -8,7 +8,7 @@ import {
 } from '../models/models';
 import {
   setAppBladeMaterials,
-  setAppCategories, setAppGildingTypes,
+  setAppGildingTypes,
   setAppHandguardMaterials,
   setAppHandleMaterials,
 } from '../reducers/appSlice';
