@@ -1,0 +1,17 @@
+.BottomBanner {
+    padding: 60px 0;
+}
+
+.heading {
+    font-size: 1.875rem;
+    line-height: 1.533334;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #E8AA31;
+}
+
+.text {
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.5;
+}

@@ -1,43 +1,93 @@
-import React, { FC } from "react";
-import styles from "./MaterialPage.module.css";
-import { SelectorCard } from "../../components/SelectorCard/SelectorCard";
-import { ProductSelectors } from "../../hooks/useProductSelectors";
-import { useGetBladeMaterialsQuery } from "../../redux/services/productsApi";
-import { withContainer } from "../../hoc/withContainer";
+import React, { FC, useEffect, useState } from 'react';
+import { AppContainer } from '../../shared/AppContainer/AppContainer';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import ProductsPage from '../ProductsPage/ProductsPage';
+import styles from '../ProductsPage/ProductsPage.module.css';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  resetSelectedIds,
+  setSelectedBladeMaterialId,
+  setSelectedTypeId,
+} from '../../redux/reducers/selectSlice';
+import { RootState } from '../../redux/store';
+import { AppSearchParams } from '../../variables/AppSearchParams';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
+import { AppRouts } from '../../variables/AppRouts';
+import NotFound from '../../shared/NotFound/NotFound';
+import { parseInt } from '../../utils/parseInt';
 
 interface MaterialPageProps {
-  selectors: ProductSelectors;
 }
 
-const MaterialPage: FC<MaterialPageProps> = (props) => {
-  const materials = useGetBladeMaterialsQuery().data;
+const MaterialPage: FC<MaterialPageProps> = () => {
+  useScrollToTop();
 
-  const onClickHandler = (id: number) => {
-    props.selectors.setBladeMaterialId(id);
-  };
+  const dispatch = useDispatch();
+  const bladeMaterialIdString = useParams().id;
+  const bladeMaterialId = parseInt(bladeMaterialIdString);
+  const location = useLocation();
+  const [id, setId] = useState<number>(bladeMaterialId);
+
+  useEffect(() => {
+    dispatch(resetSelectedIds());
+  }, [dispatch, location]);
+
+  useEffect(() => {
+    if (!bladeMaterialId) {
+      return;
+    }
+    setId(bladeMaterialId);
+  }, [bladeMaterialId]);
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    dispatch(setSelectedTypeId(1));
+    dispatch(setSelectedBladeMaterialId(id));
+  }, [dispatch, id]);
+
+  const pageName = useSelector((state: RootState) => {
+    if (!id || !state.appState.appBladeMaterials[id]) {
+      return null;
+    }
+    return state.appState.appBladeMaterials[id];
+  });
+
+  if (!bladeMaterialId) {
+    return <AppContainer><NotFound /></AppContainer>;
+  }
+
+  if (!id) {
+    return null;
+  }
 
   return (
-    <div className="_container">
-      <div className={styles.MaterialPage}>
-        <div className={styles.heading}>Ножи по маркам стали</div>
-        <div className={styles.breadcrumbs}>Breadcrumbs...</div>
-        <div className={styles.body}>
-          {materials &&
-            materials.map((material) => {
-              return (
-                <SelectorCard
-                  key={material.id}
-                  name={material.name}
-                  img={material.img}
-                  id={material.id}
-                  onClickHandler={onClickHandler}
-                />
-              );
-            })}
+    <AppContainer>
+      <ProductsPage
+        queryParamName={AppSearchParams.BLADE_MATERIAL_ID}
+        queryParamValue={id.toString()}
+      >
+        <h2 className={styles.heading}>{pageName}</h2>
+        <div className={styles.breadcrumbs}>
+          <Breadcrumbs
+            separator={<NavigateNextIcon fontSize='small' />}
+            aria-label='breadcrumb'
+          >
+            <Link className={styles.link} to='/'>
+              Главная
+            </Link>
+            <Link className={styles.link} to={AppRouts.MATERIAL}>
+              Ножи по маркам стали
+            </Link>
+            <span className={styles.page}>{pageName}</span>
+          </Breadcrumbs>
         </div>
-      </div>
-    </div>
+      </ProductsPage>
+    </AppContainer>
   );
 };
 
-export default withContainer(MaterialPage);
+export default MaterialPage;

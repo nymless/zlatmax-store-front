@@ -1,11 +1,11 @@
 .dropdown {
-
 }
 
 .menu {
     display: flex;
     column-gap: 115px;
     height: 70px;
+    padding: 0 10px;
 }
 
 .button {

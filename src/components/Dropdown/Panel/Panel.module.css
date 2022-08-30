@@ -1,14 +1,29 @@
 .panel {
-    height: 600px;
-    display: flex;
-    column-gap: 95px;
-    position: relative;
+    padding-bottom: 30px;
 }
 
-.panel::after {
+.menu {
+    position: relative;
+    height: 100%;
+    display: flex;
+    column-gap: 95px;
+}
+
+.menu::before {
     content: "";
     position: absolute;
     top: 80px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #FFFFFF;
+    opacity: 30%;
+}
+
+.menu::after {
+    content: "";
+    position: absolute;
+    bottom: 55px;
     left: 0;
     width: 100%;
     height: 1px;

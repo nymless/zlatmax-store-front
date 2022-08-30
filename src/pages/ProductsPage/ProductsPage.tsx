@@ -1,71 +1,61 @@
-import React, { FC } from 'react';
-import { ProductCard } from '../../components/ProductCard/ProductCard';
-import { useGetProductModelsByParamsQuery } from '../../redux/services/productsApi';
-import { ProductSelectors } from '../../hooks/useProductSelectors';
+import React, { FC, PropsWithChildren } from 'react';
 import styles from './ProductsPage.module.css';
-import { withContainer } from '../../hoc/withContainer';
 import { useSearchParams } from 'react-router-dom';
-import { filterTruthy } from '../../utils/filterTruthy';
-import ProductFilter from '../../components/ProductFilter/ProductFilter';
+import ProductFilterForm from '../../components/ProductFilter/ProductFilterForm';
+import { useGetProductsByParamsQuery } from '../../redux/api/productsApi';
+import Products from './Products/Products';
+import { useAppPagination } from '../../hooks/useAppPagination';
+import { AppSearchParams } from '../../variables/AppSearchParams';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 interface ProductsPageProps {
-  selectors: ProductSelectors;
+  queryParamName: string;
+  queryParamValue: string;
 }
 
-const ProductsPage: FC<ProductsPageProps> = (props) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+// todo: with pagination from many product to few product make scroll up
+// todo: add spinner
 
-  const allParams = {
-    typeId: searchParams.get('typeId'),
-    brandId: searchParams.get('brandId'),
-    categoryId: searchParams.get('categoryId'),
-    bladeMaterialId: searchParams.get('bladeMaterialId'),
-    rating: searchParams.get('rating'),
-    totalLength: searchParams.get('totalLength'),
-    bladeLength: searchParams.get('bladeLength'),
-    bladeWidth: searchParams.get('bladeWidth'),
-    page: searchParams.get('page'),
-    limit: searchParams.get('limit'),
-  };
+const ProductsPage: FC<PropsWithChildren<ProductsPageProps>> = (props) => {
+  useScrollToTop();
 
-  const realParams = filterTruthy(allParams);
+  const [searchParams] = useSearchParams();
+  searchParams.set(AppSearchParams.TYPE_ID, '1');
+  searchParams.set(props.queryParamName, props.queryParamValue);
 
-  const { data, error, isLoading } =
-    useGetProductModelsByParamsQuery(realParams);
+  const productsLimit = 9;
+  searchParams.set(AppSearchParams.LIMIT, productsLimit.toString());
 
-  // TODO: add pagination
-  const count = data?.count;
+  const { data, error, isLoading } = useGetProductsByParamsQuery(
+    Object.fromEntries(searchParams.entries())
+  );
 
-  // TODO: add spinner
+  const { currentPage, handlePagination, pagesCount } = useAppPagination(
+    searchParams,
+    productsLimit,
+    data?.count
+  );
+
   return (
-    <div className="_container">
-      <section className={styles.ProductsPage}>
-        <div className={styles.heading}>Название</div>
-        <div className={styles.breadcrumbs}>Breadcrumbs...</div>
-        <div className={styles.body}>
-          <div className={styles.filter}>
-            <ProductFilter />
-          </div>
-          <div className={styles.products}>
-            {isLoading && 'Данные загружаются'}
-            {error && 'Ошибка загрузки данных с сервера'}
-            {!isLoading && !error && !data?.rows.length
-              ? 'Нет товаров соответсвующих выбранным параметрам'
-              : data?.rows.map((product) => {
-                  return (
-                    <ProductCard
-                      key={product.id}
-                      name={product.name}
-                      img={product.img}
-                      productId={product.id}
-                    />
-                  );
-                })}
-          </div>
+    <section className={styles.ProductsPage}>
+      {props.children}
+      <div className={styles.body}>
+        <div className={styles.filter}>
+          <ProductFilterForm ranges={data?.ranges} />
         </div>
-      </section>
-    </div>
+        <Products
+          products={data}
+          isLoading={isLoading}
+          error={error}
+          queryParamName={props.queryParamName}
+          queryParamValue={props.queryParamValue}
+          currentPage={currentPage}
+          pagesCount={pagesCount}
+          handlePagination={handlePagination}
+        />
+      </div>
+    </section>
   );
 };
 
-export default withContainer(ProductsPage);
+export default ProductsPage;

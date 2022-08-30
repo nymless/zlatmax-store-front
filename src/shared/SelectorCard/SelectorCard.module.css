@@ -1,0 +1,29 @@
+.card {
+    min-width: 260px;
+    min-height: 170px;
+    border-radius: 3px;
+    box-shadow: 0 0 20px rgba(173, 173, 173, 70%);
+    display: grid;
+    grid-template-rows: 80% 20%;
+    gap: 20px;
+    padding: 20px 0;
+    background-color: #FEFEFE;
+}
+
+.card:hover {
+    box-shadow: 0 0 20px rgba(232, 170, 49, 70%);
+    transform: scale(102%);
+}
+
+.img {
+    margin: 0 auto;
+    display: block;
+    height: 100%;
+    max-width: 100%;
+}
+
+.name {
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: 600;
+}

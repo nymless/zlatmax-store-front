@@ -1,0 +1,13 @@
+.Products {
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.paginator {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}

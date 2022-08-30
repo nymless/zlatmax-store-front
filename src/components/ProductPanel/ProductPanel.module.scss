@@ -1,0 +1,153 @@
+.ProductPanel {
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgb(204, 204, 204);
+    padding: 30px;
+    background-color: #fefefe;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.heading {
+    margin: 0;
+}
+
+.stars {
+    flex: 1 1 auto;
+    width: 145px;
+}
+
+.misc {
+    display: flex;
+    gap: 30px;
+}
+
+.stock {
+    color: #24AD53;
+    font-weight: 500;
+    padding: 15px 0 30px;
+}
+
+.info {
+    padding: 30px 0;
+    border-top: 1px solid rgba(14, 14, 14, 15%);
+    border-bottom: 1px solid rgba(14, 14, 14, 15%);
+    display: grid;
+    grid-template-columns: 195px auto;
+    font-size: 1.125rem;
+    font-weight: 500;
+    row-gap: 20px;
+}
+
+.description {
+    opacity: 50%;
+}
+
+.footer {
+    padding-top: 30px;
+}
+
+.priceBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.priceBox {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.price {
+    font-size: 1.875rem;
+    font-weight: 700;
+}
+
+.oldPrice {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ABABAB;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        height: 2px;
+        width: 110%;
+        top: 40%;
+        left: -5%;
+        background-color: #E8AA31;
+        transform: rotate(-15deg);
+    }
+}
+
+.bonusBlock {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.bonus {
+    font-size: 0.875rem;
+    opacity: 50%;
+    font-weight: 500;
+}
+
+.bonusInfo {
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    background-color: rgba(14, 14, 14, 30%);
+    line-height: 19px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 12px;
+    position: relative;
+    cursor: default;
+}
+
+.bonusDescription {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: left;
+    width: 429px;
+    height: 118px;
+    border: 1px solid #E8AA31;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: -125px;
+    left: -395px;
+    padding: 0 17px;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    border-radius: 3px;
+    line-height: 22px;
+    display: none;
+}
+
+.bonusInfo:hover .bonusDescription {
+    display: flex;
+}
+
+.quantityBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+}
+
+.buttonBlock {
+    display: grid;
+    grid-template-columns: 228px 228px;
+    column-gap: 30px;
+}
+
+.buttonSvg {
+    margin-left: 15px;
+}

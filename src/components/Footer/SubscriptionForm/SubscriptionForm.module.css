@@ -1,0 +1,15 @@
+.SubscriptionForm {
+}
+
+.terms {
+    font-size: 0.869565rem;
+    padding-top: 8px;
+}
+
+.link {
+    color: #E8AA31;
+}
+
+.link:hover {
+    text-decoration: underline;
+}

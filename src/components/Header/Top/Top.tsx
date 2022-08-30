@@ -1,19 +1,24 @@
-import React, { FC } from "react";
-import { withContainer } from "../../../hoc/withContainer";
-import { Login } from "../../Login/Login";
-import { Nav } from "../../Nav/Nav";
-import { User } from "../../User/User";
-import styles from "./Top.module.css";
+import React, { FC } from 'react';
+import { AppContainer } from '../../../shared/AppContainer/AppContainer';
+import { LoginLink } from './LoginLink/LoginLink';
+import { Nav } from '../../Nav/Nav';
+import { UserMenu } from './UserMenu/UserMenu';
+import styles from './Top.module.css';
+import { useAppSelector } from '../../../redux/store';
 
-interface TopProps {
-  isAuth: boolean
-}
+interface TopProps {}
 
-const Top: FC<TopProps> = (props) => (
-  <div className={styles.Top}>
-    <Nav />
-    {props.isAuth ? <User /> : <Login />}
-  </div>
-);
+const Top: FC<TopProps> = (props) => {
+  const user = useAppSelector((state) => state.userState.user);
 
-export default withContainer(Top);
+  return (
+    <AppContainer>
+      <div className={styles.Top}>
+        <Nav />
+        {user ? <UserMenu user={user} /> : <LoginLink />}
+      </div>
+    </AppContainer>
+  );
+};
+
+export default Top;

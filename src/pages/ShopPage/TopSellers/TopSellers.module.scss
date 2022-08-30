@@ -1,0 +1,39 @@
+.TopSellers {
+  margin: 120px 0 160px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 60px;
+  font-size: 1.25rem;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: rgba(14, 14, 14, 58%);
+
+  &:hover {
+    color: #E8AA31;
+  }
+}
+
+.buttonSvg {
+  margin-left: 15px;
+}
+
+.topSellersSwiper {
+  padding: 15px 15px 70px;
+
+  & :global {
+    .swiper-pagination {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+.ArticleCard {
+  width: 376px;
+  height: 350px;
+  border-radius: 3px;
+  box-shadow: 0 0 20px rgba(173, 173, 173, 70%);
+  background-color: #FEFEFE;
+
+  &:hover {
+    box-shadow: 0 0 20px rgba(232, 170, 49, 70%);
+  }
+}
+
+.link {
+  display: grid;
+  grid-template-rows: 2fr 1.5fr;
+}
+
+.img {
+  margin: 0 auto;
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 3px 3px 0 0;
+}
+
+.descriptionBlock {
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 1.25rem;
+  line-height: 1.70;
+  font-weight: 600;
+}
+
+.date {
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(14, 14, 14, 30%);
+}

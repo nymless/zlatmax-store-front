@@ -1,0 +1,13 @@
+.Articles {
+    margin: 120px 0
+}
+
+.heading {
+    margin-bottom: 30px;
+    font-size: 1.25rem;
+}
+
+.articlesBlock {
+    display: flex;
+    gap: 30px;
+}

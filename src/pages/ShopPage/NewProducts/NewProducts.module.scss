@@ -1,0 +1,50 @@
+.NewProducts {
+  padding: 55px 0 46px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  column-gap: 60px;
+}
+
+.heading {
+  margin-bottom: 30px;
+  font-size: 1.875rem;
+}
+
+.text {
+  margin-bottom: 60px;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 70%);
+  line-height: 1.5;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #E8AA31;
+
+  &:hover {
+    color: #d19623;
+  }
+}
+
+.buttonSvg {
+  margin-left: 15px;
+}
+
+.newProductsSwiper {
+  width: 100%;
+  padding: 15px 15px 70px;
+
+  & :global {
+    .swiper-pagination {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+    }
+  }
+}

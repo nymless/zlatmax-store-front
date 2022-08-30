@@ -1,0 +1,51 @@
+.BannerSwiper {
+  & :global {
+    .swiper-pagination {
+      display: flex;
+      gap: 5px;
+    }
+  }
+}
+
+.BannerSlide {
+  white-space: pre-wrap;
+  padding-bottom: 70px;
+
+  h2 {
+    font-size: 2.25rem;
+    line-height: 1.277778;
+    margin-bottom: 30px;
+
+    span {
+      font-weight: 500;
+
+      &:first-child {
+        font-weight: 700;
+      }
+    }
+  }
+
+  p {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 70%);
+    margin-bottom: 60px;
+
+    span {
+      font-weight: 400;
+
+      &:first-child {
+        font-weight: 800;
+      }
+
+      &:nth-child(2) {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.details {
+  display: block;
+  width: 228px;
+}

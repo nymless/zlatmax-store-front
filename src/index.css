@@ -1,9 +1,16 @@
-body {
-    color: #141414;
-}
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+@import-normalize;
 
 * {
     box-sizing: border-box;
+}
+
+body,
+html {
+    font-family: "Montserrat", sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    color: #141414;
 }
 
 a {
@@ -13,4 +20,9 @@ a {
 
 ul {
     list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    padding: 0;
 }

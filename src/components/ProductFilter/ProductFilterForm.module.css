@@ -1,0 +1,20 @@
+.ProductFilterForm {
+    box-shadow: 0 0 20px rgba(173, 173, 173, 0.5);
+}
+
+.heading {
+    margin: 0;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 30px;
+    background-color: #141414;
+    color: #fefefe;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.rating {
+    display: flex;
+    gap: 20px;
+    padding-top: 2px;
+}

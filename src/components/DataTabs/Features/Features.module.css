@@ -1,0 +1,25 @@
+.Features {
+    font-family: Montserrat, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 30px;
+}
+
+.panel:not(:last-of-type) {
+    border-right: 1px solid rgba(14, 14, 14, 15%);
+    padding-right: 30px;
+}
+
+.heading {
+    font-size: 1.125rem;
+    margin: 0 0 30px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 60px;
+    row-gap: 20px;
+}

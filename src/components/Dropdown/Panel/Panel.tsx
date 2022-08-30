@@ -1,74 +1,98 @@
-import React, { FC } from "react";
-import s from "./Panel.module.css";
-import { Menu } from "./Menu/Menu";
-import { ProductSelectors } from "../../../hooks/useProductSelectors";
+import React, { FC } from 'react';
+import styles from './Panel.module.css';
+import { Menu } from './Menu/Menu';
 import {
-  useGetCategoriesQuery,
   useGetBrandsQuery,
-  useGetBladeMaterialsQuery,
-} from "../../../redux/services/productsApi";
+  useGetCategoriesQuery,
+} from '../../../redux/api/productDetailsApi';
+import { useGetBladeMaterialsQuery } from '../../../redux/api/knifeMaterialsApi';
+import { shortenedArray } from '../../../utils/shortenedArray';
+import MuiDialog from '@mui/material/Dialog';
+import { styled } from '@mui/material/styles';
+import { AppContainer } from '../../../shared/AppContainer/AppContainer';
+
+export const Dialog = styled(MuiDialog)(
+  (props: { offset: number | undefined }) => `
+    height: 600px;
+    background-color: #141414;
+    top: ${props.offset || 0}px;
+  
+    & .MuiBackdrop-root {
+      background-color: unset;
+    }
+  `
+);
 
 interface Props {
-  selectors: ProductSelectors;
-  setDropOpened: (toggle: boolean) => void;
+  open: boolean;
+  onClose: () => void;
+  divRef: React.RefObject<HTMLDivElement>;
 }
 
-export const Panel: FC<Props> = (props) => {
+const Panel: FC<Props> = (props) => {
+  const { onClose, open } = props;
+
   const categories = useGetCategoriesQuery().data;
   const brand = useGetBrandsQuery().data;
   const bladeMaterials = useGetBladeMaterialsQuery().data;
 
-  const handleCategoryClick = (id: number) => {
-    props.setDropOpened(false);
-    props.selectors.setCategoryId(id);
+  const shortenedCategories = shortenedArray(categories);
+  const shortenedBrands = shortenedArray(brand);
+  const shortenedBladeMaterials = shortenedArray(bladeMaterials);
+
+  const handleClose = () => {
+    onClose();
   };
 
-  const handleBrandClick = (id: number) => {
-    props.setDropOpened(false);
-    props.selectors.setBrandId(id);
-  };
-
-  const handleBladeMaterialClick = (id: number) => {
-    props.setDropOpened(false);
-    props.selectors.setBladeMaterialId(id);
-  };
-
-  const handleHeaderClick = () => {
-    props.setDropOpened(false);
+  const handleListItemClick = () => {
+    onClose();
   };
 
   return (
-    <div className={s.panel}>
-      {categories && (
-        <Menu
-          name="Категория ножей"
-          list={categories}
-          onClickHandler={handleCategoryClick}
-          handleHeaderClick={handleHeaderClick}
-          path="/category"
-          selectors={props.selectors}
-        />
-      )}
-      {brand && (
-        <Menu
-          name="Производство ножей"
-          list={brand}
-          onClickHandler={handleBrandClick}
-          handleHeaderClick={handleHeaderClick}
-          path="/brand"
-          selectors={props.selectors}
-        />
-      )}
-      {bladeMaterials && (
-        <Menu
-          name="Ножи по маркам стали"
-          list={bladeMaterials}
-          onClickHandler={handleBladeMaterialClick}
-          handleHeaderClick={handleHeaderClick}
-          path="/material"
-          selectors={props.selectors}
-        />
-      )}
-    </div>
+    <Dialog
+      offset={props.divRef.current?.getBoundingClientRect().bottom}
+      className={styles.panel}
+      onClose={handleClose}
+      open={open}
+      PaperComponent={() => {
+        return (
+          <AppContainer>
+            <div className={styles.menu}>
+              {shortenedCategories && (
+                <Menu
+                  name="Категория ножей"
+                  list={shortenedCategories}
+                  onClickHandler={handleListItemClick}
+                  handleHeaderClick={handleListItemClick}
+                  path="/category"
+                />
+              )}
+              {shortenedBrands && (
+                <Menu
+                  name="Производство ножей"
+                  list={shortenedBrands}
+                  onClickHandler={handleListItemClick}
+                  handleHeaderClick={handleListItemClick}
+                  path="/brand"
+                  prefix="Ножи"
+                />
+              )}
+              {shortenedBladeMaterials && (
+                <Menu
+                  name="Ножи по маркам стали"
+                  list={shortenedBladeMaterials}
+                  onClickHandler={handleListItemClick}
+                  handleHeaderClick={handleListItemClick}
+                  path="/material"
+                  prefix="Ножи из стали"
+                />
+              )}
+            </div>
+          </AppContainer>
+        );
+      }}
+    ></Dialog>
   );
 };
+
+export default Panel;

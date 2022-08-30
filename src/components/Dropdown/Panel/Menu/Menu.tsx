@@ -1,15 +1,14 @@
-import React from "react";
-import s from "./Menu.module.css";
-import { Link } from "react-router-dom";
-import { ProductSelectors } from "../../../../hooks/useProductSelectors";
+import React from 'react';
+import s from './Menu.module.css';
+import { Link } from 'react-router-dom';
 
 type Props = {
   name: string;
   list: { id: number; name: string }[];
-  onClickHandler: (id: number) => void;
+  onClickHandler: () => void;
   handleHeaderClick: () => void;
   path: string;
-  selectors: ProductSelectors;
+  prefix?: string;
 };
 
 export const Menu: React.FC<Props> = (props) => {
@@ -24,18 +23,29 @@ export const Menu: React.FC<Props> = (props) => {
       </Link>
       <div className={s.body}>
         {props.list.map((item) => {
+          let name = item.name;
+          if (props.prefix) {
+            name = props.prefix + ' ' + item.name;
+          }
           return (
             <Link
               className={s.link}
               key={item.id}
-              to={"/product"}
-              onClick={() => props.onClickHandler(item.id)}
+              to={props.path + '/' + item.id}
+              onClick={props.onClickHandler}
             >
-              {item.name}
+              {name}
             </Link>
           );
         })}
       </div>
+      <Link
+        className={s.footer}
+        to={props.path}
+        onClick={() => props.handleHeaderClick()}
+      >
+        Смотреть все
+      </Link>
     </div>
   );
 };

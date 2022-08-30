@@ -1,11 +1,11 @@
 import React from 'react';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
+import UnderConstruction from '../../shared/UnderConstruction/UnderConstruction';
 
 const AdminPage = () => {
-    return (
-        <div>
-            Admin
-        </div>
-    );
+  useScrollToTop();
+
+  return <UnderConstruction />;
 };
 
 export default AdminPage;

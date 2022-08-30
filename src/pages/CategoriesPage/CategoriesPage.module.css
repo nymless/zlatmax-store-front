@@ -1,0 +1,34 @@
+.CategoriesPage {
+    margin: 30px 0;
+}
+
+.breadcrumbs {
+    margin-bottom: 25px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.link {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: #141414;
+    opacity: 0.5;
+}
+
+.link:hover {
+    color: #E8AA31;
+    opacity: 1;
+}
+
+.page {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: #E8AA31;
+}
+
+.body {
+    margin: 30px 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+}
