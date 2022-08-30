@@ -56,7 +56,7 @@ const Companies: FC<CompaniesProps> = (props) => {
               <img
                 className={styles.logo}
                 src={AppPaths.IMG_URL + company.img}
-                alt="Logo"
+                alt='Logo'
               />
               <div>{company.name}</div>
             </div>

@@ -14,18 +14,23 @@ import UnderConstruction from '../../shared/UnderConstruction/UnderConstruction'
 import { AppRouts } from '../../variables/AppRouts';
 import LoginPage from '../../pages/LoginPage/LoginPage';
 import RegistrationPage from '../../pages/RegistrationPage/RegistrationPage';
+import { useAppSelector } from '../../redux/store';
 
-interface Props {}
+interface AppRouterProps {
+}
 
-const AppRouter: FC<Props> = (props) => {
-  // TODO: make api, admin and cart
-  const isAuth = false;
+const AppRouter: FC<AppRouterProps> = () => {
+  const user = useAppSelector((state) => state.userState.user);
+  const isAuth = Boolean(user);
+  const isAdmin = Boolean(user?.role === 'ADMIN');
 
   return (
     <Routes>
-      <Route path="/" element={<ShopPage />} />
-      {isAuth && <Route path={AppRouts.ADMIN} element={<AdminPage />} />}
+      <Route path='/' element={<ShopPage />} />
+
       {isAuth && <Route path={AppRouts.CART} element={<ShoppingCartPage />} />}
+      {isAdmin && <Route path={AppRouts.ADMIN} element={<AdminPage />} />}
+
       <Route path={AppRouts.LOGIN} element={<LoginPage />} />
       <Route path={AppRouts.REGISTRATION} element={<RegistrationPage />} />
       <Route path={AppRouts.CATEGORY} element={<CategoriesPage />} />
@@ -72,7 +77,7 @@ const AppRouter: FC<Props> = (props) => {
         element={<UnderConstruction />}
       />
 
-      <Route path="/*" element={<ShopPage />} />
+      <Route path='/*' element={<ShopPage />} />
     </Routes>
   );
 };

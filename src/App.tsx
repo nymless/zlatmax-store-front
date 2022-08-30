@@ -6,13 +6,18 @@ import Header from './components/Header/Header';
 import { useAppInit } from './hooks/useAppInit';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import FullScreenLoader from './shared/FullScreenLoader/FullScreenLoader';
 
 function App() {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
 
-  useAppInit();
+  const initialized = useAppInit();
+
+  if (!initialized) {
+    return <FullScreenLoader />
+  }
 
   return (
     <div className="App">

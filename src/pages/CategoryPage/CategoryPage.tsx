@@ -16,10 +16,10 @@ import { AppSearchParams } from '../../variables/AppSearchParams';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
 import { parseInt } from '../../utils/parseInt';
 import { AppRouts } from '../../variables/AppRouts';
+import NotFound from '../../shared/NotFound/NotFound';
 
-interface CategoryPageProps {}
-
-// todo: 404 page component
+interface CategoryPageProps {
+}
 
 const CategoryPage: FC<CategoryPageProps> = () => {
   useScrollToTop();
@@ -57,7 +57,7 @@ const CategoryPage: FC<CategoryPageProps> = () => {
   });
 
   if (!categoryId) {
-    return <div>404 error</div>;
+    return <AppContainer><NotFound /></AppContainer>;
   }
 
   if (!id) {
@@ -70,13 +70,13 @@ const CategoryPage: FC<CategoryPageProps> = () => {
         queryParamName={AppSearchParams.CATEGORY_ID}
         queryParamValue={id.toString()}
       >
-        <div className={styles.heading}>{pageName}</div>
+        <h2 className={styles.heading}>{pageName}</h2>
         <div className={styles.breadcrumbs}>
           <Breadcrumbs
-            separator={<NavigateNextIcon fontSize="small" />}
-            aria-label="breadcrumb"
+            separator={<NavigateNextIcon fontSize='small' />}
+            aria-label='breadcrumb'
           >
-            <Link className={styles.link} to="/">
+            <Link className={styles.link} to='/'>
               Главная
             </Link>
             <Link className={styles.link} to={AppRouts.CATEGORY}>

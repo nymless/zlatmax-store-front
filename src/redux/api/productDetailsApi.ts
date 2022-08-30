@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { AppPaths } from '../../variables/AppPaths';
 import { Brand, Category, Series, Type } from '../models/models';
+import { setAppBrands, setAppCategories, setAppTypes } from '../reducers/appSlice';
 
 export const productDetailsApi = createApi({
   reducerPath: 'productDetailsApi',
@@ -10,41 +11,63 @@ export const productDetailsApi = createApi({
   endpoints: (builder) => ({
     getTypes: builder.query<Type[], void>({
       query: () => 'type',
-    }),
-    getTypeById: builder.query<Type, number>({
-      query: (id) => 'type/' + id,
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          const appTypes = {};
+          data.forEach((type) => {
+            Object.defineProperty(appTypes, type.id, {
+              value: type.name,
+              enumerable: true,
+            });
+          });
+          dispatch(setAppTypes(appTypes));
+        } catch (error) {}
+      },
     }),
 
     getBrands: builder.query<Brand[], void>({
       query: () => 'brand',
-    }),
-    getBrandById: builder.query<Brand, number>({
-      query: (id) => 'brand/' + id,
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          const appBrands = {};
+          data.forEach((brand) => {
+            Object.defineProperty(appBrands, brand.id, {
+              value: brand.name,
+              enumerable: true,
+            });
+          });
+          dispatch(setAppBrands(appBrands));
+        } catch (error) {}
+      },
     }),
 
     getCategories: builder.query<Category[], void>({
       query: () => 'category',
-    }),
-    getCategoryById: builder.query<Category, number>({
-      query: (id) => 'category/' + id,
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          const appCategories = {};
+          data.forEach((category) => {
+            Object.defineProperty(appCategories, category.id, {
+              value: category.name,
+              enumerable: true,
+            });
+          });
+          dispatch(setAppCategories(appCategories));
+        } catch (error) {}
+      },
     }),
 
     getSeries: builder.query<Series[], void>({
       query: () => 'series',
-    }),
-    getSeriesById: builder.query<Series, number>({
-      query: (id) => 'series/' + id,
     }),
   }),
 });
 
 export const {
   useGetTypesQuery,
-  useGetTypeByIdQuery,
   useGetBrandsQuery,
-  useGetBrandByIdQuery,
   useGetCategoriesQuery,
-  useGetCategoryByIdQuery,
-  useGetSeriesQuery,
-  useGetSeriesByIdQuery,
 } = productDetailsApi;

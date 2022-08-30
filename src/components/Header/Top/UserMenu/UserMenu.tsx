@@ -49,6 +49,8 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
     handleClose();
   };
 
+  const isAdmin = props.user.role === 'ADMIN';
+
   return (
     <Box>
       <Grid container alignItems="center" spacing={1}>
@@ -88,6 +90,11 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
         <MenuItem onClick={handleClose}>
           <Link to={AppRouts.ACCOUNT}>Личный кабинет</Link>
         </MenuItem>
+        {isAdmin && (
+          <MenuItem onClick={handleClose}>
+            <Link to={AppRouts.ADMIN}>Панель администратора</Link>
+          </MenuItem>
+        )}
         <MenuItem onClick={handleLogoutClick}>Выйти из аккаунта</MenuItem>
       </Menu>
     </Box>

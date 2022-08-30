@@ -26,11 +26,11 @@ const DataTabs: FC<DataTabsProps> = (props) => {
     <div className={styles.DataTabs}>
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} aria-label="data tabs">
-            <Tab label="Описание" {...a11yProps(0)} />
-            <Tab label="Характеристика" {...a11yProps(1)} />
-            <Tab label="Отзывы" {...a11yProps(2)} />
-            <Tab label="Доставка" {...a11yProps(3)} />
+          <Tabs value={value} onChange={handleChange} aria-label='data tabs'>
+            <Tab label='Описание' {...a11yProps(0)} />
+            <Tab label='Характеристика' {...a11yProps(1)} />
+            <Tab label='Отзывы' {...a11yProps(2)} />
+            <Tab label='Доставка' {...a11yProps(3)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>

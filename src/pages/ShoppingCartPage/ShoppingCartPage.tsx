@@ -1,10 +1,11 @@
 import React from 'react';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
+import UnderConstruction from '../../shared/UnderConstruction/UnderConstruction';
 
 const ShoppingCartPage = () => {
   useScrollToTop();
 
-  return <div>ShoppingCart</div>;
+  return <UnderConstruction />;
 };
 
 export default ShoppingCartPage;

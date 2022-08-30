@@ -15,16 +15,20 @@ import { RootState } from '../../redux/store';
 import { AppSearchParams } from '../../variables/AppSearchParams';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
 import { AppRouts } from '../../variables/AppRouts';
+import NotFound from '../../shared/NotFound/NotFound';
+import { parseInt } from '../../utils/parseInt';
 
-interface MaterialPageProps {}
+interface MaterialPageProps {
+}
 
 const MaterialPage: FC<MaterialPageProps> = () => {
   useScrollToTop();
 
   const dispatch = useDispatch();
-  const bladeMaterialId = useParams().id;
+  const bladeMaterialIdString = useParams().id;
+  const bladeMaterialId = parseInt(bladeMaterialIdString);
   const location = useLocation();
-  const [id, setId] = useState<number>();
+  const [id, setId] = useState<number>(bladeMaterialId);
 
   useEffect(() => {
     dispatch(resetSelectedIds());
@@ -34,7 +38,7 @@ const MaterialPage: FC<MaterialPageProps> = () => {
     if (!bladeMaterialId) {
       return;
     }
-    setId(Number.parseInt(bladeMaterialId));
+    setId(bladeMaterialId);
   }, [bladeMaterialId]);
 
   useEffect(() => {
@@ -52,8 +56,12 @@ const MaterialPage: FC<MaterialPageProps> = () => {
     return state.appState.appBladeMaterials[id];
   });
 
+  if (!bladeMaterialId) {
+    return <AppContainer><NotFound /></AppContainer>;
+  }
+
   if (!id) {
-    return <div>404 error</div>;
+    return null;
   }
 
   return (
@@ -62,13 +70,13 @@ const MaterialPage: FC<MaterialPageProps> = () => {
         queryParamName={AppSearchParams.BLADE_MATERIAL_ID}
         queryParamValue={id.toString()}
       >
-        <div className={styles.heading}>{pageName}</div>
+        <h2 className={styles.heading}>{pageName}</h2>
         <div className={styles.breadcrumbs}>
           <Breadcrumbs
-            separator={<NavigateNextIcon fontSize="small" />}
-            aria-label="breadcrumb"
+            separator={<NavigateNextIcon fontSize='small' />}
+            aria-label='breadcrumb'
           >
-            <Link className={styles.link} to="/">
+            <Link className={styles.link} to='/'>
               Главная
             </Link>
             <Link className={styles.link} to={AppRouts.MATERIAL}>

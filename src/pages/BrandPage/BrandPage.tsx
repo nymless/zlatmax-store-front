@@ -6,25 +6,25 @@ import styles from '../ProductsPage/ProductsPage.module.css';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  resetSelectedIds,
-  setSelectedBrandId,
-  setSelectedTypeId,
-} from '../../redux/reducers/selectSlice';
+import { resetSelectedIds, setSelectedBrandId, setSelectedTypeId } from '../../redux/reducers/selectSlice';
 import { RootState } from '../../redux/store';
 import { AppSearchParams } from '../../variables/AppSearchParams';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
 import { AppRouts } from '../../variables/AppRouts';
+import { parseInt } from '../../utils/parseInt';
+import NotFound from '../../shared/NotFound/NotFound';
 
-interface BrandPageProps {}
+interface BrandPageProps {
+}
 
 const BrandPage: FC<BrandPageProps> = () => {
   useScrollToTop();
 
   const dispatch = useDispatch();
-  const brandId = useParams().id;
+  const brandIdString = useParams().id;
+  const brandId = parseInt(brandIdString);
   const location = useLocation();
-  const [id, setId] = useState<number>();
+  const [id, setId] = useState<number>(brandId);
 
   useEffect(() => {
     dispatch(resetSelectedIds());
@@ -34,7 +34,7 @@ const BrandPage: FC<BrandPageProps> = () => {
     if (!brandId) {
       return;
     }
-    setId(Number.parseInt(brandId));
+    setId(brandId);
   }, [brandId]);
 
   useEffect(() => {
@@ -52,8 +52,12 @@ const BrandPage: FC<BrandPageProps> = () => {
     return state.appState.appBrands[id];
   });
 
+  if (!brandId) {
+    return <AppContainer><NotFound /></AppContainer>;
+  }
+
   if (!id) {
-    return <div>404 error</div>;
+    return null;
   }
 
   return (
@@ -62,13 +66,13 @@ const BrandPage: FC<BrandPageProps> = () => {
         queryParamName={AppSearchParams.BRAND_ID}
         queryParamValue={id.toString()}
       >
-        <div className={styles.heading}>{pageName}</div>
+        <h2 className={styles.heading}>{pageName}</h2>
         <div className={styles.breadcrumbs}>
           <Breadcrumbs
-            separator={<NavigateNextIcon fontSize="small" />}
-            aria-label="breadcrumb"
+            separator={<NavigateNextIcon fontSize='small' />}
+            aria-label='breadcrumb'
           >
-            <Link className={styles.link} to="/">
+            <Link className={styles.link} to='/'>
               Главная
             </Link>
             <Link className={styles.link} to={AppRouts.BRAND}>

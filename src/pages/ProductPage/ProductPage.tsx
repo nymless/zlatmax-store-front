@@ -19,12 +19,9 @@ const ProductPage = () => {
   const idString = useParams().id!;
   const id = Number.parseInt(idString);
 
-  const getProductResponse = useGetProductByIdQuery(id);
-  const getProductData = getProductResponse.data;
-  const getProductError = getProductResponse.error;
-  const getProductIsLoading = getProductResponse.isLoading;
+  const { data, error, isLoading } = useGetProductByIdQuery(id);
 
-  const categoryId = getProductData?.categoryId;
+  const categoryId = data?.categoryId;
   const categoryName = useSelector((state: RootState) => {
     if (!categoryId) {
       return;
@@ -32,15 +29,15 @@ const ProductPage = () => {
     return state.appState.appCategories[categoryId];
   });
 
-  if (getProductIsLoading) {
+  if (isLoading) {
     return <div className={styles.ProductPage}>Данные загружаются</div>;
   }
 
-  if (getProductError) {
+  if (error) {
     return <div className={styles.ProductPage}>Не корректный запрос</div>;
   }
 
-  if (!getProductData) {
+  if (!data) {
     return <div className={styles.ProductPage}>Товар не найден</div>;
   }
 
@@ -49,10 +46,10 @@ const ProductPage = () => {
       <div className={styles.ProductPage}>
         <div className={styles.breadcrumbs}>
           <Breadcrumbs
-            separator={<NavigateNextIcon fontSize="small" />}
-            aria-label="breadcrumb"
+            separator={<NavigateNextIcon fontSize='small' />}
+            aria-label='breadcrumb'
           >
-            <Link className={styles.link} to="/">
+            <Link className={styles.link} to='/'>
               Главная
             </Link>
             <Link className={styles.link} to={AppRouts.CATEGORY}>
@@ -66,16 +63,16 @@ const ProductPage = () => {
                 {categoryName}
               </Link>
             )}
-            <span className={styles.page}>{getProductData.name}</span>
+            <span className={styles.page}>{data.name}</span>
           </Breadcrumbs>
         </div>
         <div className={styles.body}>
           <div className={styles.product}>
-            <Gallery product={getProductData} />
-            <ProductPanel product={getProductData} />
+            <Gallery product={data} />
+            <ProductPanel product={data} />
           </div>
           <div className={styles.description}>
-            <DataTabs product={getProductData} />
+            <DataTabs product={data} />
           </div>
         </div>
       </div>
