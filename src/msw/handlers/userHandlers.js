@@ -8,8 +8,9 @@ const notSoSecretKey = 'your-256-bit-secret';
 let counter = 1;
 
 export const userHandlers = [
-  rest.post(AppPaths.API_URL + 'auth/login', (req, res, ctx) => {
-    const { email, password } = req.body.loginCredentials;
+  rest.post(AppPaths.API_URL + 'auth/login', async (req, res, ctx) => {
+    const body = await req.json();
+    const { email, password } = body.loginCredentials;
     const user = users.find(
       (user) => user.email === email && user.password === password,
     );
@@ -28,17 +29,19 @@ export const userHandlers = [
       notSoSecretKey,
       { expiresIn: '24h' },
     );
+
     return res(
       ctx.status(200),
       ctx.cookie('access_token', token, {
-        httpOnly: true,
+        // todo: for GitHub Pages. Uncomment on production
+        // httpOnly: true,
       }),
       ctx.cookie('logged_in', 'true'),
     );
   }),
 
   rest.get(AppPaths.API_URL + 'users/current', (req, res, ctx) => {
-    const accessToken = req.cookies['access_token'];
+    const accessToken = req.cookies.access_token;
 
     try {
       const { id, email, role } = jwt.verify(accessToken, notSoSecretKey);
@@ -63,8 +66,9 @@ export const userHandlers = [
     }
   }),
 
-  rest.post(AppPaths.API_URL + 'auth/registration', (req, res, ctx) => {
-    const user = req.body?.user;
+  rest.post(AppPaths.API_URL + 'auth/registration', async (req, res, ctx) => {
+    const body = await req.json();
+    const user = body.user;
 
     if (!user) {
       return res(ctx.status(404));

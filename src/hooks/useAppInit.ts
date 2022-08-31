@@ -1,5 +1,4 @@
 import {
-  productDetailsApi,
   useGetBrandsQuery,
   useGetCategoriesQuery,
   useGetTypesQuery,

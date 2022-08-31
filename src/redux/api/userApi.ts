@@ -12,7 +12,7 @@ export const userApi = createApi({
     getCurrentUser: builder.query<User, null>({
       query: () => {
         return {
-          url: 'current',
+          url: 'users/current',
           credentials: 'include',
         };
       },
