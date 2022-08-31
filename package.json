@@ -1,8 +1,10 @@
 {
   "name": "zlatmax-store-front",
   "version": "0.1.0",
-  "homepage": "https://nymless.github.io/zlatmax-store-front",
   "private": true,
+  "homepage": ".",
+  "author": "Ivan Baklanov",
+  "license": "ISC",
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
@@ -58,7 +60,8 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "create": "npx generate-react-cli component"
+    "create": "npx generate-react-cli component",
+    "deploy": "npm run build && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import s from "./Nav.module.css";
-import { AppRouts } from '../../variables/AppRouts';
+import { AppRouts } from '../../../../variables/AppRouts';
 
 export const Nav = () => {
   return (
