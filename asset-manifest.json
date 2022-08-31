@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/zlatmax-store-front/static/css/main.383126d3.css",
-    "main.js": "/zlatmax-store-front/static/js/main.ff857557.js",
+    "main.js": "/zlatmax-store-front/static/js/main.f59f6d37.js",
     "static/media/top-banner-back-1.png": "/zlatmax-store-front/static/media/top-banner-back-1.5d8fe382afbe6b5cd527.png",
     "static/media/new-product-back.png": "/zlatmax-store-front/static/media/new-product-back.2a91abc67ec559514035.png",
     "static/media/viber.svg": "/zlatmax-store-front/static/media/viber.f9020da3cefe7be7a9f8ba62e2dff9c0.svg",
@@ -37,10 +37,10 @@
     "static/media/Star.svg": "/zlatmax-store-front/static/media/Star.a75ff4008a48c3abc0f6c14d66a84cfc.svg",
     "static/media/mail.svg": "/zlatmax-store-front/static/media/mail.9bde3c39650eecc0b4b486c838459090.svg",
     "main.383126d3.css.map": "/zlatmax-store-front/static/css/main.383126d3.css.map",
-    "main.ff857557.js.map": "/zlatmax-store-front/static/js/main.ff857557.js.map"
+    "main.f59f6d37.js.map": "/zlatmax-store-front/static/js/main.f59f6d37.js.map"
   },
   "entrypoints": [
     "static/css/main.383126d3.css",
-    "static/js/main.ff857557.js"
+    "static/js/main.f59f6d37.js"
   ]
 }
