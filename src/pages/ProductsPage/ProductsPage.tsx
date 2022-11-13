@@ -13,8 +13,8 @@ interface ProductsPageProps {
   queryParamValue: string;
 }
 
-// todo: with pagination from many product to few product make scroll up
-// todo: add spinner
+// TODO: with pagination from many product to few product make scroll up
+// TODO: add spinner
 
 const ProductsPage: FC<PropsWithChildren<ProductsPageProps>> = (props) => {
   useScrollToTop();

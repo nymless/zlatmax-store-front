@@ -33,8 +33,7 @@ export const userHandlers = [
     return res(
       ctx.status(200),
       ctx.cookie('access_token', token, {
-        // todo: for GitHub Pages. Uncomment on production
-        // httpOnly: true,
+        httpOnly: process.env.REACT_APP_DEPLOY_ENV !== 'gh-pages',
       }),
       ctx.cookie('logged_in', 'true'),
     );

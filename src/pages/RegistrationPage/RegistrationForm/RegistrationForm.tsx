@@ -33,7 +33,7 @@ export type RegistrationValues = {
 };
 
 const RegistrationForm: FC<RegistrationFormProps> = () => {
-  // todo: error toast to user
+  // TODO: error toast to user
   const [registerUser, { isLoading, isSuccess }] =
     useRegisterUserMutation();
 

@@ -18,11 +18,11 @@ interface ProductProps {
   product: ProductForProductPage;
 }
 
-// todo: userId app context.
-// todo: product stock server API. Color representation of stock status.
-// todo: products compare server API.
-// todo: product rating server API.
-// todo: users bonuses server API.
+// TODO: userId app context.
+// TODO: product stock server API. Color representation of stock status.
+// TODO: products compare server API.
+// TODO: product rating server API.
+// TODO: users bonuses server API.
 
 const ProductPanel: FC<ProductProps> = (props) => {
   const [quantity, setQuantity] = useState(1);
@@ -36,7 +36,7 @@ const ProductPanel: FC<ProductProps> = (props) => {
   const [price, setPrice] = useState(priceWithDiscount);
   const [oldPrice, setOldPrice] = useState(defaultPrice);
 
-  // todo: from server API
+  // TODO: from server API
   const bonusRate = 0.05;
   const productBonuses = Math.floor(price * bonusRate);
   const purchaseBonuses = productBonuses * quantity;
@@ -69,7 +69,7 @@ const ProductPanel: FC<ProductProps> = (props) => {
     },
   });
 
-  // todo: cart server api
+  // TODO: cart server api
   const addToCart = (event: any) => {
     console.log('Product added to cart');
   };

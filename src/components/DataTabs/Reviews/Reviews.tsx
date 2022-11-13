@@ -48,12 +48,12 @@ const Reviews: FC<ReviewsProps> = (props) => {
 
   const dateFormatter = new Intl.DateTimeFormat('ru');
 
-  // todo: reviews reply server API
+  // TODO: reviews reply server API
   const addReply = () => {
     console.log('add reply');
   };
 
-  // todo: reviews like server API
+  // TODO: reviews like server API
   const addLike = () => {
     console.log('add like');
   };

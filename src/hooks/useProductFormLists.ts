@@ -19,7 +19,7 @@ export interface Lists {
   maintenanceList?: Part[];
 }
 
-// todo: maintenanceList list from server API
+// TODO: maintenanceList list from server API
 
 export const useProductFormLists = (productId: number) => {
   const blades = useGetBladesByParamsQuery(productId).data;
@@ -58,7 +58,7 @@ export const useProductFormLists = (productId: number) => {
     };
   });
 
-  // todo: from API
+  // TODO: from API
   const maintenanceList: Part[] = [
     {
       partId: 1,

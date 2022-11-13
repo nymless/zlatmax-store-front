@@ -85,7 +85,7 @@ export const useFilterFormInit = () => {
   };
 
   const handleSubmitForm = (values: FormikValues) => {
-    // todo: truthy values '' ?
+    // TODO: truthy values '' ?
     const getParams = filterTruthy(values);
     setSearchParams(getParams);
   };

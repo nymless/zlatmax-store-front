@@ -17,8 +17,8 @@ type ProductCardProps = {
 };
 
 export const ProductCard: FC<PropsWithChildren<ProductCardProps>> = (props) => {
-  // todo: reviews server API
-  // todo: rating server API
+  // TODO: reviews server API
+  // TODO: rating server API
   const discount = props.product.discountRate;
   const defaultPrice = props.product.defaultPrice;
   const priceWithDiscount = defaultPrice * (1 - discount / 100);

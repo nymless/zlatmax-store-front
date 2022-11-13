@@ -37,7 +37,7 @@ const Companies: FC<CompaniesProps> = (props) => {
     );
   }
 
-  // todo: correct endings ('дней', 'дня', etc.)
+  // TODO: correct endings ('дней', 'дня', etc.)
   return (
     <div className={styles.Companies}>
       {data.map((company) => {

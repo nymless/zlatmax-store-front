@@ -1,5 +1,12 @@
-export interface User {
+interface IGenericResource {
   id: number;
+}
+
+interface INamedResource extends IGenericResource {
+  name: string;
+}
+
+export interface User extends IGenericResource {
   firstName: string;
   lastName: string;
   middleName: string | null;
@@ -8,84 +15,57 @@ export interface User {
   img: string | null;
 }
 
-export interface Type {
-  id: number;
-  name: string;
-}
+export interface Type extends INamedResource {}
 
-export interface Brand {
-  id: number;
-  name: string;
+export interface Brand extends INamedResource {
   img: string;
 }
 
-export interface Category {
-  id: number;
-  name: string;
+export interface Category extends INamedResource {
   img: string;
 }
 
-export interface Series {
-  id: number;
-  name: string;
-}
+export interface Series extends INamedResource {}
 
-export interface HandleMaterial {
-  id: number;
-  name: string;
-}
+export interface HandleMaterial extends INamedResource {}
 
-export interface HandguardMaterial {
-  id: number;
-  name: string;
-}
+export interface HandguardMaterial extends INamedResource {}
 
-export interface BladeMaterial {
-  id: number;
-  name: string;
+export interface BladeMaterial extends INamedResource {
   img: string;
 }
 
-export interface GildingType {
-  id: number;
-  name: string;
-}
+export interface GildingType extends INamedResource {}
 
-export interface Handle {
-  id: number;
+export interface Handle extends IGenericResource {
   handleMaterialId: number;
   productId: number;
   partPrice: number;
 }
 
-export interface Handguard {
-  id: number;
+export interface Handguard extends IGenericResource {
   handguardMaterialId: number;
   productId: number;
   partPrice: number;
 }
 
-export interface Blade {
-  id: number;
+export interface Blade extends IGenericResource {
   bladeMaterialId: number;
   productId: number;
   partPrice: number;
 }
 
-export interface Gilding {
-  id: number;
+export interface Gilding extends IGenericResource {
   gildingTypeId: number;
   productId: number;
   partPrice: number;
 }
 
-export interface Product {
-  id: number;
+export interface Product extends INamedResource {
   typeId: number;
   brandId: number;
   categoryId: number;
   seriesId: number;
-  name: string;
   rating: number;
   img: string;
   totalLength: number;
@@ -101,53 +81,44 @@ export interface Product {
   code: string;
 }
 
-export interface Info {
-  id: number;
+export interface Info extends IGenericResource {
   title: string | null;
   description: string;
   productId: number;
 }
 
-export interface Gallery {
-  id: number;
+export interface Gallery extends IGenericResource {
   img: string;
   productId: number;
 }
 
-export interface Rating {
-  id: number;
+export interface Rating extends IGenericResource {
   userId: number;
   productId: number;
   rate: number;
 }
 
-export interface Review {
-  id: number;
+export interface Review extends INamedResource {
   productId: number;
   date: string;
-  name: string;
   img: string;
   rate: number;
   review: string;
 }
 
-export interface Article {
-  id: number;
+export interface Article extends INamedResource {
   date: string;
-  name: string;
   img: string;
   title: string;
   content: string;
 }
 
-export interface Favorite {
-  id: number;
+export interface Favorite extends IGenericResource {
   userId: number;
   productId: number;
 }
 
-export interface Order {
-  id: number;
+export interface Order extends IGenericResource {
   userId: number;
   paymentTypeId: number;
   createdAt: Date;
@@ -155,39 +126,27 @@ export interface Order {
   status: 'pending' | 'paid' | 'fulfilled';
 }
 
-export interface PaymentType {
-  id: number;
-  name: string;
-}
+export interface PaymentType extends INamedResource {}
 
-export interface StoreBonus {
-  id: number;
+export interface StoreBonus extends IGenericResource {
   exchangeRate: number;
   bonusRate: number;
 }
 
-export interface UserBonus {
-  id: number;
+export interface UserBonus extends IGenericResource {
   bonusId: number;
   userId: number;
   count: number;
 }
 
-export interface Country {
-  id: number;
-  name: string;
-}
+export interface Country extends INamedResource {}
 
-export interface City {
-  id: number;
+export interface City extends INamedResource {
   countryId: number;
-  name: string;
 }
 
-export interface Shipping {
-  id: number;
+export interface Shipping extends INamedResource {
   cityId: number;
-  name: string;
   img: string;
   minHandlingTime: number;
   maxHandlingTime: number;

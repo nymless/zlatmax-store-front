@@ -7,31 +7,28 @@ import App from './App';
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
 import { CookiesProvider } from 'react-cookie';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 
-// todo: for GitHub Pages use. Remove for production.
-import { HashRouter as Router } from 'react-router-dom';
-// import { BrowserRouter as Router } from 'react-router-dom';
+// FIXME: Если ключь валидации просрочен на момент авторизии, сделать чтобы MSW создавал и высылал новый.
+// FIXME: В режиме BrowserRouter, если открыта не первая страница, то перезагрузка вызывает ошибку.
 
-// todo: for GitHub Pages use. Remove for production.
-const url =
-  process.env.NODE_ENV === 'development'
-    ? './mockServiceWorker.js'
-    : '/zlatmax-store-front/mockServiceWorker.js';
-const { worker } = require('./msw/browser');
-worker.start({
-  waitUntilReady: true,
-  onUnhandledRequest: 'bypass',
-  serviceWorker: {
-    url,
-  },
-});
-// if (process.env.NODE_ENV === 'development') {
-//   const { worker } = require('./msw/browser');
-//   worker.start({
-//     waitUntilReady: true,
-//     onUnhandledRequest: "bypass",
-//   });
-// }
+const Router =
+  process.env.REACT_APP_DEPLOY_ENV === 'gh-pages' ? HashRouter : BrowserRouter;
+
+if (process.env.REACT_APP_MODE_ENV === 'msw') {
+  const url =
+    process.env.REACT_APP_DEPLOY_ENV === 'gh-pages'
+      ? '/zlatmax-store-front/mockServiceWorker.js'
+      : './mockServiceWorker.js';
+  const { worker } = require('./msw/browser');
+  worker.start({
+    waitUntilReady: true,
+    onUnhandledRequest: 'bypass',
+    serviceWorker: {
+      url,
+    },
+  });
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

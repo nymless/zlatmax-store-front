@@ -4,7 +4,7 @@ import styles from './NoReviews.module.css';
 interface NoReviewsProps {}
 
 const NoReviews: FC<NoReviewsProps> = () => {
-  // todo: add review server API
+  // TODO: add review server API
   const addReview = () => {
     console.log('add review');
   };
