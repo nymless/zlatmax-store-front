@@ -11,8 +11,10 @@ import {
 } from '../redux/api/knifeMaterialsApi';
 import { userApi } from '../redux/api/userApi';
 import { useCookies } from 'react-cookie';
+import { useState, useEffect } from 'react';
 
 export const useAppInit = () => {
+  const [appInitialized, setAppInitialized] = useState(false);
   const [cookie] = useCookies(['logged_in']);
 
   userApi.endpoints.getCurrentUser.useQuery(null, {
@@ -20,23 +22,33 @@ export const useAppInit = () => {
     refetchOnMountOrArgChange: true,
   });
 
-  const typesLoaded = Boolean(useGetTypesQuery().data);
-  const categoriesLoaded = Boolean(useGetCategoriesQuery().data);
-  const brandsLoaded = Boolean(useGetBrandsQuery().data);
-  const bladeMaterialsLoaded = Boolean(useGetBladeMaterialsQuery().data);
-  const handleMaterialsLoaded = Boolean(useGetHandleMaterialsQuery().data);
-  const handguardMaterialsLoaded = Boolean(
-    useGetHandguardMaterialsQuery().data
-  );
-  const gildingTypesLoaded = Boolean(useGetGildingTypesQuery().data);
+  const typesLoaded = useGetTypesQuery().isSuccess;
+  const categoriesLoaded = useGetCategoriesQuery().isSuccess;
+  const brandsLoaded = useGetBrandsQuery().isSuccess;
+  const bladeMaterialsLoaded = useGetBladeMaterialsQuery().isSuccess;
+  const handleMaterialsLoaded = useGetHandleMaterialsQuery().isSuccess;
+  const handguardMaterialsLoaded = useGetHandguardMaterialsQuery().isSuccess;
+  const gildingTypesLoaded = useGetGildingTypesQuery().isSuccess;
 
-  return (
-    typesLoaded &&
-    categoriesLoaded &&
-    brandsLoaded &&
-    bladeMaterialsLoaded &&
-    handleMaterialsLoaded &&
-    handguardMaterialsLoaded &&
-    gildingTypesLoaded
-  );
+  useEffect(() => {
+    setAppInitialized(
+      typesLoaded &&
+        categoriesLoaded &&
+        brandsLoaded &&
+        bladeMaterialsLoaded &&
+        handleMaterialsLoaded &&
+        handguardMaterialsLoaded &&
+        gildingTypesLoaded
+    );
+  }, [
+    typesLoaded,
+    categoriesLoaded,
+    brandsLoaded,
+    bladeMaterialsLoaded,
+    handleMaterialsLoaded,
+    handguardMaterialsLoaded,
+    gildingTypesLoaded,
+  ]);
+
+  return { appInitialized };
 };

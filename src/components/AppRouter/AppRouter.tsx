@@ -19,6 +19,8 @@ import { useAppSelector } from '../../redux/store';
 interface AppRouterProps {
 }
 
+// TODO: Сделать защищенные страницы
+
 const AppRouter: FC<AppRouterProps> = () => {
   const user = useAppSelector((state) => state.userState.user);
   const isAuth = Boolean(user);

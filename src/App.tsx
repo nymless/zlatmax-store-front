@@ -13,10 +13,10 @@ function App() {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
 
-  const initialized = useAppInit();
+  const { appInitialized } = useAppInit();
 
-  if (!initialized) {
-    return <FullScreenLoader />
+  if (!appInitialized) {
+    return <FullScreenLoader />;
   }
 
   return (

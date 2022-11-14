@@ -5,7 +5,7 @@ import { AppPaths } from '../../variables/AppPaths';
 const jwt = require('jsonwebtoken');
 
 const notSoSecretKey = 'your-256-bit-secret';
-let counter = 1;
+let userIdCounter = 1;
 
 export const userHandlers = [
   rest.post(AppPaths.API_URL + 'auth/login', async (req, res, ctx) => {
@@ -75,7 +75,7 @@ export const userHandlers = [
 
     Object.defineProperties(user, {
       id: {
-        value: ++counter,
+        value: ++userIdCounter,
         enumerable: true,
       },
       role: {

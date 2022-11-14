@@ -1,26 +1,26 @@
-## Zlatmax Store
+# Zlatmax Store
 
-### Front-end part
+## Front-end part
 
 React application of e-commerce website. REST API.
 
-###### Preview:
+### Preview
 
-https://nymless.github.io/zlatmax-store-front
+<https://nymless.github.io/zlatmax-store-front>
 
-###### Back-end part:
+### Back-end part
 
-https://github.com/nymless/zlatmax-store-back
+<https://github.com/nymless/zlatmax-store-back>
 
-###### Free website layout:
+### Free website layout
 
-https://www.figma.com/file/BM1CUOv5SWWf2CYDyfJqA6/zlatmax?node-id=0%3A1
+<https://www.figma.com/file/BM1CUOv5SWWf2CYDyfJqA6/zlatmax?node-id=0%3A1>
 
-###### Designer:
+### Designer
 
-https://www.instagram.com/bozhenko.a.v/
+<https://www.instagram.com/bozhenko.a.v/>
 
-###### Application uses:
+### Application uses
 
 * Create-react-app
 * React Router
@@ -31,12 +31,12 @@ https://www.instagram.com/bozhenko.a.v/
 * Styled Components
 * Swiper
 
-###### Testing
+### Testing
 
 * Jest
 * Testing Library
 
-###### For application working in GitHub Pages, server API simulated in browser using:
+### For application working in GitHub Pages, server API simulated in browser using
 
 * Mock Service Worker
 * Various node modules browserify
@@ -44,7 +44,7 @@ https://www.instagram.com/bozhenko.a.v/
 Persisting of application state has not been implemented yet.
 Page refresh will erase current state.
 
-###### Scripts
+### Scripts
 
 * `npm start`
 * `npm test`
